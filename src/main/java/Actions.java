@@ -9,6 +9,7 @@ import main.java.map.GameMapLayout;
 import main.java.map.GameMapRenderer;
 
 import java.util.List;
+import java.util.Random;
 
 /*
 Действия, совершаемые над миром. Итерация всех действий всех существ (makeMove)
@@ -33,20 +34,21 @@ public class Actions {
     }
 
     public void turnActions() {
+        GameMapLayout gameMapLayout = new GameMapLayout(gameMap);
         List<Creature> creatures = gameMap.getAllCreatures();
-        addResources();
+        addResources(gameMapLayout);
         for (Creature creature : creatures) {
             creature.makeMove(gameMap);
         }
         gameMapRenderer.printMapSimulation();
     }
 
-    private void addResources() {
+    private void addResources(GameMapLayout gameMapLayout) {
         if (isSmallAmountOfCheese()) {
-
+            gameMapLayout.setupNewEntity(gameMap.getRandomEmptyCell(), "Cheese");
         }
         if (isSmallAmountOfMouse()) {
-
+            gameMapLayout.setupNewEntity(gameMap.getRandomEmptyCell(), "Mouse");
         }
     }
 

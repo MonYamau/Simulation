@@ -32,15 +32,22 @@ public class GameMapLayout {
             case "Yarn" -> new Yarn();
             case "Basket" -> new Basket();
             case "Cheese" -> new Cheese();
-            case "Cat" -> new Cat(10, 2, "Mouse", coordinates, 3);
-            case "Mouse" -> new Mouse(6, 3, "Cheese", coordinates);
+            case "Cat" -> new Cat(10, 3, "Mouse", coordinates, 2);
+            case "Mouse" -> new Mouse(6, 2, "Cheese", coordinates);
             default -> null;
         };
     }
 
     public void setupStartCreatures() {
         setupNewEntity(new Coordinates(10, 14), "Cat");
+        setupNewEntity(new Coordinates(10, 13), "Cat");
+        setupNewEntity(new Coordinates(9, 14), "Cat");
+
         setupNewEntity(new Coordinates(1, 1), "Mouse");
+        setupNewEntity(new Coordinates(2, 0), "Mouse");
+        setupNewEntity(new Coordinates(1, 2), "Mouse");
+        setupNewEntity(new Coordinates(2, 1), "Mouse");
+        setupNewEntity(new Coordinates(0, 2), "Mouse");
     }
 
     public void setupStartResources() {

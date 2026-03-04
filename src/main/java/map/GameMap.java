@@ -7,6 +7,7 @@ import main.java.entities.animate.Creature;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 public class GameMap {
     public static final int MAX_COLUMN_VALUE = 12;
@@ -53,6 +54,11 @@ public class GameMap {
         return !entities.containsKey(coordinates) || getEntity(coordinates) == null;
     }
 
+    public boolean isCellWithinBoundaries(Coordinates coordinates) {
+        if (!(coordinates.col() < MAX_COLUMN_VALUE && coordinates.col() >= 0)) return false;
+        return coordinates.row() < MAX_ROW_VALUE && coordinates.row() >= 0;
+    }
+
     public boolean isCellOccupied(Coordinates coordinates, String food) {
         if (!isCellEmpty(coordinates)) {
             Entity entity = getEntity(coordinates);
@@ -73,8 +79,10 @@ public class GameMap {
         return emptyCells;
     }
 
-    public boolean isCellWithinBoundaries(Coordinates coordinates) {
-        if (!(coordinates.col() < MAX_COLUMN_VALUE && coordinates.col() >= 0)) return false;
-        return coordinates.row() < MAX_ROW_VALUE && coordinates.row() >= 0;
+    public Coordinates getRandomEmptyCell(){
+        Random random = new Random();
+        List<Coordinates> emptyCells = getAllEmptyCells();
+        int randomIndex = random.nextInt(emptyCells.size());
+        return emptyCells.get(randomIndex);
     }
 }
