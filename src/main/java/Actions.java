@@ -6,7 +6,7 @@ import main.java.entities.animate.Mouse;
 import main.java.entities.inanimate.Cheese;
 import main.java.map.GameMap;
 import main.java.map.GameMapLayout;
-import main.java.map.MapRenderer;
+import main.java.map.GameMapRenderer;
 
 import java.util.List;
 
@@ -19,17 +19,17 @@ turnActions - цикл каждого хода. Пополнение ресур�
  */
 public class Actions {
     GameMap gameMap;
-    MapRenderer mapRenderer;
+    GameMapRenderer gameMapRenderer;
 
-    public Actions(GameMap gameMap, MapRenderer mapRenderer) {
+    public Actions(GameMap gameMap, GameMapRenderer gameMapRenderer) {
         this.gameMap = gameMap;
-        this.mapRenderer = mapRenderer;
+        this.gameMapRenderer = gameMapRenderer;
     }
 
     public void initActions() {
         GameMapLayout gameMapLayout = new GameMapLayout(gameMap);
         gameMapLayout.setupStartMap();
-        mapRenderer.printMapSimulation();
+        gameMapRenderer.printMapSimulation();
     }
 
     public void turnActions() {
@@ -38,7 +38,7 @@ public class Actions {
         for (Creature creature : creatures) {
             creature.makeMove(gameMap);
         }
-        mapRenderer.printMapSimulation();
+        gameMapRenderer.printMapSimulation();
     }
 
     private void addResources() {

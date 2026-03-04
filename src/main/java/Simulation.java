@@ -1,7 +1,7 @@
 package main.java;
 
 import main.java.map.GameMap;
-import main.java.map.MapRenderer;
+import main.java.map.GameMapRenderer;
 
 import java.util.Scanner;
 
@@ -18,8 +18,8 @@ public class Simulation {
 
     public static void main(String[] args) {
         GameMap gameMap = new GameMap();
-        MapRenderer mapRenderer = new MapRenderer(gameMap);
-        Actions actions = new Actions(gameMap, mapRenderer);
+        GameMapRenderer gameMapRenderer = new GameMapRenderer(gameMap);
+        Actions actions = new Actions(gameMap, gameMapRenderer);
 
         actions.initActions();
         while (true) {

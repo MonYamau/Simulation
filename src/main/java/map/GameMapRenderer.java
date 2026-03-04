@@ -6,7 +6,7 @@ import main.java.entities.Entity;
 import static main.java.map.GameMap.MAX_COLUMN_VALUE;
 import static main.java.map.GameMap.MAX_ROW_VALUE;
 
-public class MapRenderer {
+public class GameMapRenderer {
     public static final String ANSI_GREY_BACKGROUND_COLOR = "\u001B[;100m";
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String CELL = "  　";
@@ -14,7 +14,7 @@ public class MapRenderer {
 
     GameMap gameMap;
 
-    public MapRenderer(GameMap gameMap) {
+    public GameMapRenderer(GameMap gameMap) {
         this.gameMap = gameMap;
     }
 
