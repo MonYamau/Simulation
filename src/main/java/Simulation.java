@@ -22,12 +22,12 @@ public class Simulation {
         Actions actions = new Actions();
 
         actions.initActions(gameMap, mapRenderer);
-        while (true){
+        while (true) {
             String input = scanner.nextLine();
-            if (input.equals("0")){
+            if (input.equals("0")) {
                 return;
             }
-            if(input.equals(" ")){
+            if (input.equals(" ")) {
                 actions.turnActions(gameMap, mapRenderer);
             }
         }

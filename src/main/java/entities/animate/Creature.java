@@ -49,7 +49,7 @@ public abstract class Creature extends Entity {
         for (int i = 0; i < getSpeed(); i++) {
             PathFinder pathFinder = new PathFinder();
             Coordinates move = pathFinder.getNextCellForMove(getCoordinates(), getFood(), gameMap);
-            if (!gameMap.isCellEmpty(move) && gameMap.getEntity(move).getClass().getSimpleName().equals(getFood())){
+            if (!gameMap.isCellEmpty(move) && gameMap.getEntity(move).getClass().getSimpleName().equals(getFood())) {
                 eatFood(move, gameMap);
             } else {
                 gameMap.replaceEntity(getCoordinates(), move);

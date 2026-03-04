@@ -54,7 +54,7 @@ public class MapRenderer {
             case "Basket" -> CELL_WITH_ENTITY.formatted("🧺");
             case "Box" -> CELL_WITH_ENTITY.formatted("📦");
             case "Cheese" -> CELL_WITH_ENTITY.formatted("🧀");
-            case "Mouse" -> CELL_WITH_ENTITY.formatted("🐁");
+            case "Mouse" -> CELL_WITH_ENTITY.formatted("🐭");
             case "Cat" -> CELL_WITH_ENTITY.formatted("🐱");
             default -> CELL;
         };

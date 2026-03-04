@@ -7,9 +7,9 @@ import main.java.map.GameMap;
 //имеет силу атаки
 //может потратить ход на движение в сторону Survivor, либо его атаку
 //здоровье Survivor снимается на значение атаки Predator
-public abstract class Predator extends Creature{
+public abstract class Predator extends Creature {
     private final int attack;
-    
+
     public Predator(int speed, String food, Coordinates coordinates, int attack) {
         super(speed, food, coordinates);
         this.attack = attack;
@@ -19,7 +19,7 @@ public abstract class Predator extends Creature{
         return attack;
     }
 
-    public void makeAttack(Creature creature){
+    public void makeAttack(Creature creature) {
         creature.setHp(creature.getHp() - getAttack());
         System.out.println(creature.getHp());
     }

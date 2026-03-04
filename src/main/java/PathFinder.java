@@ -11,7 +11,7 @@ public class PathFinder {
     Map<Coordinates, Coordinates> savedPath = new HashMap<>();
     Random random = new Random();
 
-    public Coordinates getNextCellForMove(Coordinates entityCoordinates, String food, GameMap gameMap){
+    public Coordinates getNextCellForMove(Coordinates entityCoordinates, String food, GameMap gameMap) {
         List<Coordinates> path = findPathToMeat(entityCoordinates, food, gameMap);
         if (!path.isEmpty()) return path.getFirst();
         List<Coordinates> availableCells = new ArrayList<>(getAvailableCellsForMove(entityCoordinates, gameMap, food));
@@ -28,7 +28,7 @@ public class PathFinder {
         return useBfsAlgorithm(entityCoordinates, food, gameMap);
     }
 
-    private List<Coordinates> useBfsAlgorithm(Coordinates entityCoordinates, String food, GameMap gameMap){
+    private List<Coordinates> useBfsAlgorithm(Coordinates entityCoordinates, String food, GameMap gameMap) {
         List<Coordinates> pathToFood = new ArrayList<>();
         while (!check.isEmpty()) {
             Coordinates newCheckcoordinates = check.poll();
