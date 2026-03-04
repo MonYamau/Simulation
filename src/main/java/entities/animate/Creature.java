@@ -1,19 +1,18 @@
 package main.java.entities.animate;
 
-import main.java.PathFinder;
 import main.java.Coordinates;
+import main.java.PathFinder;
 import main.java.entities.Entity;
 import main.java.map.GameMap;
 
-//существо имеет скорость(сколько клеток может пройти за ход), количество HP
-//имеет метод make move - сделать ход
 public abstract class Creature extends Entity {
-    private int hp;
     private final int speed;
     private final String food;
+    private int hp;
     private Coordinates coordinates;
 
-    public Creature(int speed, String food, Coordinates coordinates) {
+    public Creature(int hp, int speed, String food, Coordinates coordinates) {
+        this.hp = hp;
         this.speed = speed;
         this.food = food;
         this.coordinates = coordinates;
@@ -43,13 +42,15 @@ public abstract class Creature extends Entity {
         return food;
     }
 
-    //инициирует движение
-    //передаёт значение скорости
+    public int getSatiety() {
+        return 2;
+    }
+
     public void makeMove(GameMap gameMap) {
         for (int i = 0; i < getSpeed(); i++) {
-            PathFinder pathFinder = new PathFinder();
-            Coordinates move = pathFinder.getNextCellForMove(getCoordinates(), getFood(), gameMap);
-            if (!gameMap.isCellEmpty(move) && gameMap.getEntity(move).getClass().getSimpleName().equals(getFood())) {
+            PathFinder pathFinder = new PathFinder(gameMap);
+            Coordinates move = pathFinder.getNextCellForMove(getCoordinates(), getFood());
+            if (pathFinder.isEntityEatable(move, getFood())) {
                 eatFood(move, gameMap);
             } else {
                 gameMap.replaceEntity(getCoordinates(), move);

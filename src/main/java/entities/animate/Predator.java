@@ -1,27 +1,18 @@
 package main.java.entities.animate;
 
 import main.java.Coordinates;
-import main.java.entities.Entity;
 import main.java.map.GameMap;
 
-//имеет силу атаки
-//может потратить ход на движение в сторону Survivor, либо его атаку
-//здоровье Survivor снимается на значение атаки Predator
 public abstract class Predator extends Creature {
     private final int attack;
 
-    public Predator(int speed, String food, Coordinates coordinates, int attack) {
-        super(speed, food, coordinates);
+    public Predator(int hp, int speed, String food, Coordinates coordinates, int attack) {
+        super(hp, speed, food, coordinates);
         this.attack = attack;
     }
 
     public int getAttack() {
         return attack;
-    }
-
-    public void makeAttack(Creature creature) {
-        creature.setHp(creature.getHp() - getAttack());
-        System.out.println(creature.getHp());
     }
 
     @Override
@@ -31,9 +22,14 @@ public abstract class Predator extends Creature {
             makeAttack(creature);
         } else {
             gameMap.removeEntity(coordinates);
-            setHp(getHp() + 2);
+            setHp(getHp() + getSatiety());
             System.out.println(getHp());
             System.out.println(coordinates);
         }
+    }
+
+    public void makeAttack(Creature creature) {
+        creature.setHp(creature.getHp() - getAttack());
+        System.out.println(creature.getHp());
     }
 }

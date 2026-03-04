@@ -4,7 +4,7 @@ import main.java.Coordinates;
 
 public class Cat extends Predator {
 
-    public Cat(int speed, String food, Coordinates coordinates, int attack) {
-        super(speed, food, coordinates, attack);
+    public Cat(int hp, int speed, String food, Coordinates coordinates, int attack) {
+        super(hp, speed, food, coordinates, attack);
     }
 }

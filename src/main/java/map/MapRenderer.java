@@ -1,7 +1,7 @@
-package main.java;
+package main.java.map;
 
+import main.java.Coordinates;
 import main.java.entities.Entity;
-import main.java.map.GameMap;
 
 import static main.java.map.GameMap.MAX_COLUMN_VALUE;
 import static main.java.map.GameMap.MAX_ROW_VALUE;
@@ -12,13 +12,19 @@ public class MapRenderer {
     public static final String CELL = "  　";
     public static String CELL_WITH_ENTITY = " %s ";
 
-    public void printMapSimulation(GameMap gameMap){
+    GameMap gameMap;
+
+    public MapRenderer(GameMap gameMap) {
+        this.gameMap = gameMap;
+    }
+
+    public void printMapSimulation() {
         StringBuilder renderMap = new StringBuilder();
         for (int col = 0; col < MAX_COLUMN_VALUE; col++) {
             renderMap.append("\n");
             for (int row = 0; row < MAX_ROW_VALUE; row++) {
                 String colorCell;
-                if(!gameMap.isCellEmpty(new Coordinates(col, row))){
+                if (!gameMap.isCellEmpty(new Coordinates(col, row))) {
                     colorCell = colorizeEntityCell(new Coordinates(col, row), gameMap.getEntity(new Coordinates(col, row)));
                     renderMap.append(colorCell);
                 } else {
@@ -29,7 +35,6 @@ public class MapRenderer {
         }
         System.out.println(renderMap);
     }
-
 
 
     private String colorizeEmptyCell(Coordinates coordinates) {
@@ -48,7 +53,7 @@ public class MapRenderer {
         }
     }
 
-    private String getEntitySprite(Entity entity){
+    private String getEntitySprite(Entity entity) {
         return switch (entity.getClass().getSimpleName()) {
             case "Yarn" -> CELL_WITH_ENTITY.formatted("🧶");
             case "Basket" -> CELL_WITH_ENTITY.formatted("🧺");

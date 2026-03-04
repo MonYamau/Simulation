@@ -6,37 +6,43 @@ import main.java.map.GameMap;
 import java.util.*;
 
 public class PathFinder {
+    public GameMap gameMap;
+
     LinkedList<Coordinates> check = new LinkedList<>();
     Set<Coordinates> checked = new HashSet<>();
     Map<Coordinates, Coordinates> savedPath = new HashMap<>();
     Random random = new Random();
 
-    public Coordinates getNextCellForMove(Coordinates entityCoordinates, String food, GameMap gameMap) {
-        List<Coordinates> path = findPathToMeat(entityCoordinates, food, gameMap);
+    public PathFinder(GameMap gameMap) {
+        this.gameMap = gameMap;
+    }
+
+    public Coordinates getNextCellForMove(Coordinates entityCoordinates, String food) {
+        List<Coordinates> path = findPathToMeat(entityCoordinates, food);
         if (!path.isEmpty()) return path.getFirst();
-        List<Coordinates> availableCells = new ArrayList<>(getAvailableCellsForMove(entityCoordinates, gameMap, food));
+        List<Coordinates> availableCells = new ArrayList<>(getAvailableCellsForMove(entityCoordinates, food));
         return availableCells.get(random.nextInt(availableCells.size()));
     }
 
-    public List<Coordinates> findPathToMeat(Coordinates entityCoordinates, String food, GameMap gameMap) {
+    public List<Coordinates> findPathToMeat(Coordinates entityCoordinates, String food) {
         checked.add(entityCoordinates);
-        for (Coordinates coordinates : getAvailableCellsForMove(entityCoordinates, gameMap, food)) {
+        for (Coordinates coordinates : getAvailableCellsForMove(entityCoordinates, food)) {
             check.addLast(coordinates);
             checked.add(coordinates);
             savedPath.put(coordinates, entityCoordinates);
         }
-        return useBfsAlgorithm(entityCoordinates, food, gameMap);
+        return useBfsAlgorithm(entityCoordinates, food);
     }
 
-    private List<Coordinates> useBfsAlgorithm(Coordinates entityCoordinates, String food, GameMap gameMap) {
+    private List<Coordinates> useBfsAlgorithm(Coordinates entityCoordinates, String food) {
         List<Coordinates> pathToFood = new ArrayList<>();
         while (!check.isEmpty()) {
             Coordinates newCheckcoordinates = check.poll();
-            if (isEntityEatable(newCheckcoordinates, gameMap, food)) {
+            if (isEntityEatable(newCheckcoordinates, food)) {
                 pathToFood = restorePath(newCheckcoordinates, entityCoordinates);
                 return pathToFood;
             } else {
-                for (Coordinates coordinates : getAvailableCellsForMove(newCheckcoordinates, gameMap, food)) {
+                for (Coordinates coordinates : getAvailableCellsForMove(newCheckcoordinates, food)) {
                     if (!checked.contains(coordinates)) {
                         savedPath.put(coordinates, newCheckcoordinates);
                         check.addLast(coordinates);
@@ -58,7 +64,7 @@ public class PathFinder {
         return path.reversed();
     }
 
-    private boolean isEntityEatable(Coordinates coordinates, GameMap gameMap, String food) {
+    public boolean isEntityEatable(Coordinates coordinates, String food) {
         if (!gameMap.isCellEmpty(coordinates)) {
             Entity entity = gameMap.getEntity(coordinates);
             return entity.getClass().getSimpleName().equals(food);
@@ -66,7 +72,7 @@ public class PathFinder {
         return false;
     }
 
-    private Set<Coordinates> getAvailableCellsForMove(Coordinates coordinates, GameMap gameMap, String food) {
+    private Set<Coordinates> getAvailableCellsForMove(Coordinates coordinates, String food) {
         Set<Coordinates> availableCells = new HashSet<>();
         for (CoordinatesShift move : coordinates.getMoves()) {
             Coordinates newCoordinates = coordinates.shift(move);

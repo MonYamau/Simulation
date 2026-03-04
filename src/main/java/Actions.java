@@ -2,9 +2,12 @@ package main.java;
 
 import main.java.entities.Entity;
 import main.java.entities.animate.Creature;
+import main.java.entities.animate.Mouse;
+import main.java.entities.inanimate.Cheese;
 import main.java.map.GameMap;
+import main.java.map.GameMapLayout;
+import main.java.map.MapRenderer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -15,16 +18,55 @@ initActions - расстановка существ и объектов по к�
 turnActions - цикл каждого хода. Пополнение ресурса, существ и тд
  */
 public class Actions {
-    public void initActions(GameMap gameMap, MapRenderer mapRenderer) {
-        gameMap.setupDefaultMap();
-        mapRenderer.printMapSimulation(gameMap);
+    GameMap gameMap;
+    MapRenderer mapRenderer;
+
+    public Actions(GameMap gameMap, MapRenderer mapRenderer) {
+        this.gameMap = gameMap;
+        this.mapRenderer = mapRenderer;
     }
 
-    public void turnActions(GameMap gameMap, MapRenderer mapRenderer) {
+    public void initActions() {
+        GameMapLayout gameMapLayout = new GameMapLayout(gameMap);
+        gameMapLayout.setupStartMap();
+        mapRenderer.printMapSimulation();
+    }
+
+    public void turnActions() {
         List<Creature> creatures = gameMap.getAllCreatures();
-        for (int i = 0; i < creatures.size(); i++) {
-            creatures.get(i).makeMove(gameMap);
+        addResources();
+        for (Creature creature : creatures) {
+            creature.makeMove(gameMap);
         }
-        mapRenderer.printMapSimulation(gameMap);
+        mapRenderer.printMapSimulation();
+    }
+
+    private void addResources() {
+        if (isSmallAmountOfCheese()) {
+
+        }
+        if (isSmallAmountOfMouse()) {
+
+        }
+    }
+
+    private boolean isSmallAmountOfMouse() {
+        int mouseCounter = 0;
+        for (Entity entity : gameMap.getAllEntities()) {
+            if (entity instanceof Mouse) {
+                mouseCounter++;
+            }
+        }
+        return mouseCounter < 1;
+    }
+
+    private boolean isSmallAmountOfCheese() {
+        int cheeseCounter = 0;
+        for (Entity entity : gameMap.getAllEntities()) {
+            if (entity instanceof Cheese) {
+                cheeseCounter++;
+            }
+        }
+        return cheeseCounter < 1;
     }
 }

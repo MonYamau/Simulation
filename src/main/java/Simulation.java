@@ -1,8 +1,8 @@
 package main.java;
 
 import main.java.map.GameMap;
+import main.java.map.MapRenderer;
 
-import java.util.Objects;
 import java.util.Scanner;
 
 //ГЛАВНЫЙ КЛАСС ПРИЛОЖЕНИЯ
@@ -18,17 +18,17 @@ public class Simulation {
 
     public static void main(String[] args) {
         GameMap gameMap = new GameMap();
-        MapRenderer mapRenderer = new MapRenderer();
-        Actions actions = new Actions();
+        MapRenderer mapRenderer = new MapRenderer(gameMap);
+        Actions actions = new Actions(gameMap, mapRenderer);
 
-        actions.initActions(gameMap, mapRenderer);
+        actions.initActions();
         while (true) {
             String input = scanner.nextLine();
             if (input.equals("0")) {
                 return;
             }
             if (input.equals(" ")) {
-                actions.turnActions(gameMap, mapRenderer);
+                actions.turnActions();
             }
         }
     }
