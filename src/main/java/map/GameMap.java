@@ -45,7 +45,7 @@ public class GameMap {
     }
 
     public boolean isCellEmpty(Coordinates coordinates){
-        return !entities.containsKey(coordinates) && getEntity(coordinates) == null;
+        return !entities.containsKey(coordinates) || getEntity(coordinates) == null;
     }
 
     public boolean isCellOccupied(Coordinates coordinates, String food){
