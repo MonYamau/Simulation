@@ -26,7 +26,7 @@ public class GameMapLayout {
     }
 
     public <T extends Entity> void setupNewEntity(Coordinates coordinates, Class<T> entityClass) {
-        T entity = (T) entityFactory.createEntity(coordinates, entityClass);
+        T entity = entityFactory.createEntity(coordinates, entityClass);
         gameMap.setEntity(coordinates, entity);
     }
 
