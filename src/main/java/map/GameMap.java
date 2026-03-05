@@ -79,7 +79,7 @@ public class GameMap {
         return emptyCells;
     }
 
-    public Coordinates getRandomEmptyCell(){
+    public Coordinates getRandomEmptyCell() {
         Random random = new Random();
         List<Coordinates> emptyCells = getAllEmptyCells();
         int randomIndex = random.nextInt(emptyCells.size());

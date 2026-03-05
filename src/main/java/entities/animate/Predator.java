@@ -23,13 +23,10 @@ public abstract class Predator extends Creature {
         } else {
             gameMap.removeEntity(coordinates);
             setHp(getHp() + getSatiety());
-            System.out.println(getHp());
-            System.out.println(coordinates);
         }
     }
 
     public void makeAttack(Creature creature) {
         creature.setHp(creature.getHp() - getAttack());
-        System.out.println(creature.getHp());
     }
 }

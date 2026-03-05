@@ -12,6 +12,5 @@ public abstract class Survivor extends Creature {
     public void eatFood(Coordinates coordinates, GameMap gameMap) {
         gameMap.removeEntity(coordinates);
         setHp(getHp() + getSatiety());
-        System.out.println(getHp());
     }
 }

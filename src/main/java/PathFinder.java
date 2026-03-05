@@ -21,7 +21,7 @@ public class PathFinder {
         List<Coordinates> path = findPathToMeat(entityCoordinates, food);
         if (!path.isEmpty()) return path.getFirst();
         List<Coordinates> availableCells = new ArrayList<>(getAvailableCellsForMove(entityCoordinates, food));
-        if(!availableCells.isEmpty()) {
+        if (!availableCells.isEmpty()) {
             return availableCells.get(random.nextInt(availableCells.size()));
         }
         return entityCoordinates;
