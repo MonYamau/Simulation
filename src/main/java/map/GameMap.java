@@ -19,18 +19,24 @@ public class GameMap {
         return entities.get(coordinates);
     }
 
-    public List<Creature> getAllCreatures() {
-        List<Creature> creatures = new ArrayList<>();
+    public <T extends Entity> List<T> getEntitiesOfAnyType(Class<T> entityClass) {
+        List<T> anyEntities = new ArrayList<>();
         for (Entity entity : entities.values()) {
-            if (entity instanceof Creature) {
-                creatures.add((Creature) entity);
+            if (entityClass.isInstance(entity)) {
+                anyEntities.add(entityClass.cast(entity));
             }
         }
-        return creatures;
+        return anyEntities;
     }
 
     public List<Entity> getAllEntities() {
-        return new ArrayList<>(entities.values());
+        List<Entity> allEntities = new ArrayList<>();
+        for (Entity entity : entities.values()){
+            if (entity != null) {
+                allEntities.add(entity);
+            }
+        }
+        return allEntities;
     }
 
     public <T extends Entity> void setEntity(Coordinates coordinates, T entity) {

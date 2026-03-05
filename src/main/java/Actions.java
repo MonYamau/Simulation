@@ -2,6 +2,8 @@ package main.java;
 
 import main.java.entities.Entity;
 import main.java.entities.animate.Creature;
+import main.java.entities.animate.Mouse;
+import main.java.entities.inanimate.Cheese;
 import main.java.map.GameMap;
 import main.java.map.GameMapLayout;
 
@@ -23,7 +25,7 @@ public class Actions {
 
     public void turnActions() {
         GameMapLayout gameMapLayout = new GameMapLayout(gameMap);
-        List<Creature> creatures = gameMap.getAllCreatures();
+        List<Creature> creatures = gameMap.getEntitiesOfAnyType(Creature.class);
         addResources(gameMapLayout);
         for (Creature creature : creatures) {
             creature.makeMove(gameMap);
@@ -31,18 +33,18 @@ public class Actions {
     }
 
     private void addResources(GameMapLayout gameMapLayout) {
-        if (isSmallAmountOfEntity("Cheese")) {
-            gameMapLayout.setupNewEntity(gameMap.getRandomEmptyCell(), "Cheese");
+        if (isSmallAmountOfEntity(Cheese.class)) {
+            gameMapLayout.setupNewEntity(gameMap.getRandomEmptyCell(), Cheese.class);
         }
-        if (isSmallAmountOfEntity("Mouse")) {
-            gameMapLayout.setupNewEntity(gameMap.getRandomEmptyCell(), "Mouse");
+        if (isSmallAmountOfEntity(Mouse.class)) {
+            gameMapLayout.setupNewEntity(gameMap.getRandomEmptyCell(), Mouse.class);
         }
     }
 
-    private boolean isSmallAmountOfEntity(String typeOfEntity) {
+    private <T extends Entity> boolean isSmallAmountOfEntity(Class<T> entityClass) {
         int entityCounter = 0;
         for (Entity entity : gameMap.getAllEntities()) {
-            if (entity.getClass().getSimpleName().equals(typeOfEntity)) {
+            if (entityClass.isInstance(entity)) {
                 entityCounter++;
             }
         }
