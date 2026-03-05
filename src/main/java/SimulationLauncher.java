@@ -10,29 +10,29 @@ public class SimulationLauncher {
     public final static String EXIT = "В";
 
     public void startSimulationLauncher(){
-        ScriptRenderer scriptRenderer = new ScriptRenderer();
         Simulation simulation = new Simulation();
-        scriptRenderer.printWelcomeScript();
-        scriptRenderer.printInstructionScript();
         simulation.initSimulation();
-        startGameLoop(simulation, scriptRenderer);
+        startGameLoop(simulation);
     }
 
-    public void startGameLoop(Simulation simulation, ScriptRenderer scriptRenderer){
-        while (true) switch (SCANNER.nextLine().toUpperCase()) {
-            case MOTION:
-                simulation.nextTurn(scriptRenderer);
-                break;
-            case START:
-                simulation.startSimulation(scriptRenderer);
-                break;
-            case PAUSE:
-                simulation.pauseSimulation(scriptRenderer);
-                break;
-            case EXIT:
-                return;
-            default:
-                scriptRenderer.printIncorrectInputScript();
+    public void startGameLoop(Simulation simulation){
+        while (true) {
+            switch (SCANNER.nextLine().toUpperCase()) {
+                case MOTION:
+                    simulation.nextTurn();
+                    break;
+                case START:
+                    simulation.startSimulation();
+                    break;
+                case PAUSE:
+                    simulation.pauseSimulation();
+                    break;
+                case EXIT:
+                    simulation.stopSimulation();
+                    return;
+                default:
+                    ScriptRenderer.printIncorrectInputScript();
+            }
         }
     }
 }

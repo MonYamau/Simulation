@@ -3,8 +3,6 @@ package main.java;
 import main.java.map.GameMap;
 import main.java.map.GameMapRenderer;
 
-import java.util.Scanner;
-
 //ГЛАВНЫЙ КЛАСС ПРИЛОЖЕНИЯ
 //содержит счётчик ходов, map, renderer, actions
 /*
@@ -14,6 +12,9 @@ startSimulation - запустить бесконечный цикл симул�
 pauseSimulation - приостановить бесконечный цикл симуляции и рендеринга
  */
 public class Simulation {
+    private volatile boolean isRunning = true;
+    private volatile boolean isPaused = true;
+
     public static int counter = 0;
 
     GameMap gameMap = new GameMap();
@@ -21,33 +22,57 @@ public class Simulation {
     Actions actions = new Actions(gameMap);
 
     public void initSimulation() {
+        ScriptRenderer.clearScreen();
+        ScriptRenderer.printWelcomeScript();
+        ScriptRenderer.printInstructionScript();
+        ScriptRenderer.printCounter(counter);
         actions.initActions();
         gameMapRenderer.printMapSimulation();
     }
 
-    public void nextTurn(ScriptRenderer scriptRenderer){
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-        scriptRenderer.printInstructionScript();
+    public void nextTurn(){
+        ScriptRenderer.clearScreen();
+        ScriptRenderer.printInstructionScript();
+        ScriptRenderer.printCounter(++counter);
         actions.turnActions();
         gameMapRenderer.printMapSimulation();
     }
 
-    public void startSimulation(ScriptRenderer scriptRenderer){
-        while (true) {
-            System.out.print("\033[H\033[2J");
-            System.out.flush();
-            scriptRenderer.printInstructionScript();
-            actions.turnActions();
-            gameMapRenderer.printMapSimulation();
-            try {
-                Thread.sleep(1800);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
+    public synchronized void startSimulation(){
+        isRunning = true;
+        isPaused = false;
+        Thread simulationThread = getThread();
+        simulationThread.start();
     }
 
-    public void pauseSimulation(ScriptRenderer scriptRenderer){
+    public Thread getThread(){
+        return new Thread(() -> {
+            while (isRunning) {
+                synchronized (this) {
+                    while (isPaused) {
+                        try {
+                            wait();
+                        } catch (InterruptedException e) {
+                            break;
+                        }
+                    }
+                }
+                if (!isRunning) break;
+                nextTurn();
+                try {
+                    Thread.sleep(1800);
+                } catch (InterruptedException e) {
+                    break;
+                }
+            }
+        });
+    }
+
+    public synchronized void pauseSimulation(){
+        isPaused = true;
+    }
+
+    public synchronized void stopSimulation() {
+
     }
 }

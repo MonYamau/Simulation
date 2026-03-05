@@ -36,7 +36,6 @@ public class GameMapRenderer {
         System.out.println(renderMap);
     }
 
-
     private String colorizeEmptyCell(Coordinates coordinates) {
         if (isEvenCell(coordinates)) {
             return "%s%s%s".formatted(ANSI_GREY_BACKGROUND_COLOR, CELL, ANSI_RESET);

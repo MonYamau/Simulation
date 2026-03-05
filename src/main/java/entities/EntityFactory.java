@@ -29,7 +29,7 @@ public class EntityFactory {
     }
 
     public <T extends Entity> T createEntity(Coordinates coordinates, Class<T> entityClass) {
-        Function<Coordinates, T> creator = (Function<Coordinates, T>) entityCreators.get(entityClass);
-        return creator.apply(coordinates);
+        Function<Coordinates, T> entityCreator = (Function<Coordinates, T>) entityCreators.get(entityClass);
+        return entityCreator.apply(coordinates);
     }
 }

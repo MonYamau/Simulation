@@ -10,34 +10,33 @@ import main.java.map.GameMapLayout;
 import java.util.List;
 
 public class Actions {
+    public final static int MIN_NUM_OF_ENTITY = 3;
+
     GameMap gameMap;
+    GameMapLayout gameMapLayout;
 
     public Actions(GameMap gameMap) {
         this.gameMap = gameMap;
+        this.gameMapLayout = new GameMapLayout(gameMap);
     }
 
-    public final static int MIN_NUM_OF_ENTITY = 3;
-
     public void initActions() {
-        GameMapLayout gameMapLayout = new GameMapLayout(gameMap);
         gameMapLayout.setupStartMap();
     }
 
     public void turnActions() {
-        GameMapLayout gameMapLayout = new GameMapLayout(gameMap);
+        replenishFood(Mouse.class);
+        replenishFood(Cheese.class);
         List<Creature> creatures = gameMap.getEntitiesOfAnyType(Creature.class);
-        addResources(gameMapLayout);
         for (Creature creature : creatures) {
             creature.makeMove(gameMap);
         }
     }
 
-    private void addResources(GameMapLayout gameMapLayout) {
-        if (isSmallAmountOfEntity(Cheese.class)) {
-            gameMapLayout.setupNewEntity(gameMap.getRandomEmptyCell(), Cheese.class);
-        }
-        if (isSmallAmountOfEntity(Mouse.class)) {
-            gameMapLayout.setupNewEntity(gameMap.getRandomEmptyCell(), Mouse.class);
+    private <T extends Entity> void replenishFood(Class<T> entity) {
+        if (isSmallAmountOfEntity(entity)) {
+            Coordinates randomCell = gameMap.getRandomEmptyCell();
+            gameMapLayout.setupNewEntity(randomCell, entity);
         }
     }
 
