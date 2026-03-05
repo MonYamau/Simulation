@@ -3,16 +3,8 @@ package main.java;
 import main.java.map.GameMap;
 import main.java.map.GameMapRenderer;
 
-//ГЛАВНЫЙ КЛАСС ПРИЛОЖЕНИЯ
-//содержит счётчик ходов, map, renderer, actions
-/*
-Ключевые методы:
-nextTurn - просимулировать и отрендерить ОДИН ход
-startSimulation - запустить бесконечный цикл симуляции и рендеринга
-pauseSimulation - приостановить бесконечный цикл симуляции и рендеринга
- */
 public class Simulation {
-    private volatile boolean isRunning = true;
+    private volatile boolean isRunning = false;
     private volatile boolean isPaused = true;
 
     public static int counter = 0;
@@ -53,6 +45,7 @@ public class Simulation {
                         try {
                             wait();
                         } catch (InterruptedException e) {
+                            Thread.currentThread().interrupt();
                             break;
                         }
                     }
@@ -62,6 +55,7 @@ public class Simulation {
                 try {
                     Thread.sleep(1800);
                 } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
                     break;
                 }
             }
@@ -73,6 +67,8 @@ public class Simulation {
     }
 
     public synchronized void stopSimulation() {
-
+        isRunning = false;
+        isPaused = false;
+        notifyAll();
     }
 }
