@@ -43,6 +43,7 @@ public class Simulation {
         simulationThread.start();
     }
 
+    @SuppressWarnings("BusyWait")
     public Thread getThread(){
         return new Thread(() -> {
             while (isRunning) {
