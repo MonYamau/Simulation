@@ -14,9 +14,9 @@ public class GameMapLayout {
     GameMap gameMap;
     EntityFactory entityFactory;
 
-    public GameMapLayout(GameMap gameMap) {
+    public GameMapLayout(GameMap gameMap, EntityFactory entityFactory) {
         this.gameMap = gameMap;
-        this.entityFactory = new EntityFactory();
+        this.entityFactory = entityFactory;
     }
 
     public void setupStartMap() {

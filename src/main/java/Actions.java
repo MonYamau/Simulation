@@ -15,9 +15,9 @@ public class Actions {
     GameMap gameMap;
     GameMapLayout gameMapLayout;
 
-    public Actions(GameMap gameMap) {
+    public Actions(GameMap gameMap, GameMapLayout gameMapLayout) {
         this.gameMap = gameMap;
-        this.gameMapLayout = new GameMapLayout(gameMap);
+        this.gameMapLayout = gameMapLayout;
     }
 
     public void initActions() {

@@ -1,13 +1,21 @@
 package main.java;
 
+import main.java.entities.EntityFactory;
 import main.java.map.GameMap;
+import main.java.map.GameMapLayout;
 import main.java.map.GameMapRenderer;
+import main.java.service.*;
 
 public class Simulation {
     public static int counter = 0;
     GameMap gameMap = new GameMap();
+    PathFindingService bfsPathFinder = new BfsPathFindingService();
+    FeedingService survivorFeeder = new SurvivorFeedingService();
+    FeedingService predatorFeeder = new PredatorFeedingService();
+    EntityFactory entityFactory = new EntityFactory(bfsPathFinder, survivorFeeder, predatorFeeder);
+    GameMapLayout gameMapLayout = new GameMapLayout(gameMap, entityFactory);
     GameMapRenderer gameMapRenderer = new GameMapRenderer(gameMap);
-    Actions actions = new Actions(gameMap);
+    Actions actions = new Actions(gameMap, gameMapLayout);
     private volatile boolean isRunning = false;
     private volatile boolean isPaused = true;
     private Thread simulationThread;
@@ -80,7 +88,7 @@ public class Simulation {
         notifyAll();
         if (simulationThread != null) {
             try {
-                simulationThread.join();
+                simulationThread.join(1000);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
