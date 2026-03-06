@@ -19,10 +19,14 @@ public class GameMap {
     }
 
     public <T extends Entity> void putEntity(Coordinates coordinates, T entity) {
-        entities.put(coordinates, entity);
-        if (entity instanceof Creature) {
-            ((Creature) entity).setCoordinates(coordinates);
+        if (isCellWithinBoundaries(coordinates)) {
+            entities.put(coordinates, entity);
+            if (entity instanceof Creature) {
+                ((Creature) entity).setCoordinates(coordinates);
+            }
+            return;
         }
+        throw new IllegalArgumentException("invalid coordinates received");
     }
 
     public void removeEntity(Coordinates coordinates) {
