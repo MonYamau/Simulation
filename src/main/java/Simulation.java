@@ -4,15 +4,13 @@ import main.java.map.GameMap;
 import main.java.map.GameMapRenderer;
 
 public class Simulation {
-    private volatile boolean isRunning = false;
-    private volatile boolean isPaused = true;
-    private Thread simulationThread;
-
     public static int counter = 0;
-
     GameMap gameMap = new GameMap();
     GameMapRenderer gameMapRenderer = new GameMapRenderer(gameMap);
     Actions actions = new Actions(gameMap);
+    private volatile boolean isRunning = false;
+    private volatile boolean isPaused = true;
+    private Thread simulationThread;
 
     public void initSimulation() {
         ScriptRenderer.clearScreen();
@@ -23,7 +21,7 @@ public class Simulation {
         gameMapRenderer.printMapSimulation();
     }
 
-    public void nextTurn(){
+    public void nextTurn() {
         ScriptRenderer.clearScreen();
         ScriptRenderer.printInstructionScript();
         ScriptRenderer.printCounter(++counter);
@@ -31,7 +29,7 @@ public class Simulation {
         gameMapRenderer.printMapSimulation();
     }
 
-    public synchronized void startSimulation(){
+    public synchronized void startSimulation() {
         if (simulationThread != null && simulationThread.isAlive()) {
             isPaused = false;
             notifyAll();
@@ -44,7 +42,7 @@ public class Simulation {
     }
 
     @SuppressWarnings("BusyWait")
-    public Thread getThread(){
+    public Thread getThread() {
         return new Thread(() -> {
             while (isRunning) {
                 synchronized (this) {
@@ -71,7 +69,7 @@ public class Simulation {
         });
     }
 
-    public synchronized void pauseSimulation(){
+    public synchronized void pauseSimulation() {
         isPaused = true;
         notifyAll();
     }

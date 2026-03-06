@@ -9,13 +9,13 @@ public class SimulationLauncher {
     public final static String PAUSE = "П";
     public final static String EXIT = "В";
 
-    public void startSimulationLauncher(){
+    public void startSimulationLauncher() {
         Simulation simulation = new Simulation();
         simulation.initSimulation();
         startGameLoop(simulation);
     }
 
-    public void startGameLoop(Simulation simulation){
+    public void startGameLoop(Simulation simulation) {
         while (true) {
             switch (SCANNER.nextLine().toUpperCase()) {
                 case MOTION:

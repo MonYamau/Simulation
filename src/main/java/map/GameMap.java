@@ -31,7 +31,7 @@ public class GameMap {
 
     public List<Entity> getAllEntities() {
         List<Entity> allEntities = new ArrayList<>();
-        for (Entity entity : entities.values()){
+        for (Entity entity : entities.values()) {
             if (entity != null) {
                 allEntities.add(entity);
             }
