@@ -36,7 +36,6 @@ public class GameMapLayout {
     }
 
     public void setupStartResources() {
-        setupNewEntity(new Coordinates(4, 2), Cheese.class);
         setupNewEntity(new Coordinates(8, 7), Cheese.class);
         setupNewEntity(new Coordinates(4, 2), Cheese.class);
         setupNewEntity(new Coordinates(5, 10), Cheese.class);
@@ -80,7 +79,6 @@ public class GameMapLayout {
         setupNewEntity(new Coordinates(0, 10), Basket.class);
         setupNewEntity(new Coordinates(4, 13), Basket.class);
         setupNewEntity(new Coordinates(9, 1), Basket.class);
-        setupNewEntity(new Coordinates(0, 10), Basket.class);
         setupNewEntity(new Coordinates(11, 9), Basket.class);
         setupNewEntity(new Coordinates(2, 14), Basket.class);
         setupNewEntity(new Coordinates(11, 15), Basket.class);

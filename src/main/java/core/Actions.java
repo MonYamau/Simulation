@@ -9,6 +9,7 @@ import main.java.map.GameMapLayout;
 import main.java.utils.Coordinates;
 
 import java.util.List;
+import java.util.Random;
 
 public class Actions {
     public final static int MIN_NUM_OF_ENTITY = 3;
@@ -36,18 +37,27 @@ public class Actions {
 
     private <T extends Entity> void replenishFood(Class<T> entity) {
         if (isSmallAmountOfEntity(entity)) {
-            Coordinates randomCell = gameMap.getRandomEmptyCell();
+            Coordinates randomCell = getRandomEmptyCell();
             gameMapLayout.setupNewEntity(randomCell, entity);
         }
     }
 
     private <T extends Entity> boolean isSmallAmountOfEntity(Class<T> entityClass) {
         int entityCounter = 0;
-        for (Entity entity : gameMap.getAllEntities()) {
+        for (Entity entity : gameMap.getEntitiesOfAnyType(Entity.class)) {
             if (entityClass.isInstance(entity)) {
                 entityCounter++;
             }
         }
         return entityCounter < MIN_NUM_OF_ENTITY;
     }
+
+    public Coordinates getRandomEmptyCell() {
+        Random random = new Random();
+        List<Coordinates> emptyCells = gameMap.getAllEmptyCells();
+        int randomIndex = random.nextInt(emptyCells.size());
+        return emptyCells.get(randomIndex);
+    }
+
+
 }

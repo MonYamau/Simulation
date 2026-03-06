@@ -4,6 +4,7 @@ import main.java.map.GameMap;
 import main.java.service.FeedingService;
 import main.java.service.PathFindingService;
 import main.java.utils.Coordinates;
+import main.java.utils.MovementUtils;
 
 public abstract class Creature extends Entity {
     private final int speed;
@@ -52,7 +53,7 @@ public abstract class Creature extends Entity {
             if (feedingService.canEat(this, move, gameMap)) {
                 feedingService.eat(this, move, gameMap);
             } else {
-                gameMap.moveEntity(getCoordinates(), move);
+                MovementUtils.moveEntity(getCoordinates(), move, gameMap);
             }
         }
     }

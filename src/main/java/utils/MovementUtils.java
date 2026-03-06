@@ -1,5 +1,8 @@
 package main.java.utils;
 
+import main.java.entity.Entity;
+import main.java.map.GameMap;
+
 import java.util.Set;
 
 public class MovementUtils {
@@ -12,7 +15,21 @@ public class MovementUtils {
         );
     }
 
-    public static Coordinates move(Coordinates coordinates, CoordinatesShift coordinatesShift) {
+    public static Coordinates moveCoordinates(Coordinates coordinates, CoordinatesShift coordinatesShift) {
         return new Coordinates(coordinates.col() + coordinatesShift.shiftCol(), coordinates.row() + coordinatesShift.shiftRow());
+    }
+
+    public static void moveEntity(Coordinates from, Coordinates to, GameMap gameMap) {
+        Entity entity = gameMap.getEntity(from);
+        gameMap.removeEntity(from);
+        gameMap.putEntity(to, entity);
+    }
+
+    public static boolean isCellOccupied(Coordinates coordinates, String food, GameMap gameMap) {
+        if (!gameMap.isCellEmpty(coordinates)) {
+            Entity entity = gameMap.getEntity(coordinates);
+            return !entity.getClass().getSimpleName().equals(food);
+        }
+        return false;
     }
 }

@@ -7,7 +7,6 @@ import main.java.utils.Coordinates;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 public class GameMap {
     public static final int MAX_COLUMN_VALUE = 12;
@@ -17,26 +16,6 @@ public class GameMap {
 
     public Entity getEntity(Coordinates coordinates) {
         return entities.get(coordinates);
-    }
-
-    public <T extends Entity> List<T> getEntitiesOfAnyType(Class<T> entityClass) {
-        List<T> anyEntities = new ArrayList<>();
-        for (Entity entity : entities.values()) {
-            if (entityClass.isInstance(entity)) {
-                anyEntities.add(entityClass.cast(entity));
-            }
-        }
-        return anyEntities;
-    }
-
-    public List<Entity> getAllEntities() {
-        List<Entity> allEntities = new ArrayList<>();
-        for (Entity entity : entities.values()) {
-            if (entity != null) {
-                allEntities.add(entity);
-            }
-        }
-        return allEntities;
     }
 
     public <T extends Entity> void putEntity(Coordinates coordinates, T entity) {
@@ -50,10 +29,14 @@ public class GameMap {
         entities.remove(coordinates);
     }
 
-    public void moveEntity(Coordinates from, Coordinates to) {
-        Entity entity = getEntity(from);
-        removeEntity(from);
-        putEntity(to, entity);
+    public <T extends Entity> List<T> getEntitiesOfAnyType(Class<T> entityClass) {
+        List<T> anyEntities = new ArrayList<>();
+        for (Entity entity : entities.values()) {
+            if (entityClass.isInstance(entity)) {
+                anyEntities.add(entityClass.cast(entity));
+            }
+        }
+        return anyEntities;
     }
 
     public boolean isCellEmpty(Coordinates coordinates) {
@@ -61,16 +44,8 @@ public class GameMap {
     }
 
     public boolean isCellWithinBoundaries(Coordinates coordinates) {
-        if (!(coordinates.col() < MAX_COLUMN_VALUE && coordinates.col() >= 0)) return false;
-        return coordinates.row() < MAX_ROW_VALUE && coordinates.row() >= 0;
-    }
-
-    public boolean isCellOccupied(Coordinates coordinates, String food) {
-        if (!isCellEmpty(coordinates)) {
-            Entity entity = getEntity(coordinates);
-            return !entity.getClass().getSimpleName().equals(food);
-        }
-        return false;
+        if (!(coordinates.col() <= MAX_COLUMN_VALUE && coordinates.col() >= 0)) return false;
+        return coordinates.row() <= MAX_ROW_VALUE && coordinates.row() >= 0;
     }
 
     public List<Coordinates> getAllEmptyCells() {
@@ -83,12 +58,5 @@ public class GameMap {
             }
         }
         return emptyCells;
-    }
-
-    public Coordinates getRandomEmptyCell() {
-        Random random = new Random();
-        List<Coordinates> emptyCells = getAllEmptyCells();
-        int randomIndex = random.nextInt(emptyCells.size());
-        return emptyCells.get(randomIndex);
     }
 }

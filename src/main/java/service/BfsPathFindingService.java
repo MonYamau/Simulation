@@ -37,8 +37,6 @@ public class BfsPathFindingService implements PathFindingService {
             savedPath.put(coordinates, start);
         }
         return useBfsAlgorithm(start, food, gameMap);
-
-
     }
 
     private List<Coordinates> useBfsAlgorithm(Coordinates start, String food, GameMap gameMap) {
@@ -82,13 +80,11 @@ public class BfsPathFindingService implements PathFindingService {
     private Set<Coordinates> getAvailableCellsForMove(Coordinates coordinates, String food, GameMap gameMap) {
         Set<Coordinates> availableCells = new HashSet<>();
         for (CoordinatesShift shift : MovementUtils.getShifts()) {
-            Coordinates newCheck = MovementUtils.move(coordinates, shift);
-            if (gameMap.isCellWithinBoundaries(newCheck) && !gameMap.isCellOccupied(newCheck, food)) {
+            Coordinates newCheck = MovementUtils.moveCoordinates(coordinates, shift);
+            if (gameMap.isCellWithinBoundaries(newCheck) && !MovementUtils.isCellOccupied(newCheck, food, gameMap)) {
                 availableCells.add(newCheck);
             }
         }
         return availableCells;
     }
-
-
 }
