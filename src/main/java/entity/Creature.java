@@ -8,16 +8,16 @@ import main.java.utils.MovementUtils;
 
 public abstract class Creature extends Entity {
     private final int speed;
-    private final String food;
+    private final String typeOfFood;
     private final PathFindingService pathFindingService;
     private final FeedingService feedingService;
     private int hp;
     private Coordinates coordinates;
 
-    public Creature(int hp, int speed, String food, Coordinates coordinates, PathFindingService pathFindingService, FeedingService feedingService) {
+    public Creature(int hp, int speed, String typeOfFood, Coordinates coordinates, PathFindingService pathFindingService, FeedingService feedingService) {
         this.hp = hp;
         this.speed = speed;
-        this.food = food;
+        this.typeOfFood = typeOfFood;
         this.coordinates = coordinates;
         this.pathFindingService = pathFindingService;
         this.feedingService = feedingService;
@@ -43,13 +43,13 @@ public abstract class Creature extends Entity {
         return speed;
     }
 
-    public String getFood() {
-        return food;
+    public String getTypeOfFood() {
+        return typeOfFood;
     }
 
     public void makeMove(GameMap gameMap) {
         for (int i = 0; i < getSpeed(); i++) {
-            Coordinates move = pathFindingService.getNextCellForMove(getCoordinates(), getFood(), gameMap);
+            Coordinates move = pathFindingService.getNextCellForMove(this, gameMap);
             if (feedingService.canEat(this, move, gameMap)) {
                 feedingService.eat(this, move, gameMap);
             } else {
