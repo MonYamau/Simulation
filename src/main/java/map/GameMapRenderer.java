@@ -1,7 +1,7 @@
 package main.java.map;
 
 import main.java.utils.Coordinates;
-import main.java.entities.Entity;
+import main.java.entity.Entity;
 
 import static main.java.map.GameMap.MAX_COLUMN_VALUE;
 import static main.java.map.GameMap.MAX_ROW_VALUE;

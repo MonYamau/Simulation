@@ -1,4 +1,4 @@
-package main.java.entities.animate;
+package main.java.entity;
 
 import main.java.utils.Coordinates;
 import main.java.service.FeedingService;

@@ -1,7 +1,6 @@
-package main.java.entities.animate;
+package main.java.entity;
 
 import main.java.utils.Coordinates;
-import main.java.entities.Entity;
 import main.java.map.GameMap;
 import main.java.service.FeedingService;
 import main.java.service.PathFindingService;

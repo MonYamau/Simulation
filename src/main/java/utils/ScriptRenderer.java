@@ -1,6 +1,6 @@
 package main.java.utils;
 
-import static main.java.SimulationLauncher.*;
+import static main.java.core.SimulationLauncher.*;
 
 public final class ScriptRenderer {
     public static void clearScreen() {

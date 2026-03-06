@@ -1,6 +1,6 @@
-package main.java;
+package main.java.core;
 
-import main.java.entities.EntityFactory;
+import main.java.entity.EntityFactory;
 import main.java.map.GameMap;
 import main.java.map.GameMapLayout;
 import main.java.map.GameMapRenderer;

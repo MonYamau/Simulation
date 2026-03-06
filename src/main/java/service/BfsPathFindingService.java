@@ -2,7 +2,7 @@ package main.java.service;
 
 import main.java.utils.Coordinates;
 import main.java.utils.CoordinatesShift;
-import main.java.entities.Entity;
+import main.java.entity.Entity;
 import main.java.map.GameMap;
 
 import java.util.*;

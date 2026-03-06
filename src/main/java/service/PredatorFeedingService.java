@@ -1,9 +1,9 @@
 package main.java.service;
 
 import main.java.utils.Coordinates;
-import main.java.entities.Entity;
-import main.java.entities.animate.Creature;
-import main.java.entities.animate.Predator;
+import main.java.entity.Entity;
+import main.java.entity.Creature;
+import main.java.entity.Predator;
 import main.java.map.GameMap;
 
 public class PredatorFeedingService implements FeedingService {
