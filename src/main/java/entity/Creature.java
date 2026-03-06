@@ -1,9 +1,9 @@
 package main.java.entity;
 
-import main.java.utils.Coordinates;
 import main.java.map.GameMap;
 import main.java.service.FeedingService;
 import main.java.service.PathFindingService;
+import main.java.utils.Coordinates;
 
 public abstract class Creature extends Entity {
     private final int speed;

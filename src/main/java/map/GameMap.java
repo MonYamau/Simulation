@@ -1,8 +1,8 @@
 package main.java.map;
 
-import main.java.utils.Coordinates;
-import main.java.entity.Entity;
 import main.java.entity.Creature;
+import main.java.entity.Entity;
+import main.java.utils.Coordinates;
 
 import java.util.ArrayList;
 import java.util.HashMap;

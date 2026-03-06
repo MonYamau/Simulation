@@ -1,14 +1,7 @@
 package main.java.map;
 
+import main.java.entity.*;
 import main.java.utils.Coordinates;
-import main.java.entity.Entity;
-import main.java.entity.EntityFactory;
-import main.java.entity.Cat;
-import main.java.entity.Mouse;
-import main.java.entity.Basket;
-import main.java.entity.Box;
-import main.java.entity.Cheese;
-import main.java.entity.Yarn;
 
 public class GameMapLayout {
     GameMap gameMap;

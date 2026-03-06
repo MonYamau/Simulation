@@ -1,7 +1,7 @@
 package main.java.service;
 
-import main.java.utils.Coordinates;
 import main.java.map.GameMap;
+import main.java.utils.Coordinates;
 
 import java.util.List;
 

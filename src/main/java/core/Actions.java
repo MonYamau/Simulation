@@ -1,9 +1,9 @@
 package main.java.core;
 
-import main.java.entity.Entity;
-import main.java.entity.Creature;
-import main.java.entity.Mouse;
 import main.java.entity.Cheese;
+import main.java.entity.Creature;
+import main.java.entity.Entity;
+import main.java.entity.Mouse;
 import main.java.map.GameMap;
 import main.java.map.GameMapLayout;
 import main.java.utils.Coordinates;

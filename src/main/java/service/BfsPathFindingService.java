@@ -1,9 +1,9 @@
 package main.java.service;
 
-import main.java.utils.Coordinates;
-import main.java.utils.CoordinatesShift;
 import main.java.entity.Entity;
 import main.java.map.GameMap;
+import main.java.utils.Coordinates;
+import main.java.utils.CoordinatesShift;
 import main.java.utils.MovementUtils;
 
 import java.util.*;
