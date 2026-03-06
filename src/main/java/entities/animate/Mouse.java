@@ -1,6 +1,6 @@
 package main.java.entities.animate;
 
-import main.java.Coordinates;
+import main.java.utils.Coordinates;
 import main.java.service.FeedingService;
 import main.java.service.PathFindingService;
 

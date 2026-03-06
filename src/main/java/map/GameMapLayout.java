@@ -1,6 +1,6 @@
 package main.java.map;
 
-import main.java.Coordinates;
+import main.java.utils.Coordinates;
 import main.java.entities.Entity;
 import main.java.entities.EntityFactory;
 import main.java.entities.animate.Cat;

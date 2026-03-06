@@ -1,6 +1,6 @@
 package main.java.entities;
 
-import main.java.Coordinates;
+import main.java.utils.Coordinates;
 import main.java.entities.animate.Cat;
 import main.java.entities.animate.Mouse;
 import main.java.entities.inanimate.Basket;

@@ -1,6 +1,6 @@
 package main.java.map;
 
-import main.java.Coordinates;
+import main.java.utils.Coordinates;
 import main.java.entities.Entity;
 
 import static main.java.map.GameMap.MAX_COLUMN_VALUE;

@@ -5,6 +5,7 @@ import main.java.map.GameMap;
 import main.java.map.GameMapLayout;
 import main.java.map.GameMapRenderer;
 import main.java.service.*;
+import main.java.utils.ScriptRenderer;
 
 public class Simulation {
     public static int counter = 0;

@@ -1,7 +1,7 @@
 package main.java.service;
 
-import main.java.Coordinates;
-import main.java.CoordinatesShift;
+import main.java.utils.Coordinates;
+import main.java.utils.CoordinatesShift;
 import main.java.entities.Entity;
 import main.java.map.GameMap;
 

@@ -6,6 +6,7 @@ import main.java.entities.animate.Mouse;
 import main.java.entities.inanimate.Cheese;
 import main.java.map.GameMap;
 import main.java.map.GameMapLayout;
+import main.java.utils.Coordinates;
 
 import java.util.List;
 

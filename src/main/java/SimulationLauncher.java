@@ -1,5 +1,7 @@
 package main.java;
 
+import main.java.utils.ScriptRenderer;
+
 import java.util.Scanner;
 
 public class SimulationLauncher {
