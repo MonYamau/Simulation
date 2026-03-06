@@ -29,6 +29,7 @@ public class EntityFactory {
     }
 
     public <T extends Entity> T createEntity(Coordinates coordinates, Class<T> entityClass) {
+        @SuppressWarnings("unchecked")
         Function<Coordinates, T> entityCreator = (Function<Coordinates, T>) entityCreators.get(entityClass);
         return entityCreator.apply(coordinates);
     }
