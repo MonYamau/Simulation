@@ -50,7 +50,7 @@ public class GameMap {
         entities.remove(coordinates);
     }
 
-    public void replaceEntity(Coordinates from, Coordinates to) {
+    public void moveEntity(Coordinates from, Coordinates to) {
         Entity entity = getEntity(from);
         removeEntity(from);
         setEntity(to, entity);

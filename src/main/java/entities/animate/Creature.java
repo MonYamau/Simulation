@@ -1,7 +1,7 @@
 package main.java.entities.animate;
 
 import main.java.Coordinates;
-import main.java.PathFinder;
+import main.java.BfsPathFindingService;
 import main.java.entities.Entity;
 import main.java.map.GameMap;
 
@@ -48,12 +48,12 @@ public abstract class Creature extends Entity {
 
     public void makeMove(GameMap gameMap) {
         for (int i = 0; i < getSpeed(); i++) {
-            PathFinder pathFinder = new PathFinder(gameMap);
-            Coordinates move = pathFinder.getNextCellForMove(getCoordinates(), getFood());
-            if (pathFinder.isEntityEatable(move, getFood())) {
+            BfsPathFindingService bfsPathFindingService = new BfsPathFindingService(gameMap);
+            Coordinates move = bfsPathFindingService.getNextCellForMove(getCoordinates(), getFood(), gameMap);
+            if (bfsPathFindingService.isEntityEdible(move, getFood())) {
                 eatFood(move, gameMap);
             } else {
-                gameMap.replaceEntity(getCoordinates(), move);
+                gameMap.moveEntity(getCoordinates(), move);
             }
         }
     }
