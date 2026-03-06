@@ -1,19 +1,18 @@
 package main.java.entities.animate;
 
 import main.java.Coordinates;
-import main.java.service.FeedingService;
-import main.java.service.PathFindingService;
 import main.java.entities.Entity;
 import main.java.map.GameMap;
+import main.java.service.FeedingService;
+import main.java.service.PathFindingService;
 
 public abstract class Creature extends Entity {
     private final int speed;
     private final String food;
-    private int hp;
-    private Coordinates coordinates;
-
     private final PathFindingService pathFindingService;
     private final FeedingService feedingService;
+    private int hp;
+    private Coordinates coordinates;
 
     public Creature(int hp, int speed, String food, Coordinates coordinates, PathFindingService pathFindingService, FeedingService feedingService) {
         this.hp = hp;

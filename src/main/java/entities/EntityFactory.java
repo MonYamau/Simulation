@@ -1,14 +1,14 @@
 package main.java.entities;
 
 import main.java.Coordinates;
-import main.java.service.FeedingService;
-import main.java.service.PathFindingService;
 import main.java.entities.animate.Cat;
 import main.java.entities.animate.Mouse;
 import main.java.entities.inanimate.Basket;
 import main.java.entities.inanimate.Box;
 import main.java.entities.inanimate.Cheese;
 import main.java.entities.inanimate.Yarn;
+import main.java.service.FeedingService;
+import main.java.service.PathFindingService;
 
 import java.util.HashMap;
 import java.util.Map;
