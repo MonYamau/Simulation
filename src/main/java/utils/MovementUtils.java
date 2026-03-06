@@ -5,7 +5,9 @@ import main.java.map.GameMap;
 
 import java.util.Set;
 
-public class MovementUtils {
+public final class MovementUtils {
+    private MovementUtils(){}
+
     public static Set<CoordinatesShift> getShifts() {
         return Set.of(
                 new CoordinatesShift(-1, 0), //вверх
