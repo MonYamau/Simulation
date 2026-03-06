@@ -79,10 +79,12 @@ public class Simulation {
         isRunning = false;
         isPaused = false;
         notifyAll();
-        try {
-            simulationThread.join();
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+        if (simulationThread != null) {
+            try {
+                simulationThread.join();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
         }
     }
 }
