@@ -22,7 +22,7 @@ public final class ScriptRenderer {
 
     public static void printInstructionScript() {
         System.out.printf("""
-                Введите [%s], чтобы запустить один ход
+                Введите [%s], чтобы выполнить один ход
                 Введите [%s], чтобы запустить/продолжить бесконечную симуляцию
                 Введите [%s], чтобы приостановить бесконечную симуляцию
                 Введите [%s], чтобы выйти%n""", MOTION, START, PAUSE, EXIT);
