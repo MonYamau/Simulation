@@ -4,6 +4,7 @@ import main.java.utils.Coordinates;
 import main.java.utils.CoordinatesShift;
 import main.java.entity.Entity;
 import main.java.map.GameMap;
+import main.java.utils.MovementUtils;
 
 import java.util.*;
 
@@ -80,12 +81,14 @@ public class BfsPathFindingService implements PathFindingService {
 
     private Set<Coordinates> getAvailableCellsForMove(Coordinates coordinates, String food, GameMap gameMap) {
         Set<Coordinates> availableCells = new HashSet<>();
-        for (CoordinatesShift move : coordinates.getMoves()) {
-            Coordinates newCheck = coordinates.shift(move);
+        for (CoordinatesShift shift : MovementUtils.getShifts()) {
+            Coordinates newCheck = MovementUtils.move(coordinates, shift);
             if (gameMap.isCellWithinBoundaries(newCheck) && !gameMap.isCellOccupied(newCheck, food)) {
                 availableCells.add(newCheck);
             }
         }
         return availableCells;
     }
+
+
 }

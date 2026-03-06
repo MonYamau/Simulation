@@ -39,7 +39,7 @@ public class GameMap {
         return allEntities;
     }
 
-    public <T extends Entity> void setEntity(Coordinates coordinates, T entity) {
+    public <T extends Entity> void putEntity(Coordinates coordinates, T entity) {
         entities.put(coordinates, entity);
         if (entity instanceof Creature) {
             ((Creature) entity).setCoordinates(coordinates);
@@ -53,7 +53,7 @@ public class GameMap {
     public void moveEntity(Coordinates from, Coordinates to) {
         Entity entity = getEntity(from);
         removeEntity(from);
-        setEntity(to, entity);
+        putEntity(to, entity);
     }
 
     public boolean isCellEmpty(Coordinates coordinates) {
