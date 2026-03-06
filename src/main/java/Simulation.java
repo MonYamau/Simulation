@@ -32,7 +32,7 @@ public class Simulation {
     }
 
     public synchronized void startSimulation(){
-        if (simulationThread.isAlive()) {
+        if (simulationThread != null && simulationThread.isAlive()) {
             isPaused = false;
             notifyAll();
             return;
