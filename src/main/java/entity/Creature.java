@@ -49,7 +49,7 @@ public abstract class Creature extends Entity {
 
     public void makeMove(GameMap gameMap) {
         for (int i = 0; i < getSpeed(); i++) {
-            Coordinates move = pathFindingService.getNextCellForMove(this, gameMap);
+            Coordinates move = pathFindingService.getNextCellForMove(getCoordinates(), getTypeOfFood(), gameMap);
             if (feedingService.canEat(this, move, gameMap)) {
                 feedingService.eat(this, move, gameMap);
             } else {

@@ -1,6 +1,5 @@
 package main.java.service;
 
-import main.java.entity.Creature;
 import main.java.entity.Entity;
 import main.java.map.GameMap;
 import main.java.utils.Coordinates;
@@ -15,41 +14,41 @@ public class BfsPathFindingService implements PathFindingService {
     Map<Coordinates, Coordinates> savedPath;
 
     @Override
-    public Coordinates getNextCellForMove(Creature creature, GameMap gameMap) {
+    public Coordinates getNextCellForMove(Coordinates start, String target, GameMap gameMap) {
         Random random = new Random();
-        List<Coordinates> path = findPathToTarget(creature, gameMap);
+        List<Coordinates> path = findPathToTarget(start, target, gameMap);
         if (!path.isEmpty()) return path.getFirst();
-        List<Coordinates> availableCells = new ArrayList<>(getAvailableCellsForMove(creature.getCoordinates(), creature.getTypeOfFood(), gameMap));
+        List<Coordinates> availableCells = new ArrayList<>(getAvailableCellsForMove(start, target, gameMap));
         if (!availableCells.isEmpty()) {
             return availableCells.get(random.nextInt(availableCells.size()));
         }
-        return creature.getCoordinates();
+        return start;
     }
 
     @Override
-    public List<Coordinates> findPathToTarget(Creature creature, GameMap gameMap) {
+    public List<Coordinates> findPathToTarget(Coordinates start, String target, GameMap gameMap) {
         check = new LinkedList<>();
         checked = new HashSet<>();
         savedPath = new HashMap<>();
-        checked.add(creature.getCoordinates());
-        Set<Coordinates> availableCells = getAvailableCellsForMove(creature.getCoordinates(), creature.getTypeOfFood(), gameMap);
+        checked.add(start);
+        Set<Coordinates> availableCells = getAvailableCellsForMove(start, target, gameMap);
         for (Coordinates coordinate : availableCells) {
             check.addLast(coordinate);
             checked.add(coordinate);
-            savedPath.put(coordinate, creature.getCoordinates());
+            savedPath.put(coordinate, start);
         }
-        return useBfsAlgorithm(creature, gameMap);
+        return useBfsAlgorithm(start, target, gameMap);
     }
 
-    private List<Coordinates> useBfsAlgorithm(Creature creature, GameMap gameMap) {
+    private List<Coordinates> useBfsAlgorithm(Coordinates start, String target, GameMap gameMap) {
         List<Coordinates> pathToFood = new ArrayList<>();
         while (!check.isEmpty()) {
             Coordinates nextCheck = check.poll();
-            if (isEntityEdible(nextCheck, creature.getTypeOfFood(), gameMap)) {
-                pathToFood = restorePath(nextCheck, creature.getCoordinates());
+            if (isEntityEdible(nextCheck, target, gameMap)) {
+                pathToFood = restorePath(nextCheck, start);
                 return pathToFood;
             } else {
-                Set<Coordinates> availableCells = getAvailableCellsForMove(creature.getCoordinates(), creature.getTypeOfFood(), gameMap);
+                Set<Coordinates> availableCells = getAvailableCellsForMove(start, target, gameMap);
                 for (Coordinates coordinate : availableCells) {
                     if (!checked.contains(coordinate)) {
                         savedPath.put(coordinate, nextCheck);
