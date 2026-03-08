@@ -6,7 +6,7 @@ import main.java.utils.Coordinates;
 import java.util.List;
 
 public interface PathFindingService {
-    Coordinates getNextCellForMove(Coordinates entityCoordinates, String food, GameMap gameMap);
+    Coordinates getNextCellForMove(Coordinates entityCoordinates, Class<?> target, GameMap gameMap);
 
-    List<Coordinates> findPathToTarget(Coordinates entityCoordinates, String food, GameMap gameMap);
+    List<Coordinates> findPathToTarget(Coordinates entityCoordinates, Class<?> target, GameMap gameMap);
 }

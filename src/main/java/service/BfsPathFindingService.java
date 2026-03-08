@@ -14,11 +14,11 @@ public class BfsPathFindingService implements PathFindingService {
     Map<Coordinates, Coordinates> savedPath;
 
     @Override
-    public Coordinates getNextCellForMove(Coordinates start, String food, GameMap gameMap) {
+    public Coordinates getNextCellForMove(Coordinates start, Class<?> target, GameMap gameMap) {
         Random random = new Random();
-        List<Coordinates> path = findPathToTarget(start, food, gameMap);
+        List<Coordinates> path = findPathToTarget(start, target, gameMap);
         if (!path.isEmpty()) return path.getFirst();
-        List<Coordinates> availableCells = new ArrayList<>(getAvailableCellsForMove(start, food, gameMap));
+        List<Coordinates> availableCells = new ArrayList<>(getAvailableCellsForMove(start, target, gameMap));
         if (!availableCells.isEmpty()) {
             return availableCells.get(random.nextInt(availableCells.size()));
         }
@@ -26,28 +26,28 @@ public class BfsPathFindingService implements PathFindingService {
     }
 
     @Override
-    public List<Coordinates> findPathToTarget(Coordinates start, String food, GameMap gameMap) {
+    public List<Coordinates> findPathToTarget(Coordinates start, Class<?> target, GameMap gameMap) {
         check = new LinkedList<>();
         checked = new HashSet<>();
         savedPath = new HashMap<>();
         checked.add(start);
-        for (Coordinates coordinates : getAvailableCellsForMove(start, food, gameMap)) {
+        for (Coordinates coordinates : getAvailableCellsForMove(start, target, gameMap)) {
             check.addLast(coordinates);
             checked.add(coordinates);
             savedPath.put(coordinates, start);
         }
-        return useBfsAlgorithm(start, food, gameMap);
+        return useBfsAlgorithm(start, target, gameMap);
     }
 
-    private List<Coordinates> useBfsAlgorithm(Coordinates start, String food, GameMap gameMap) {
-        List<Coordinates> pathToFood = new ArrayList<>();
+    private List<Coordinates> useBfsAlgorithm(Coordinates start, Class<?> target, GameMap gameMap) {
+        List<Coordinates> pathToTarget = new ArrayList<>();
         while (!check.isEmpty()) {
             Coordinates nextCheck = check.poll();
-            if (isEntityEdible(nextCheck, food, gameMap)) {
-                pathToFood = restorePath(nextCheck, start);
-                return pathToFood;
+            if (isEntityEdible(nextCheck, target, gameMap)) {
+                pathToTarget = restorePath(nextCheck, start);
+                return pathToTarget;
             } else {
-                for (Coordinates coordinates : getAvailableCellsForMove(nextCheck, food, gameMap)) {
+                for (Coordinates coordinates : getAvailableCellsForMove(nextCheck, target, gameMap)) {
                     if (!checked.contains(coordinates)) {
                         savedPath.put(coordinates, nextCheck);
                         check.addLast(coordinates);
@@ -56,7 +56,7 @@ public class BfsPathFindingService implements PathFindingService {
                 }
             }
         }
-        return pathToFood;
+        return pathToTarget;
     }
 
     private List<Coordinates> restorePath(Coordinates finish, Coordinates start) {
@@ -69,19 +69,19 @@ public class BfsPathFindingService implements PathFindingService {
         return path.reversed();
     }
 
-    public boolean isEntityEdible(Coordinates coordinates, String food, GameMap gameMap) {
+    public boolean isEntityEdible(Coordinates coordinates, Class<?> target, GameMap gameMap) {
         if (!gameMap.isCellEmpty(coordinates)) {
             Entity entity = gameMap.getEntity(coordinates);
-            return entity.getClass().getSimpleName().equals(food);
+            return target.isInstance(entity);
         }
         return false;
     }
 
-    private Set<Coordinates> getAvailableCellsForMove(Coordinates coordinates, String food, GameMap gameMap) {
+    private Set<Coordinates> getAvailableCellsForMove(Coordinates coordinates, Class<?> target, GameMap gameMap) {
         Set<Coordinates> availableCells = new HashSet<>();
         for (CoordinatesShift shift : MovementUtils.getShifts()) {
             Coordinates newCheck = MovementUtils.moveCoordinates(coordinates, shift);
-            if (gameMap.isCellWithinBoundaries(newCheck) && !MovementUtils.isCellOccupied(newCheck, food, gameMap)) {
+            if (gameMap.isCellWithinBoundaries(newCheck) && !MovementUtils.isCellOccupied(newCheck, target, gameMap)) {
                 availableCells.add(newCheck);
             }
         }

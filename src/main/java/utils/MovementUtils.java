@@ -25,10 +25,10 @@ public class MovementUtils {
         gameMap.putEntity(to, entity);
     }
 
-    public static boolean isCellOccupied(Coordinates coordinates, String food, GameMap gameMap) {
+    public static boolean isCellOccupied(Coordinates coordinates, Class<?> target, GameMap gameMap) {
         if (!gameMap.isCellEmpty(coordinates)) {
             Entity entity = gameMap.getEntity(coordinates);
-            return !entity.getClass().getSimpleName().equals(food);
+            return !target.isInstance(entity);
         }
         return false;
     }
