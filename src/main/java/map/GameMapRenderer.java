@@ -54,7 +54,6 @@ public class GameMapRenderer {
 
     private String getEntitySprite(Entity entity) {
         return switch (entity.getClass().getSimpleName()) {
-            case "Yarn" -> CELL_WITH_ENTITY.formatted("🧶");
             case "Basket" -> CELL_WITH_ENTITY.formatted("🧺");
             case "Box" -> CELL_WITH_ENTITY.formatted("📦");
             case "Cheese" -> CELL_WITH_ENTITY.formatted("🧀");

@@ -14,7 +14,6 @@ public class EntityFactory {
     public EntityFactory(PathFindingService bfsPathFinder, FeedingService survivorFeeder, FeedingService predatorFeeder) {
         writeEntity(Box.class, coordinates -> new Box());
         writeEntity(Basket.class, coordinates -> new Basket());
-        writeEntity(Yarn.class, coordinates -> new Yarn());
         writeEntity(Cheese.class, coordinates -> new Cheese());
         writeEntity(Cat.class, coordinates -> new Cat(10, 3, Mouse.class, coordinates, bfsPathFinder, predatorFeeder, 1));
         writeEntity(Mouse.class, coordinates -> new Mouse(6, 2, Cheese.class, coordinates, bfsPathFinder, survivorFeeder));

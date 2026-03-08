@@ -45,35 +45,36 @@ public class GameMapLayout {
     }
 
     public void setupObstacles() {
-        setupNewEntity(new Coordinates(3, 1), Yarn.class);
-        setupNewEntity(new Coordinates(1, 4), Yarn.class);
-        setupNewEntity(new Coordinates(7, 9), Yarn.class);
-        setupNewEntity(new Coordinates(0, 13), Yarn.class);
-        setupNewEntity(new Coordinates(2, 9), Yarn.class);
-        setupNewEntity(new Coordinates(7, 0), Yarn.class);
-        setupNewEntity(new Coordinates(9, 13), Yarn.class);
-        setupNewEntity(new Coordinates(10, 3), Yarn.class);
-
         setupNewEntity(new Coordinates(3, 4), Box.class);
         setupNewEntity(new Coordinates(4, 6), Box.class);
         setupNewEntity(new Coordinates(3, 5), Box.class);
         setupNewEntity(new Coordinates(4, 5), Box.class);
+
         setupNewEntity(new Coordinates(8, 11), Box.class);
         setupNewEntity(new Coordinates(9, 11), Box.class);
         setupNewEntity(new Coordinates(9, 10), Box.class);
+
         setupNewEntity(new Coordinates(6, 2), Box.class);
         setupNewEntity(new Coordinates(6, 3), Box.class);
         setupNewEntity(new Coordinates(10, 5), Box.class);
+
         setupNewEntity(new Coordinates(9, 6), Box.class);
         setupNewEntity(new Coordinates(10, 7), Box.class);
+
         setupNewEntity(new Coordinates(3, 11), Box.class);
         setupNewEntity(new Coordinates(2, 12), Box.class);
         setupNewEntity(new Coordinates(3, 12), Box.class);
+
         setupNewEntity(new Coordinates(7, 14), Box.class);
         setupNewEntity(new Coordinates(6, 15), Box.class);
         setupNewEntity(new Coordinates(7, 15), Box.class);
         setupNewEntity(new Coordinates(8, 15), Box.class);
 
+        setupNewEntity(new Coordinates(0, 6), Box.class);
+        setupNewEntity(new Coordinates(0, 7), Box.class);
+        setupNewEntity(new Coordinates(1, 7), Box.class);
+
+        setupNewEntity(new Coordinates(0, 8), Basket.class);
         setupNewEntity(new Coordinates(5, 8), Basket.class);
         setupNewEntity(new Coordinates(8, 4), Basket.class);
         setupNewEntity(new Coordinates(0, 10), Basket.class);
