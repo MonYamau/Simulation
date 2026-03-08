@@ -5,7 +5,7 @@ import main.java.map.GameMap;
 import main.java.utils.Coordinates;
 
 public interface FeedingService {
-    boolean canEat(Creature creature, Coordinates coordinates, GameMap gameMap);
+    boolean canEat(Creature creature, Coordinates entityCoordinates, GameMap gameMap);
 
     void eat(Creature creature, Coordinates coordinates, GameMap gameMap);
 }

@@ -48,8 +48,8 @@ public class GameMap {
     }
 
     public boolean isCellWithinBoundaries(Coordinates coordinates) {
-        if (!(coordinates.col() <= MAX_COLUMN_VALUE && coordinates.col() >= 0)) return false;
-        return coordinates.row() <= MAX_ROW_VALUE && coordinates.row() >= 0;
+        if (!(coordinates.col() < MAX_COLUMN_VALUE && coordinates.col() >= 0)) return false;
+        return coordinates.row() < MAX_ROW_VALUE && coordinates.row() >= 0;
     }
 
     public List<Coordinates> getAllEmptyCells() {
