@@ -43,7 +43,7 @@ public class BfsPathFindingService implements PathFindingService {
         List<Coordinates> pathToTarget = new ArrayList<>();
         while (!check.isEmpty()) {
             Coordinates nextCheck = check.poll();
-            if (isEntityEdible(nextCheck, target, gameMap)) {
+            if (isTarget(nextCheck, target, gameMap)) {
                 pathToTarget = restorePath(nextCheck, start);
                 return pathToTarget;
             } else {
@@ -69,7 +69,7 @@ public class BfsPathFindingService implements PathFindingService {
         return path.reversed();
     }
 
-    public boolean isEntityEdible(Coordinates coordinates, Class<?> target, GameMap gameMap) {
+    public boolean isTarget(Coordinates coordinates, Class<?> target, GameMap gameMap) {
         if (!gameMap.isCellEmpty(coordinates)) {
             Entity entity = gameMap.getEntity(coordinates);
             return target.isInstance(entity);
