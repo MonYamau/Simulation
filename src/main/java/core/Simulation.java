@@ -10,7 +10,7 @@ import main.java.utils.ScriptRenderer;
 public class Simulation {
     public static int counter = 0;
     GameMap gameMap = new GameMap();
-    PathFindingService bfsPathFinder = new BfsPathFindingService();
+    PathFindingService bfsPathFinder = new BfsPathFinder();
     FeedingService survivorFeeder = new SurvivorFeedingService();
     FeedingService predatorFeeder = new PredatorFeedingService();
     EntityFactory entityFactory = new EntityFactory(bfsPathFinder, survivorFeeder, predatorFeeder);

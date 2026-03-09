@@ -8,7 +8,7 @@ import main.java.utils.MovementUtils;
 
 import java.util.*;
 
-public class BfsPathFindingService implements PathFindingService {
+public class BfsPathFinder implements PathFindingService {
     LinkedList<Coordinates> check;
     Set<Coordinates> checked;
     Map<Coordinates, Coordinates> savedPath;
