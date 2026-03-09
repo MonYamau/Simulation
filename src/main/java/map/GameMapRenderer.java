@@ -1,6 +1,6 @@
 package main.java.map;
 
-import main.java.entity.Entity;
+import main.java.entity.*;
 import main.java.utils.Coordinates;
 
 import static main.java.map.GameMap.MAX_COLUMN_VALUE;
@@ -53,14 +53,22 @@ public class GameMapRenderer {
     }
 
     private String getEntitySprite(Entity entity) {
-        return switch (entity.getClass().getSimpleName()) {
-            case "Basket" -> CELL_WITH_ENTITY.formatted("🧺");
-            case "Box" -> CELL_WITH_ENTITY.formatted("📦");
-            case "Cheese" -> CELL_WITH_ENTITY.formatted("🧀");
-            case "Mouse" -> CELL_WITH_ENTITY.formatted("🐭");
-            case "Cat" -> CELL_WITH_ENTITY.formatted("🐱");
-            default -> CELL;
-        };
+        if (entity instanceof Basket) {
+            return CELL_WITH_ENTITY.formatted("🧺");
+        }
+        if (entity instanceof Box) {
+            return CELL_WITH_ENTITY.formatted("📦");
+        }
+        if (entity instanceof Cheese) {
+            return CELL_WITH_ENTITY.formatted("🧀");
+        }
+        if (entity instanceof Mouse) {
+            return CELL_WITH_ENTITY.formatted("🐭");
+        }
+        if (entity instanceof Cat) {
+            return CELL_WITH_ENTITY.formatted("🐱");
+        }
+        return CELL;
     }
 
     private boolean isEvenCell(Coordinates coordinates) {
