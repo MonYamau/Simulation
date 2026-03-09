@@ -7,12 +7,13 @@ import main.java.utils.Coordinates;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GameMap {
     public static final int MAX_COLUMN_VALUE = 12;
     public static final int MAX_ROW_VALUE = 16;
 
-    HashMap<Coordinates, Entity> entities = new HashMap<>();
+    Map<Coordinates, Entity> entities = new HashMap<>();
 
     public Entity getEntity(Coordinates coordinates) {
         return entities.get(coordinates);
@@ -44,7 +45,7 @@ public class GameMap {
     }
 
     public boolean isCellEmpty(Coordinates coordinates) {
-        return !entities.containsKey(coordinates) || getEntity(coordinates) == null;
+        return !entities.containsKey(coordinates);
     }
 
     public boolean isCellWithinBoundaries(Coordinates coordinates) {
