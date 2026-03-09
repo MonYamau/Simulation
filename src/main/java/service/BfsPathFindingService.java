@@ -30,12 +30,9 @@ public class BfsPathFindingService implements PathFindingService {
         check = new LinkedList<>();
         checked = new HashSet<>();
         savedPath = new HashMap<>();
+        check.add(start);
         checked.add(start);
-        for (Coordinates coordinates : getAvailableCellsForMove(start, target, gameMap)) {
-            check.addLast(coordinates);
-            checked.add(coordinates);
-            savedPath.put(coordinates, start);
-        }
+        savedPath.put(start, null);
         return useBfsAlgorithm(start, target, gameMap);
     }
 
