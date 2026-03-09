@@ -1,20 +1,11 @@
 package main.java.service;
 
 import main.java.entity.Creature;
-import main.java.entity.Entity;
 import main.java.entity.Predator;
 import main.java.map.GameMap;
 import main.java.utils.Coordinates;
 
-public class PredatorFeedingService implements FeedingService {
-    @Override
-    public boolean canEat(Creature creature, Coordinates entityCoordinates, GameMap gameMap) {
-        if (!gameMap.isCellEmpty(entityCoordinates)) {
-            Entity entity = gameMap.getEntity(entityCoordinates);
-            return creature.getTypeOfFood().isInstance(entity);
-        }
-        return false;
-    }
+public class PredatorFeeder implements FeedingService {
 
     @Override
     public void eat(Creature creature, Coordinates coordinates, GameMap gameMap) {
@@ -23,11 +14,11 @@ public class PredatorFeedingService implements FeedingService {
             makeAttack(target, creature);
         } else {
             gameMap.removeEntity(coordinates);
-            creature.setHp(creature.getHp() + 2);
+            creature.setHp(creature.getHp() + creature.getSaturation());
         }
     }
 
-    public void makeAttack(Creature target, Creature predator) {
+    private void makeAttack(Creature target, Creature predator) {
         int attack = ((Predator) predator).getAttack();
         target.setHp(target.getHp() - attack);
     }

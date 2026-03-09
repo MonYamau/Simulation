@@ -6,6 +6,10 @@ import main.java.service.PathFindingService;
 import main.java.utils.Coordinates;
 import main.java.utils.MovementUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public abstract class Creature extends Entity {
     private final int speed;
     private final Class<?> typeOfFood;
@@ -47,14 +51,37 @@ public abstract class Creature extends Entity {
         return typeOfFood;
     }
 
+    public int getSaturation() {
+        return 2;
+    }
+
     public void makeMove(GameMap gameMap) {
         for (int i = 0; i < getSpeed(); i++) {
-            Coordinates move = pathFindingService.getNextCellForMove(getCoordinates(), getTypeOfFood(), gameMap);
-            if (feedingService.canEat(this, move, gameMap)) {
+            Coordinates move = getNextCellForMove(gameMap);
+            if (isTarget(move, gameMap)) {
                 feedingService.eat(this, move, gameMap);
             } else {
                 MovementUtils.moveEntity(getCoordinates(), move, gameMap);
             }
         }
+    }
+
+    public Coordinates getNextCellForMove(GameMap gameMap) {
+        Random random = new Random();
+        List<Coordinates> path = pathFindingService.find(getCoordinates(), getTypeOfFood(), gameMap);
+        if (!path.isEmpty()) return path.getFirst();
+        List<Coordinates> availableCells = new ArrayList<>(MovementUtils.getAvailableCellsForMove(getCoordinates(), getTypeOfFood(), gameMap));
+        if (!availableCells.isEmpty()) {
+            return availableCells.get(random.nextInt(availableCells.size()));
+        }
+        return getCoordinates();
+    }
+
+    public boolean isTarget(Coordinates coordinates, GameMap gameMap) {
+        if (!gameMap.isCellEmpty(coordinates)) {
+            Entity entity = gameMap.getEntity(coordinates);
+            return getTypeOfFood().isInstance(entity);
+        }
+        return false;
     }
 }

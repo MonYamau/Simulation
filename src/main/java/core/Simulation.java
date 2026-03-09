@@ -11,8 +11,8 @@ public class Simulation {
     public static int counter = 0;
     GameMap gameMap = new GameMap();
     PathFindingService bfsPathFinder = new BfsPathFinder();
-    FeedingService survivorFeeder = new SurvivorFeedingService();
-    FeedingService predatorFeeder = new PredatorFeedingService();
+    FeedingService survivorFeeder = new SurvivorFeeder();
+    FeedingService predatorFeeder = new PredatorFeeder();
     EntityFactory entityFactory = new EntityFactory(bfsPathFinder, survivorFeeder, predatorFeeder);
     GameMapLayout gameMapLayout = new GameMapLayout(gameMap, entityFactory);
     ResourceProvider resourceProvider = new ResourceProvider(gameMap, gameMapLayout);
