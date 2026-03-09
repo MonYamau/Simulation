@@ -15,7 +15,8 @@ public class Simulation {
     FeedingService predatorFeeder = new PredatorFeedingService();
     EntityFactory entityFactory = new EntityFactory(bfsPathFinder, survivorFeeder, predatorFeeder);
     GameMapLayout gameMapLayout = new GameMapLayout(gameMap, entityFactory);
-    Actions actions = new Actions(gameMap, gameMapLayout);
+    ResourceProvider resourceProvider = new ResourceProvider(gameMap, gameMapLayout);
+    Actions actions = new Actions(gameMap, gameMapLayout, resourceProvider);
     GameMapRenderer gameMapRenderer = new GameMapRenderer(gameMap);
     private volatile boolean isRunning = false;
     private volatile boolean isPaused = true;
