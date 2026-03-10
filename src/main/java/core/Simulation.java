@@ -1,33 +1,34 @@
 package main.java.core;
 
+import main.java.action.Action;
+import main.java.action.ActionManager;
 import main.java.entity.EntityFactory;
 import main.java.map.GameMap;
-import main.java.map.GameMapLayout;
 import main.java.map.GameMapRenderer;
-import main.java.service.*;
 import main.java.utils.ScriptRenderer;
 
 public class Simulation {
-    public static int counter = 0;
-    GameMap gameMap = new GameMap();
-    PathFindingService bfsPathFinder = new BfsPathFinder();
-    FeedingService survivorFeeder = new SurvivorFeeder();
-    FeedingService predatorFeeder = new PredatorFeeder();
-    EntityFactory entityFactory = new EntityFactory(bfsPathFinder, survivorFeeder, predatorFeeder);
-    GameMapLayout gameMapLayout = new GameMapLayout(gameMap, entityFactory);
-    ResourceProvider resourceProvider = new ResourceProvider(gameMap, gameMapLayout);
-    Actions actions = new Actions(gameMap, gameMapLayout, resourceProvider);
-    GameMapRenderer gameMapRenderer = new GameMapRenderer(gameMap);
+    private static int counter;
+    private final GameMapRenderer gameMapRenderer;
+    private final ActionManager actionManager;
     private volatile boolean isRunning = false;
     private volatile boolean isPaused = true;
     private Thread simulationThread;
+
+    public Simulation(GameMap gameMap, GameMapRenderer gameMapRenderer, EntityFactory entityFactory) {
+        counter = 0;
+        this.gameMapRenderer = gameMapRenderer;
+        this.actionManager = new ActionManager(gameMap, entityFactory);
+    }
 
     public void initSimulation() {
         ScriptRenderer.clearScreen();
         ScriptRenderer.printWelcomeScript();
         ScriptRenderer.printInstructionScript();
         ScriptRenderer.printCounter(counter);
-        actions.initActions();
+        for (Action action : actionManager.getInitActions()) {
+            action.perform();
+        }
         gameMapRenderer.printMapSimulation();
     }
 
@@ -35,7 +36,9 @@ public class Simulation {
         ScriptRenderer.clearScreen();
         ScriptRenderer.printInstructionScript();
         ScriptRenderer.printCounter(++counter);
-        actions.turnActions();
+        for (Action action : actionManager.getTurnActions()) {
+            action.perform();
+        }
         gameMapRenderer.printMapSimulation();
     }
 

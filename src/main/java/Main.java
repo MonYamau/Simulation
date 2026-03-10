@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         SimulationLauncher simulationLauncher = new SimulationLauncher();
         try {
-            simulationLauncher.startSimulationLauncher();
+            simulationLauncher.start();
         } catch (IllegalArgumentException e) {
             System.err.println("Получено некорректное значение");
             System.err.println(e.getMessage());

@@ -1,5 +1,8 @@
 package main.java.core;
 
+import main.java.entity.EntityFactory;
+import main.java.map.GameMap;
+import main.java.map.GameMapRenderer;
 import main.java.utils.ScriptRenderer;
 
 import java.util.Scanner;
@@ -11,8 +14,18 @@ public class SimulationLauncher {
     public final static String PAUSE = "П";
     public final static String EXIT = "В";
 
-    public void startSimulationLauncher() {
-        Simulation simulation = new Simulation();
+    GameMap gameMap;
+    GameMapRenderer gameMapRenderer;
+    EntityFactory entityFactory;
+
+    public SimulationLauncher() {
+        this.gameMap = new GameMap();
+        this.gameMapRenderer = new GameMapRenderer(gameMap);
+        this.entityFactory = new EntityFactory();
+    }
+
+    public void start() {
+        Simulation simulation = new Simulation(gameMap, gameMapRenderer, entityFactory);
         simulation.initSimulation();
         startGameLoop(simulation);
     }
