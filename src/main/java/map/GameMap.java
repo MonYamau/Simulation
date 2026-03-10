@@ -1,6 +1,6 @@
 package main.java.map;
 
-import main.java.entity.Creature;
+import main.java.entity.creature.Creature;
 import main.java.entity.Entity;
 import main.java.utils.Coordinates;
 
@@ -16,7 +16,10 @@ public class GameMap {
     private final Map<Coordinates, Entity> entities = new HashMap<>();
 
     public Entity getEntity(Coordinates coordinates) {
-        return entities.get(coordinates);
+        if (isCellWithinBoundaries(coordinates)) {
+            return entities.get(coordinates);
+        }
+        throw new IllegalArgumentException("invalid coordinates received" + coordinates);
     }
 
     public <T extends Entity> void putEntity(Coordinates coordinates, T entity) {
@@ -27,11 +30,15 @@ public class GameMap {
             }
             return;
         }
-        throw new IllegalArgumentException("invalid coordinates received");
+        throw new IllegalArgumentException("invalid coordinates received" + coordinates);
     }
 
     public void removeEntity(Coordinates coordinates) {
-        entities.remove(coordinates);
+        if (isCellWithinBoundaries(coordinates)) {
+            entities.remove(coordinates);
+            return;
+        }
+        throw new IllegalArgumentException("invalid coordinates received" + coordinates);
     }
 
     public <T extends Entity> List<T> getEntitiesOfAnyType(Class<T> entityClass) {
@@ -45,7 +52,7 @@ public class GameMap {
     }
 
     public boolean isCellEmpty(Coordinates coordinates) {
-        return !entities.containsKey(coordinates);
+        return !entities.containsKey(coordinates) || getEntity(coordinates) == null;
     }
 
     public boolean isCellWithinBoundaries(Coordinates coordinates) {
