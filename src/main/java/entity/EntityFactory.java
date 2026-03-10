@@ -1,5 +1,7 @@
 package main.java.entity;
 
+import main.java.entity.creature.Cat;
+import main.java.entity.creature.Mouse;
 import main.java.service.*;
 import main.java.utils.Coordinates;
 
