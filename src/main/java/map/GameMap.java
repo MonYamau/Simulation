@@ -13,7 +13,7 @@ public class GameMap {
     public static final int MAX_COLUMN_VALUE = 12;
     public static final int MAX_ROW_VALUE = 16;
 
-    Map<Coordinates, Entity> entities = new HashMap<>();
+    private final Map<Coordinates, Entity> entities = new HashMap<>();
 
     public Entity getEntity(Coordinates coordinates) {
         return entities.get(coordinates);
