@@ -1,5 +1,6 @@
-package main.java.entity;
+package main.java.entity.creature;
 
+import main.java.entity.Entity;
 import main.java.map.GameMap;
 import main.java.service.FeedingService;
 import main.java.service.PathFindingService;
@@ -58,15 +59,15 @@ public abstract class Creature extends Entity {
     public void makeMove(GameMap gameMap) {
         for (int i = 0; i < getSpeed(); i++) {
             Coordinates move = getNextCellForMove(gameMap);
-            if (isTarget(move, gameMap)) {
-                feedingService.eat(this, move, gameMap);
+            if (MovementUtils.isTarget(move, getTypeOfFood(), gameMap)) {
+                feedingService.getFood(this, move, gameMap);
             } else {
-                MovementUtils.moveEntity(getCoordinates(), move, gameMap);
+                moveEntity(getCoordinates(), move, gameMap);
             }
         }
     }
 
-    public Coordinates getNextCellForMove(GameMap gameMap) {
+    private Coordinates getNextCellForMove(GameMap gameMap) {
         Random random = new Random();
         List<Coordinates> path = pathFindingService.find(getCoordinates(), getTypeOfFood(), gameMap);
         if (!path.isEmpty()) return path.getFirst();
@@ -77,11 +78,9 @@ public abstract class Creature extends Entity {
         return getCoordinates();
     }
 
-    public boolean isTarget(Coordinates coordinates, GameMap gameMap) {
-        if (!gameMap.isCellEmpty(coordinates)) {
-            Entity entity = gameMap.getEntity(coordinates);
-            return getTypeOfFood().isInstance(entity);
-        }
-        return false;
+    private void moveEntity(Coordinates from, Coordinates to, GameMap gameMap) {
+        Entity entity = gameMap.getEntity(from);
+        gameMap.removeEntity(from);
+        gameMap.putEntity(to, entity);
     }
 }

@@ -1,4 +1,4 @@
-package main.java.entity;
+package main.java.entity.creature;
 
 import main.java.service.FeedingService;
 import main.java.service.PathFindingService;
