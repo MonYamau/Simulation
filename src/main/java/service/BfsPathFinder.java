@@ -1,6 +1,5 @@
 package main.java.service;
 
-import main.java.entity.Entity;
 import main.java.map.GameMap;
 import main.java.utils.Coordinates;
 import main.java.utils.MovementUtils;
@@ -27,15 +26,15 @@ public class BfsPathFinder implements PathFindingService {
         List<Coordinates> pathToTarget = new ArrayList<>();
 
         while (!check.isEmpty()) {
-            Coordinates nextCheck = check.poll();
-            if (isTarget(nextCheck, target, gameMap)) {
-                pathToTarget = restorePath(nextCheck, start);
+            Coordinates neighbor = check.poll();
+            if (MovementUtils.isTarget(neighbor, target, gameMap)) {
+                pathToTarget = restorePath(neighbor, start);
                 return pathToTarget;
             }
 
-            for (Coordinates coordinates : MovementUtils.getAvailableCellsForMove(nextCheck, target, gameMap)) {
+            for (Coordinates coordinates : MovementUtils.getAvailableCellsForMove(neighbor, target, gameMap)) {
                 if (!checked.contains(coordinates)) {
-                    savedPath.put(coordinates, nextCheck);
+                    savedPath.put(coordinates, neighbor);
                     check.addLast(coordinates);
                     checked.add(coordinates);
                 }
@@ -52,13 +51,5 @@ public class BfsPathFinder implements PathFindingService {
             current = savedPath.get(current);
         }
         return path.reversed();
-    }
-
-    private boolean isTarget(Coordinates coordinates, Class<?> target, GameMap gameMap) {
-        if (!gameMap.isCellEmpty(coordinates)) {
-            Entity entity = gameMap.getEntity(coordinates);
-            return target.isInstance(entity);
-        }
-        return false;
     }
 }
