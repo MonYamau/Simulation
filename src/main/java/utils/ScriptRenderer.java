@@ -12,7 +12,7 @@ public final class ScriptRenderer {
     }
 
     public static void printCounter(int counter) {
-        System.out.printf("Количество произведённых ходов: " + counter);
+        System.out.println("Количество произведённых ходов: " + counter);
     }
 
     public static void printWelcomeScript() {
