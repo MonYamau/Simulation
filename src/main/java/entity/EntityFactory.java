@@ -7,10 +7,10 @@ import main.java.utils.Coordinates;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class EntityFactory {
-    private final Map<Class<?>, Function<Coordinates, Entity>> entityCreators = new HashMap<>();
+    private final Map<Class<?>, Supplier<Entity>> entityCreators = new HashMap<>();
 
     public EntityFactory() {
         PathFindingService bfsPathFinder = new BfsPathFinder();
@@ -19,21 +19,21 @@ public class EntityFactory {
         initializeEntityCreators(bfsPathFinder, survivorFeeder, predatorFeeder);
     }
 
-    public <T extends Entity> T createEntity(Coordinates coordinates, Class<T> entityClass) {
+    public <T extends Entity> T createEntity(Class<T> entityClass) {
         @SuppressWarnings("unchecked")
-        Function<Coordinates, T> entityCreator = (Function<Coordinates, T>) entityCreators.get(entityClass);
-        return entityCreator.apply(coordinates);
+        Supplier<T> entityCreator = (Supplier<T>) entityCreators.get(entityClass);
+        return entityCreator.get();
     }
 
     private void initializeEntityCreators(PathFindingService bfsPathFinder, FeedingService survivorFeeder, FeedingService predatorFeeder) {
-        registerEntityCreator(Box.class, coordinates -> new Box());
-        registerEntityCreator(Basket.class, coordinates -> new Basket());
-        registerEntityCreator(Cheese.class, coordinates -> new Cheese());
-        registerEntityCreator(Cat.class, coordinates -> new Cat(10, 3, Mouse.class, coordinates, bfsPathFinder, predatorFeeder, 2));
-        registerEntityCreator(Mouse.class, coordinates -> new Mouse(6, 2, Cheese.class, coordinates, bfsPathFinder, survivorFeeder));
+        registerEntityCreator(Box.class, Box::new);
+        registerEntityCreator(Basket.class, Basket::new);
+        registerEntityCreator(Cheese.class, Cheese::new);
+        registerEntityCreator(Cat.class, () -> new Cat(10, 3, Mouse.class, bfsPathFinder, predatorFeeder, 2));
+        registerEntityCreator(Mouse.class, () -> new Mouse(6, 2, Cheese.class, bfsPathFinder, survivorFeeder));
     }
 
-    private <T extends Entity> void registerEntityCreator(Class<T> entityClass, Function<Coordinates, Entity> creator) {
+    private <T extends Entity> void registerEntityCreator(Class<T> entityClass, Supplier<Entity> creator) {
         entityCreators.put(entityClass, creator);
     }
 }

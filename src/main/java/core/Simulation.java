@@ -72,7 +72,14 @@ public class Simulation {
                     }
                 }
                 if (!isRunning) break;
-                nextTurn();
+                try {
+                    nextTurn();
+                } catch (Exception e) {
+                    isRunning = false;
+                    System.err.println("Error was received when executing the flow: " + e.getMessage());
+                    break;
+                }
+
                 try {
                     Thread.sleep(1800);
                 } catch (InterruptedException e) {

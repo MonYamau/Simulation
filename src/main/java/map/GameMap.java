@@ -1,7 +1,6 @@
 package main.java.map;
 
 import main.java.entity.Entity;
-import main.java.entity.creature.Creature;
 import main.java.utils.Coordinates;
 
 import java.util.ArrayList;
@@ -19,18 +18,24 @@ public class GameMap {
         if (isCellWithinBoundaries(coordinates)) {
             return entities.get(coordinates);
         }
-        throw new IllegalArgumentException("invalid coordinates received" + coordinates);
+        throw new IllegalArgumentException("invalid coordinates received: " + coordinates);
+    }
+
+    public Coordinates getCoordinates(Entity entity) {
+        for (Map.Entry<Coordinates, Entity> entry : entities.entrySet()) {
+            if (entry.getValue() == entity) {
+                return entry.getKey();
+            }
+        }
+        throw new IllegalArgumentException("invalid entity received: " + entity);
     }
 
     public <T extends Entity> void putEntity(Coordinates coordinates, T entity) {
         if (isCellWithinBoundaries(coordinates)) {
             entities.put(coordinates, entity);
-            if (entity instanceof Creature) {
-                ((Creature) entity).setCoordinates(coordinates);
-            }
             return;
         }
-        throw new IllegalArgumentException("invalid coordinates received" + coordinates);
+        throw new IllegalArgumentException("invalid coordinates received: " + coordinates);
     }
 
     public void removeEntity(Coordinates coordinates) {
@@ -38,7 +43,7 @@ public class GameMap {
             entities.remove(coordinates);
             return;
         }
-        throw new IllegalArgumentException("invalid coordinates received" + coordinates);
+        throw new IllegalArgumentException("invalid coordinates received: " + coordinates);
     }
 
     public <T extends Entity> List<T> getEntitiesOfAnyType(Class<T> entityClass) {

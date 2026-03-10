@@ -17,23 +17,13 @@ public abstract class Creature extends Entity {
     private final PathFindingService pathFindingService;
     private final FeedingService feedingService;
     private int hp;
-    private Coordinates coordinates;
 
-    public Creature(int hp, int speed, Class<?> typeOfFood, Coordinates coordinates, PathFindingService pathFindingService, FeedingService feedingService) {
+    public Creature(int hp, int speed, Class<?> typeOfFood, PathFindingService pathFindingService, FeedingService feedingService) {
         this.hp = hp;
         this.speed = speed;
         this.typeOfFood = typeOfFood;
-        this.coordinates = coordinates;
         this.pathFindingService = pathFindingService;
         this.feedingService = feedingService;
-    }
-
-    public Coordinates getCoordinates() {
-        return coordinates;
-    }
-
-    public void setCoordinates(Coordinates coordinates) {
-        this.coordinates = coordinates;
     }
 
     public int getHp() {
@@ -56,26 +46,41 @@ public abstract class Creature extends Entity {
         return 2;
     }
 
+    public boolean isDead(){
+        return getHp() <= 0;
+    }
+
+    private Coordinates getCoordinatesFromMap(GameMap gameMap){
+        Coordinates coordinates = gameMap.getCoordinates(this);
+        if (coordinates == null){
+            throw new IllegalStateException("Creature not found on the map");
+        }
+        return coordinates;
+    }
+
     public void makeMove(GameMap gameMap) {
+        Coordinates currentCoordinates = getCoordinatesFromMap(gameMap);
         for (int i = 0; i < getSpeed(); i++) {
             Coordinates move = getNextCellForMove(gameMap);
             if (MovementUtils.isTarget(move, getTypeOfFood(), gameMap)) {
                 feedingService.getFood(this, move, gameMap);
             } else {
-                moveEntity(getCoordinates(), move, gameMap);
+                moveEntity(currentCoordinates, move, gameMap);
+                currentCoordinates = move;
             }
         }
     }
 
     private Coordinates getNextCellForMove(GameMap gameMap) {
+        Coordinates currentCoordinates = getCoordinatesFromMap(gameMap);
         Random random = new Random();
-        List<Coordinates> path = pathFindingService.find(getCoordinates(), getTypeOfFood(), gameMap);
+        List<Coordinates> path = pathFindingService.find(currentCoordinates, getTypeOfFood(), gameMap);
         if (!path.isEmpty()) return path.getFirst();
-        List<Coordinates> availableCells = new ArrayList<>(MovementUtils.getAvailableCellsForMove(getCoordinates(), getTypeOfFood(), gameMap));
+        List<Coordinates> availableCells = new ArrayList<>(MovementUtils.getAvailableCellsForMove(currentCoordinates, getTypeOfFood(), gameMap));
         if (!availableCells.isEmpty()) {
             return availableCells.get(random.nextInt(availableCells.size()));
         }
-        return getCoordinates();
+        return currentCoordinates;
     }
 
     private void moveEntity(Coordinates from, Coordinates to, GameMap gameMap) {

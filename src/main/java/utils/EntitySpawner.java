@@ -13,7 +13,7 @@ public final class EntitySpawner {
 
     public static <T extends Entity> void setupNewEntity(Class<T> entityClass, EntityFactory entityFactory, GameMap gameMap) {
         Coordinates emptyCell = getRandomEmptyCell(gameMap);
-        T entity = entityFactory.createEntity(emptyCell, entityClass);
+        T entity = entityFactory.createEntity(entityClass);
         gameMap.putEntity(emptyCell, entity);
     }
 
