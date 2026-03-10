@@ -2,7 +2,6 @@ package main.java.core;
 
 import main.java.action.Action;
 import main.java.action.ActionManager;
-import main.java.entity.EntityFactory;
 import main.java.map.GameMap;
 import main.java.map.GameMapRenderer;
 import main.java.utils.ScriptRenderer;
@@ -15,23 +14,13 @@ public class Simulation {
     private volatile boolean isPaused;
     private Thread simulationThread;
 
-    public Simulation(GameMap gameMap, EntityFactory entityFactory) {
+    public Simulation(GameMap gameMap, ActionManager actionManager) {
         counter = 0;
         isRunning = false;
         isPaused = true;
         this.gameMap = gameMap;
-        this.actionManager = new ActionManager(gameMap, entityFactory);
-    }
+        this.actionManager = actionManager;
 
-    public void initSimulation() {
-        ScriptRenderer.clearScreen();
-        ScriptRenderer.printWelcomeScript();
-        ScriptRenderer.printInstructionScript();
-        ScriptRenderer.printCounter(counter);
-        for (Action action : actionManager.getInitActions()) {
-            action.perform();
-        }
-        GameMapRenderer.printMapSimulation(gameMap);
     }
 
     public void nextTurn() {

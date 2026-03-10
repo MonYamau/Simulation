@@ -1,5 +1,6 @@
 package main.java.core;
 
+import main.java.action.ActionManager;
 import main.java.entity.EntityFactory;
 import main.java.map.GameMap;
 import main.java.utils.ScriptRenderer;
@@ -15,15 +16,17 @@ public class SimulationLauncher {
 
     GameMap gameMap;
     EntityFactory entityFactory;
+    ActionManager actionManager;
 
     public SimulationLauncher() {
         this.gameMap = new GameMap();
         this.entityFactory = new EntityFactory();
+        this.actionManager = new ActionManager(gameMap, entityFactory);
     }
 
     public void start() {
-        Simulation simulation = new Simulation(gameMap, entityFactory);
-        simulation.initSimulation();
+        Simulation simulation = new Simulation(gameMap, actionManager);
+        SimulationCreator.initSimulation(gameMap, actionManager);
         startGameLoop(simulation);
     }
 
