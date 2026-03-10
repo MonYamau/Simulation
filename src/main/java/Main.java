@@ -8,9 +8,11 @@ public class Main {
         try {
             simulationLauncher.start();
         } catch (IllegalArgumentException e) {
-            System.err.println("Получено некорректное значение");
+            System.err.println("incorrect value received");
+            System.err.println(e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Unknown error received");
             System.err.println(e.getMessage());
         }
-
     }
 }
