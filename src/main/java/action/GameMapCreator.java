@@ -1,6 +1,8 @@
 package main.java.action;
 
 import main.java.entity.*;
+import main.java.entity.creature.Cat;
+import main.java.entity.creature.Mouse;
 import main.java.map.GameMap;
 import main.java.utils.EntitySpawner;
 

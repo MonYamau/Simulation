@@ -1,6 +1,6 @@
 package main.java.action;
 
-import main.java.entity.Creature;
+import main.java.entity.creature.Creature;
 import main.java.map.GameMap;
 
 import java.util.List;
