@@ -46,13 +46,13 @@ public abstract class Creature extends Entity {
         return 2;
     }
 
-    public boolean isDead(){
+    public boolean isDead() {
         return getHp() <= 0;
     }
 
-    private Coordinates getCoordinatesFromMap(GameMap gameMap){
+    private Coordinates getCoordinatesFromMap(GameMap gameMap) {
         Coordinates coordinates = gameMap.getCoordinates(this);
-        if (coordinates == null){
+        if (coordinates == null) {
             throw new IllegalStateException("Creature not found on the map");
         }
         return coordinates;
