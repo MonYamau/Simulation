@@ -10,41 +10,43 @@ public final class MovementUtils {
     private MovementUtils() {
     }
 
-    public static Set<CoordinatesShift> getShifts() {
-        return Set.of(
-                new CoordinatesShift(-1, 0), //вверх
-                new CoordinatesShift(1, 0), //вниз
-                new CoordinatesShift(0, -1), //налево
-                new CoordinatesShift(0, 1) //направо
-        );
-    }
-
-    public static Coordinates moveCoordinates(Coordinates coordinates, CoordinatesShift coordinatesShift) {
-        return new Coordinates(coordinates.col() + coordinatesShift.shiftCol(), coordinates.row() + coordinatesShift.shiftRow());
-    }
-
-    public static boolean isCellOccupied(Coordinates coordinates, Class<?> target, GameMap gameMap) {
-        if (!gameMap.isCellEmpty(coordinates)) {
-            Entity entity = gameMap.getEntity(coordinates);
-            return !target.isInstance(entity);
-        }
-        return false;
-    }
-
-    public static void moveEntity(Coordinates from, Coordinates to, GameMap gameMap) {
-        Entity entity = gameMap.getEntity(from);
-        gameMap.removeEntity(from);
-        gameMap.putEntity(to, entity);
-    }
-
-    public static Set<Coordinates> getAvailableCellsForMove(Coordinates coordinates, Class<?> target, GameMap gameMap) {
+    public static Set<Coordinates> getAvailableCellsForMove(Coordinates current, Class<?> target, GameMap gameMap) {
         Set<Coordinates> availableCells = new HashSet<>();
-        for (CoordinatesShift shift : MovementUtils.getShifts()) {
-            Coordinates newCheck = MovementUtils.moveCoordinates(coordinates, shift);
+        for (Coordinates shift : MovementUtils.getShifts()) {
+            Coordinates newCheck = MovementUtils.shiftCoordinates(current, shift);
             if (gameMap.isCellWithinBoundaries(newCheck) && !MovementUtils.isCellOccupied(newCheck, target, gameMap)) {
                 availableCells.add(newCheck);
             }
         }
         return availableCells;
+    }
+
+    public static boolean isTarget(Coordinates coordinates, Class<?> target, GameMap gameMap) {
+        if (!gameMap.isCellEmpty(coordinates)) {
+            Entity entity = gameMap.getEntity(coordinates);
+            return target.isInstance(entity);
+        }
+        return false;
+    }
+
+    private static Set<Coordinates> getShifts() {
+        return Set.of(
+                new Coordinates(-1, 0), //вверх
+                new Coordinates(1, 0), //вниз
+                new Coordinates(0, -1), //налево
+                new Coordinates(0, 1) //направо
+        );
+    }
+
+    private static Coordinates shiftCoordinates(Coordinates current, Coordinates shift) {
+        return new Coordinates(current.col() + shift.col(), current.row() + shift.row());
+    }
+
+    private static boolean isCellOccupied(Coordinates coordinates, Class<?> target, GameMap gameMap) {
+        if (!gameMap.isCellEmpty(coordinates)) {
+            Entity entity = gameMap.getEntity(coordinates);
+            return !target.isInstance(entity);
+        }
+        return false;
     }
 }
