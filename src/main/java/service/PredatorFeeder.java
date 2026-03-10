@@ -6,11 +6,12 @@ import main.java.map.GameMap;
 import main.java.utils.Coordinates;
 
 public class PredatorFeeder implements FeedingService {
+    private final static int MIN_NUM_HP = 0;
 
     @Override
     public void eat(Creature creature, Coordinates coordinates, GameMap gameMap) {
         Creature target = (Creature) gameMap.getEntity(coordinates);
-        if (target.getHp() > 0) {
+        if (target.getHp() > MIN_NUM_HP) {
             makeAttack(target, creature);
         } else {
             gameMap.removeEntity(coordinates);
