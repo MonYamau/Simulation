@@ -1,7 +1,7 @@
 package main.java.map;
 
-import main.java.entity.creature.Creature;
 import main.java.entity.Entity;
+import main.java.entity.creature.Creature;
 import main.java.utils.Coordinates;
 
 import java.util.ArrayList;

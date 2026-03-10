@@ -2,7 +2,6 @@ package main.java.core;
 
 import main.java.entity.EntityFactory;
 import main.java.map.GameMap;
-import main.java.map.GameMapRenderer;
 import main.java.utils.ScriptRenderer;
 
 import java.util.Scanner;

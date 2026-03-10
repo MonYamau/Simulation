@@ -1,6 +1,9 @@
 package main.java.map;
 
-import main.java.entity.*;
+import main.java.entity.Basket;
+import main.java.entity.Box;
+import main.java.entity.Cheese;
+import main.java.entity.Entity;
 import main.java.entity.creature.Cat;
 import main.java.entity.creature.Mouse;
 import main.java.utils.Coordinates;
@@ -14,7 +17,8 @@ public final class GameMapRenderer {
     public static final String CELL = "  　";
     public static String CELL_WITH_ENTITY = " %s ";
 
-    private GameMapRenderer() {}
+    private GameMapRenderer() {
+    }
 
     public static void printMapSimulation(GameMap gameMap) {
         StringBuilder renderMap = new StringBuilder();
