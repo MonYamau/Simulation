@@ -15,17 +15,15 @@ public class SimulationLauncher {
     public final static String EXIT = "В";
 
     GameMap gameMap;
-    GameMapRenderer gameMapRenderer;
     EntityFactory entityFactory;
 
     public SimulationLauncher() {
         this.gameMap = new GameMap();
-        this.gameMapRenderer = new GameMapRenderer(gameMap);
         this.entityFactory = new EntityFactory();
     }
 
     public void start() {
-        Simulation simulation = new Simulation(gameMap, gameMapRenderer, entityFactory);
+        Simulation simulation = new Simulation(gameMap, entityFactory);
         simulation.initSimulation();
         startGameLoop(simulation);
     }

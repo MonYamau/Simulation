@@ -9,15 +9,17 @@ import main.java.utils.ScriptRenderer;
 
 public class Simulation {
     private static int counter;
-    private final GameMapRenderer gameMapRenderer;
+    private final GameMap gameMap;
     private final ActionManager actionManager;
-    private volatile boolean isRunning = false;
-    private volatile boolean isPaused = true;
+    private volatile boolean isRunning;
+    private volatile boolean isPaused;
     private Thread simulationThread;
 
-    public Simulation(GameMap gameMap, GameMapRenderer gameMapRenderer, EntityFactory entityFactory) {
+    public Simulation(GameMap gameMap, EntityFactory entityFactory) {
         counter = 0;
-        this.gameMapRenderer = gameMapRenderer;
+        isRunning = false;
+        isPaused = true;
+        this.gameMap = gameMap;
         this.actionManager = new ActionManager(gameMap, entityFactory);
     }
 
@@ -29,7 +31,7 @@ public class Simulation {
         for (Action action : actionManager.getInitActions()) {
             action.perform();
         }
-        gameMapRenderer.printMapSimulation();
+        GameMapRenderer.printMapSimulation(gameMap);
     }
 
     public void nextTurn() {
@@ -39,7 +41,7 @@ public class Simulation {
         for (Action action : actionManager.getTurnActions()) {
             action.perform();
         }
-        gameMapRenderer.printMapSimulation();
+        GameMapRenderer.printMapSimulation(gameMap);
     }
 
     public synchronized void startSimulation() {
@@ -55,7 +57,7 @@ public class Simulation {
     }
 
     @SuppressWarnings("BusyWait")
-    public Thread getThread() {
+    private Thread getThread() {
         return new Thread(() -> {
             while (isRunning) {
                 synchronized (this) {
