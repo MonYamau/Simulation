@@ -7,7 +7,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public final class MovementUtils {
-    private MovementUtils (){}
+    private MovementUtils() {
+    }
 
     public static Set<CoordinatesShift> getShifts() {
         return Set.of(
