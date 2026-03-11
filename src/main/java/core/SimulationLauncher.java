@@ -36,6 +36,7 @@ public class SimulationLauncher {
                     break;
                 case EXIT:
                     simulation.stopSimulation();
+                    scanner.close();
                     return;
                 default:
                     ScriptRenderer.printIncorrectInputScript();
