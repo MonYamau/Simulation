@@ -9,6 +9,12 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class EntityFactory {
+    private static final int CAT_HP = 10;
+    private static final int MOUSE_HP = 6;
+    private static final int CAT_SPEED = 3;
+    private static final int MOUSE_SPEED = 2;
+    private static final int CAT_ATTACK = 2;
+
     private final Map<Class<?>, Supplier<Entity>> entityCreators = new HashMap<>();
 
     public EntityFactory() {
@@ -28,8 +34,8 @@ public class EntityFactory {
         registerEntityCreator(Box.class, Box::new);
         registerEntityCreator(Basket.class, Basket::new);
         registerEntityCreator(Cheese.class, Cheese::new);
-        registerEntityCreator(Cat.class, () -> new Cat(10, 3, Mouse.class, bfsPathFinder, predatorFeeder, 2));
-        registerEntityCreator(Mouse.class, () -> new Mouse(6, 2, Cheese.class, bfsPathFinder, survivorFeeder));
+        registerEntityCreator(Cat.class, () -> new Cat(CAT_HP, CAT_SPEED, Mouse.class, bfsPathFinder, predatorFeeder, CAT_ATTACK));
+        registerEntityCreator(Mouse.class, () -> new Mouse(MOUSE_HP, MOUSE_SPEED, Cheese.class, bfsPathFinder, survivorFeeder));
     }
 
     private <T extends Entity> void registerEntityCreator(Class<T> entityClass, Supplier<Entity> creator) {
