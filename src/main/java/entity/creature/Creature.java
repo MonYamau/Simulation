@@ -9,6 +9,7 @@ import main.java.utils.MovementUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 public abstract class Creature extends Entity {
@@ -84,8 +85,11 @@ public abstract class Creature extends Entity {
     }
 
     private void moveEntity(Coordinates from, Coordinates to, GameMap gameMap) {
-        Entity entity = gameMap.getEntity(from);
+        Optional<Entity> entity = gameMap.getEntity(from);
+        if (entity.isEmpty()) {
+            throw new IllegalArgumentException("invalid entity received: " + entity);
+        }
         gameMap.removeEntity(from);
-        gameMap.putEntity(to, entity);
+        gameMap.putEntity(to, entity.get());
     }
 }

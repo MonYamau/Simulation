@@ -4,6 +4,7 @@ import main.java.entity.Entity;
 import main.java.map.GameMap;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public final class MovementUtils {
@@ -23,8 +24,11 @@ public final class MovementUtils {
 
     public static boolean isTarget(Coordinates coordinates, Class<?> target, GameMap gameMap) {
         if (!gameMap.isCellEmpty(coordinates)) {
-            Entity entity = gameMap.getEntity(coordinates);
-            return target.isInstance(entity);
+            Optional<Entity> entity = gameMap.getEntity(coordinates);
+            if (entity.isEmpty()) {
+                throw new IllegalArgumentException("invalid entity received: " + entity);
+            }
+            return target.isInstance(entity.get());
         }
         return false;
     }
@@ -44,8 +48,11 @@ public final class MovementUtils {
 
     private static boolean isCellOccupied(Coordinates coordinates, Class<?> target, GameMap gameMap) {
         if (!gameMap.isCellEmpty(coordinates)) {
-            Entity entity = gameMap.getEntity(coordinates);
-            return !target.isInstance(entity);
+            Optional<Entity> entity = gameMap.getEntity(coordinates);
+            if (entity.isEmpty()) {
+                throw new IllegalArgumentException("invalid entity received: " + entity);
+            }
+            return !target.isInstance(entity.get());
         }
         return false;
     }

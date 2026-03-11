@@ -8,6 +8,8 @@ import main.java.entity.creature.Cat;
 import main.java.entity.creature.Mouse;
 import main.java.utils.Coordinates;
 
+import java.util.Optional;
+
 import static main.java.map.GameMap.MAX_COLUMN_VALUE;
 import static main.java.map.GameMap.MAX_ROW_VALUE;
 
@@ -27,7 +29,11 @@ public final class GameMapRenderer {
             for (int row = 0; row < MAX_ROW_VALUE; row++) {
                 String colorCell;
                 if (!gameMap.isCellEmpty(new Coordinates(col, row))) {
-                    colorCell = colorizeCell(new Coordinates(col, row), gameMap.getEntity(new Coordinates(col, row)));
+                    Optional<Entity> entity = gameMap.getEntity(new Coordinates(col, row));
+                    if (entity.isEmpty()) {
+                        throw new IllegalArgumentException("invalid entity received: " + entity);
+                    }
+                    colorCell = colorizeCell(new Coordinates(col, row), entity.get());
                     renderMap.append(colorCell);
                 } else {
                     colorCell = colorizeCell(new Coordinates(col, row));

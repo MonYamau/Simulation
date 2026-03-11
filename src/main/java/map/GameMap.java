@@ -3,10 +3,7 @@ package main.java.map;
 import main.java.entity.Entity;
 import main.java.utils.Coordinates;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GameMap {
     public static final int MAX_COLUMN_VALUE = 12;
@@ -14,9 +11,9 @@ public class GameMap {
 
     private final Map<Coordinates, Entity> entities = new HashMap<>();
 
-    public Entity getEntity(Coordinates coordinates) {
+    public Optional<Entity> getEntity(Coordinates coordinates) {
         if (isCellWithinBoundaries(coordinates)) {
-            return entities.get(coordinates);
+            return Optional.ofNullable(entities.get(coordinates));
         }
         throw new IllegalArgumentException("invalid coordinates received: " + coordinates);
     }
@@ -58,7 +55,7 @@ public class GameMap {
 
     public boolean isCellEmpty(Coordinates coordinates) {
         if (isCellWithinBoundaries(coordinates)) {
-            return !entities.containsKey(coordinates) || getEntity(coordinates) == null;
+            return !entities.containsKey(coordinates);
         }
         throw new IllegalArgumentException("invalid coordinates received: " + coordinates);
     }

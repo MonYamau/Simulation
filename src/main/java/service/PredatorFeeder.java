@@ -1,16 +1,23 @@
 package main.java.service;
 
+import main.java.entity.Entity;
 import main.java.entity.creature.Creature;
 import main.java.entity.creature.Predator;
 import main.java.map.GameMap;
 import main.java.utils.Coordinates;
+
+import java.util.Optional;
 
 public class PredatorFeeder implements FeedingService {
     private final static int MIN_NUM_HP = 0;
 
     @Override
     public void getFood(Creature creature, Coordinates coordinates, GameMap gameMap) {
-        Creature target = (Creature) gameMap.getEntity(coordinates);
+        Optional<Entity> entity = gameMap.getEntity(coordinates);
+        if (entity.isEmpty()) {
+            throw new IllegalArgumentException("invalid entity received: " + entity);
+        }
+        Creature target = (Creature) entity.get();
         if (target.getHp() > MIN_NUM_HP) {
             makeAttack(target, creature);
         } else {
