@@ -9,9 +9,9 @@ import main.java.utils.EntitySpawner;
 public class GameMapCreator extends CreatingAction {
     private final static int QUANTITY_CAT = 3;
     private final static int QUANTITY_MOUSE = 5;
-    private final static int QUANTITY_CHEESE = 5;
-    private final static int QUANTITY_BOX = 15;
-    private final static int QUANTITY_BASKET = 15;
+    private final static int QUANTITY_CHEESE = 7;
+    private final static int QUANTITY_BOX = 25;
+    private final static int QUANTITY_BASKET = 20;
 
     public GameMapCreator(GameMap gameMap, EntityFactory entityFactory) {
         super(gameMap, entityFactory);

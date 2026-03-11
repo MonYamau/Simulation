@@ -6,7 +6,7 @@ import main.java.utils.Coordinates;
 import java.util.*;
 
 public class GameMap {
-    public static final int MAX_COLUMN_VALUE = 12;
+    public static final int MAX_COLUMN_VALUE = 14;
     public static final int MAX_ROW_VALUE = 16;
 
     private final Map<Coordinates, Entity> entities = new HashMap<>();
