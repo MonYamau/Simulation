@@ -57,7 +57,10 @@ public class GameMap {
     }
 
     public boolean isCellEmpty(Coordinates coordinates) {
-        return !entities.containsKey(coordinates) || getEntity(coordinates) == null;
+        if (isCellWithinBoundaries(coordinates)) {
+            return !entities.containsKey(coordinates) || getEntity(coordinates) == null;
+        }
+        throw new IllegalArgumentException("invalid coordinates received: " + coordinates);
     }
 
     public boolean isCellWithinBoundaries(Coordinates coordinates) {
