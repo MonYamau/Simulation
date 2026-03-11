@@ -13,19 +13,11 @@ public class SimulationLauncher {
     public final static String PAUSE = "П";
     public final static String EXIT = "В";
 
-    GameMap gameMap;
-    EntityFactory entityFactory;
-    ActionManager actionManager;
-
-    public SimulationLauncher() {
-        this.gameMap = new GameMap();
-        this.entityFactory = new EntityFactory();
-        this.actionManager = new ActionManager(gameMap, entityFactory);
-    }
-
     public void start() {
+        GameMap gameMap = new GameMap();
+        EntityFactory entityFactory = new EntityFactory();
+        ActionManager actionManager = new ActionManager(gameMap, entityFactory);
         Simulation simulation = new Simulation(gameMap, actionManager);
-        SimulationCreator.init(gameMap, actionManager);
         startGameLoop(simulation);
     }
 

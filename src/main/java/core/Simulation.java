@@ -20,7 +20,7 @@ public class Simulation {
         isPaused = true;
         this.gameMap = gameMap;
         this.actionManager = actionManager;
-
+        SimulationCreator.init(gameMap, actionManager);
     }
 
     public void nextTurn() {
