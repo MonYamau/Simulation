@@ -20,6 +20,7 @@ public final class SimulationConstants {
     public static final int MOUSE_SPEED = 2;
     public static final int CAT_ATTACK = 2;
 
+    public final static String ANSI_CLEAR_SCREEN = "\033[H\033[2J";
     public final static String MOTION = "Х";
     public final static String START = "Н";
     public final static String PAUSE = "П";
