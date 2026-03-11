@@ -31,7 +31,7 @@ public final class GameMapRenderer {
                 if (!gameMap.isCellEmpty(new Coordinates(col, row))) {
                     Optional<Entity> entity = gameMap.getEntity(new Coordinates(col, row));
                     if (entity.isEmpty()) {
-                        throw new IllegalArgumentException("invalid entity received: " + entity);
+                        return;
                     }
                     colorCell = colorizeCell(new Coordinates(col, row), entity.get());
                     renderMap.append(colorCell);

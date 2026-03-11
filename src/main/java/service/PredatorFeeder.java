@@ -15,7 +15,7 @@ public class PredatorFeeder implements FeedingService {
     public void getFood(Creature creature, Coordinates coordinates, GameMap gameMap) {
         Optional<Entity> entity = gameMap.getEntity(coordinates);
         if (entity.isEmpty()) {
-            throw new IllegalArgumentException("invalid entity received: " + entity);
+            return;
         }
         Creature target = (Creature) entity.get();
         if (target.getHp() > MIN_NUM_HP) {

@@ -87,7 +87,7 @@ public abstract class Creature extends Entity {
     private void moveEntity(Coordinates from, Coordinates to, GameMap gameMap) {
         Optional<Entity> entity = gameMap.getEntity(from);
         if (entity.isEmpty()) {
-            throw new IllegalArgumentException("invalid entity received: " + entity);
+            return;
         }
         gameMap.removeEntity(from);
         gameMap.putEntity(to, entity.get());

@@ -25,10 +25,7 @@ public final class MovementUtils {
     public static boolean isTarget(Coordinates coordinates, Class<?> target, GameMap gameMap) {
         if (!gameMap.isCellEmpty(coordinates)) {
             Optional<Entity> entity = gameMap.getEntity(coordinates);
-            if (entity.isEmpty()) {
-                throw new IllegalArgumentException("invalid entity received: " + entity);
-            }
-            return target.isInstance(entity.get());
+            return entity.filter(target::isInstance).isPresent();
         }
         return false;
     }
@@ -49,10 +46,7 @@ public final class MovementUtils {
     private static boolean isCellOccupied(Coordinates coordinates, Class<?> target, GameMap gameMap) {
         if (!gameMap.isCellEmpty(coordinates)) {
             Optional<Entity> entity = gameMap.getEntity(coordinates);
-            if (entity.isEmpty()) {
-                throw new IllegalArgumentException("invalid entity received: " + entity);
-            }
-            return !target.isInstance(entity.get());
+            return entity.filter(value -> !target.isInstance(value)).isPresent();
         }
         return false;
     }
