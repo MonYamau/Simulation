@@ -24,7 +24,7 @@ public class ResourceProvider extends CreatingAction {
     private <T extends Entity> void replenishEntity(Class<T> entity, int minNumOfEntity) {
         int amount = countAmountOfEntity(entity);
         for (int i = amount; i < minNumOfEntity; i++) {
-            EntitySpawner.setupNewEntity(entity, entityFactory, gameMap);
+            EntitySpawner.spawnEntity(entity, entityFactory, gameMap);
         }
     }
 

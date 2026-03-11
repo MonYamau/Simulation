@@ -32,7 +32,7 @@ public class GameMapCreator extends CreatingAction {
 
     private <T extends Entity> void setupStartEntities(Class<T> entityClass, int quantityOfEntity) {
         for (int i = 0; i < quantityOfEntity; i++) {
-            EntitySpawner.setupNewEntity(entityClass, entityFactory, gameMap);
+            EntitySpawner.spawnEntity(entityClass, entityFactory, gameMap);
         }
     }
 }
