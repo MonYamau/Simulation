@@ -7,35 +7,35 @@ import main.java.utils.MovementUtils;
 import java.util.*;
 
 public class BfsPathFinder implements PathFindingService {
-    LinkedList<Coordinates> check;
+    Queue<Node> check;
     Set<Coordinates> checked;
-    Map<Coordinates, Coordinates> savedPath;
 
     @Override
     public List<Coordinates> find(Coordinates start, Class<?> target, GameMap gameMap) {
         check = new LinkedList<>();
         checked = new HashSet<>();
-        savedPath = new HashMap<>();
-        check.add(start);
+        Node startCell = new Node(start);
+        check.add(startCell);
         checked.add(start);
-        savedPath.put(start, null);
-        return useBfsAlgorithm(start, target, gameMap);
+        return executeBfs(start, target, gameMap);
     }
 
-    private List<Coordinates> useBfsAlgorithm(Coordinates start, Class<?> target, GameMap gameMap) {
+    private List<Coordinates> executeBfs(Coordinates start, Class<?> target, GameMap gameMap) {
         List<Coordinates> pathToTarget = new ArrayList<>();
 
         while (!check.isEmpty()) {
-            Coordinates neighbor = check.poll();
-            if (MovementUtils.isTarget(neighbor, target, gameMap)) {
-                pathToTarget = restorePath(neighbor, start);
+            Node current = check.poll();
+            Coordinates currentCoordinates = current.getCoordinates();
+            if (MovementUtils.isTarget(currentCoordinates, target, gameMap)) {
+                pathToTarget = restorePath(start, current);
                 return pathToTarget;
             }
 
-            for (Coordinates coordinates : MovementUtils.getAvailableCellsForMove(neighbor, target, gameMap)) {
+            for (Coordinates coordinates : MovementUtils.getAvailableCellsForMove(currentCoordinates, target, gameMap)) {
                 if (!checked.contains(coordinates)) {
-                    savedPath.put(coordinates, neighbor);
-                    check.addLast(coordinates);
+                    Node neighbor = new Node(coordinates);
+                    neighbor.setParent(current);
+                    check.add(neighbor);
                     checked.add(coordinates);
                 }
             }
@@ -43,12 +43,12 @@ public class BfsPathFinder implements PathFindingService {
         return pathToTarget;
     }
 
-    private List<Coordinates> restorePath(Coordinates finish, Coordinates start) {
+    private List<Coordinates> restorePath(Coordinates start, Node finish) {
         List<Coordinates> path = new ArrayList<>();
-        Coordinates current = finish;
-        while (current != start) {
-            path.add(current);
-            current = savedPath.get(current);
+        Node current = finish;
+        while (current.getCoordinates() != start) {
+            path.add(current.getCoordinates());
+            current = current.getParent();
         }
         return path.reversed();
     }
