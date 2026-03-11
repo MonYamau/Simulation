@@ -64,11 +64,10 @@ public class Simulation {
                 try {
                     nextTurn();
                 } catch (Exception e) {
-                    isRunning = false;
                     System.err.println("Error was received when executing the flow: " + e.getMessage());
+                    isRunning = false;
                     break;
                 }
-
                 try {
                     Thread.sleep(1800);
                 } catch (InterruptedException e) {
