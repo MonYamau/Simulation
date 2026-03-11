@@ -8,7 +8,6 @@ import main.java.utils.ScriptRenderer;
 import java.util.Scanner;
 
 public class SimulationLauncher {
-    public final static Scanner SCANNER = new Scanner(System.in);
     public final static String MOTION = "Х";
     public final static String START = "Н";
     public final static String PAUSE = "П";
@@ -26,13 +25,14 @@ public class SimulationLauncher {
 
     public void start() {
         Simulation simulation = new Simulation(gameMap, actionManager);
-        SimulationCreator.initSimulation(gameMap, actionManager);
+        SimulationCreator.init(gameMap, actionManager);
         startGameLoop(simulation);
     }
 
     public void startGameLoop(Simulation simulation) {
+        Scanner scanner = new Scanner(System.in);
         while (true) {
-            switch (SCANNER.nextLine().toUpperCase()) {
+            switch (scanner.nextLine().toUpperCase()) {
                 case MOTION:
                     simulation.nextTurn();
                     break;

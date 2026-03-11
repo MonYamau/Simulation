@@ -8,7 +8,7 @@ import main.java.utils.ScriptRenderer;
 
 public class SimulationCreator {
 
-    public static void initSimulation(GameMap gameMap, ActionManager actionManager) {
+    public static void init(GameMap gameMap, ActionManager actionManager) {
         ScriptRenderer.clearScreen();
         ScriptRenderer.printWelcomeScript();
         ScriptRenderer.printInstructionScript();
