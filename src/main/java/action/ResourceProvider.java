@@ -7,9 +7,10 @@ import main.java.entity.creature.Mouse;
 import main.java.map.GameMap;
 import main.java.utils.EntitySpawner;
 
+import static main.java.utils.SimulationConstants.CHEESE_COUNT;
+import static main.java.utils.SimulationConstants.MOUSE_COUNT;
+
 public class ResourceProvider extends CreatingAction {
-    public final static int MIN_NUM_OF_CHEESE = 7;
-    public final static int MIN_NUM_OF_MOUSE = 5;
 
     public ResourceProvider(GameMap gameMap, EntityFactory entityFactory) {
         super(gameMap, entityFactory);
@@ -17,8 +18,8 @@ public class ResourceProvider extends CreatingAction {
 
     @Override
     public void perform() {
-        replenishEntity(Mouse.class, MIN_NUM_OF_MOUSE);
-        replenishEntity(Cheese.class, MIN_NUM_OF_CHEESE);
+        replenishEntity(Mouse.class, MOUSE_COUNT);
+        replenishEntity(Cheese.class, CHEESE_COUNT);
     }
 
     private <T extends Entity> void replenishEntity(Class<T> entity, int minNumOfEntity) {
@@ -30,7 +31,7 @@ public class ResourceProvider extends CreatingAction {
 
     private <T extends Entity> int countAmountOfEntity(Class<T> entityClass) {
         int entityCounter = 0;
-        for (Entity entity : gameMap.getEntitiesOfAnyType(Entity.class)) {
+        for (Entity entity : gameMap.getEntitiesByType(Entity.class)) {
             if (entityClass.isInstance(entity)) {
                 entityCounter++;
             }

@@ -30,7 +30,7 @@ public class Simulation {
         for (Action action : actionManager.getTurnActions()) {
             action.perform();
         }
-        GameMapRenderer.printMapSimulation(gameMap);
+        GameMapRenderer.printGameMap(gameMap);
     }
 
     public synchronized void startSimulation() {

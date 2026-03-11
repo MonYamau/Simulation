@@ -10,19 +10,13 @@ import main.java.utils.Coordinates;
 
 import java.util.Optional;
 
-import static main.java.map.GameMap.MAX_COLUMN_VALUE;
-import static main.java.map.GameMap.MAX_ROW_VALUE;
+import static main.java.utils.SimulationConstants.*;
 
 public final class GameMapRenderer {
-    public static final String ANSI_GREY_BACKGROUND_COLOR = "\u001B[;100m";
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String CELL = "  　";
-    public static String CELL_WITH_ENTITY = " %s ";
-
     private GameMapRenderer() {
     }
 
-    public static void printMapSimulation(GameMap gameMap) {
+    public static void printGameMap(GameMap gameMap) {
         StringBuilder renderMap = new StringBuilder();
         for (int col = 0; col < MAX_COLUMN_VALUE; col++) {
             renderMap.append("\n");
@@ -31,12 +25,12 @@ public final class GameMapRenderer {
                 if (!gameMap.isCellEmpty(new Coordinates(col, row))) {
                     Optional<Entity> entity = gameMap.getEntity(new Coordinates(col, row));
                     if (entity.isEmpty()) {
-                        return;
+                        throw new IllegalArgumentException("invalid entity received: " + entity);
                     }
-                    colorCell = colorizeCell(new Coordinates(col, row), entity.get());
+                    colorCell = formatEntityCellWithColoring(new Coordinates(col, row), entity.get());
                     renderMap.append(colorCell);
                 } else {
-                    colorCell = colorizeCell(new Coordinates(col, row));
+                    colorCell = formatEmptyCellWithColoring(new Coordinates(col, row));
                     renderMap.append(colorCell);
                 }
             }
@@ -44,15 +38,15 @@ public final class GameMapRenderer {
         System.out.println(renderMap);
     }
 
-    private static String colorizeCell(Coordinates coordinates) {
+    private static String formatEmptyCellWithColoring(Coordinates coordinates) {
         if (isEvenCell(coordinates)) {
-            return "%s%s%s".formatted(ANSI_GREY_BACKGROUND_COLOR, CELL, ANSI_RESET);
+            return "%s%s%s".formatted(ANSI_GREY_BACKGROUND_COLOR, EMPTY_CELL, ANSI_RESET);
         } else {
-            return "%s".formatted(CELL);
+            return "%s".formatted(EMPTY_CELL);
         }
     }
 
-    private static String colorizeCell(Coordinates coordinates, Entity entity) {
+    private static String formatEntityCellWithColoring(Coordinates coordinates, Entity entity) {
         if (isEvenCell(coordinates)) {
             return "%s%s%s".formatted(ANSI_GREY_BACKGROUND_COLOR, getEntitySprite(entity), ANSI_RESET);
         } else {

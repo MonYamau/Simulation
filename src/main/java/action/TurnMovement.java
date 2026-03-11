@@ -13,7 +13,7 @@ public class TurnMovement extends Action {
 
     @Override
     public void perform() {
-        List<Creature> creatures = gameMap.getEntitiesOfAnyType(Creature.class);
+        List<Creature> creatures = gameMap.getEntitiesByType(Creature.class);
         for (Creature creature : creatures) {
             if (!creature.isDead()) {
                 creature.makeMove(gameMap);

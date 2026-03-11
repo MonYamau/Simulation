@@ -6,12 +6,9 @@ import main.java.entity.creature.Mouse;
 import main.java.map.GameMap;
 import main.java.utils.EntitySpawner;
 
+import static main.java.utils.SimulationConstants.*;
+
 public class GameMapCreator extends CreatingAction {
-    private final static int QUANTITY_CAT = 3;
-    private final static int QUANTITY_MOUSE = 5;
-    private final static int QUANTITY_CHEESE = 7;
-    private final static int QUANTITY_BOX = 25;
-    private final static int QUANTITY_BASKET = 20;
 
     public GameMapCreator(GameMap gameMap, EntityFactory entityFactory) {
         super(gameMap, entityFactory);
@@ -19,19 +16,19 @@ public class GameMapCreator extends CreatingAction {
 
     @Override
     public void perform() {
-        setupStartMap();
+        initGameMap();
     }
 
-    private void setupStartMap() {
-        setupStartEntities(Cat.class, QUANTITY_CAT);
-        setupStartEntities(Mouse.class, QUANTITY_MOUSE);
-        setupStartEntities(Cheese.class, QUANTITY_CHEESE);
-        setupStartEntities(Box.class, QUANTITY_BOX);
-        setupStartEntities(Basket.class, QUANTITY_BASKET);
+    private void initGameMap() {
+        createEntities(Cat.class, CAT_COUNT);
+        createEntities(Mouse.class, MOUSE_COUNT);
+        createEntities(Cheese.class, CHEESE_COUNT);
+        createEntities(Box.class, BOX_COUNT);
+        createEntities(Basket.class, BASKET_COUNT);
     }
 
-    private <T extends Entity> void setupStartEntities(Class<T> entityClass, int quantityOfEntity) {
-        for (int i = 0; i < quantityOfEntity; i++) {
+    private <T extends Entity> void createEntities(Class<T> entityClass, int entityCount) {
+        for (int i = 0; i < entityCount; i++) {
             EntitySpawner.spawnEntity(entityClass, entityFactory, gameMap);
         }
     }

@@ -8,7 +8,7 @@ public class Node {
     private final Coordinates coordinates;
     private Node parent;
 
-    public Node(Coordinates coordinates){
+    public Node(Coordinates coordinates) {
         this.coordinates = coordinates;
     }
 

@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import static main.java.utils.SimulationConstants.MIN_HP;
+import static main.java.utils.SimulationConstants.SATURATION;
+
 public abstract class Creature extends Entity {
     private final int speed;
     private final Class<?> typeOfFood;
@@ -44,15 +47,15 @@ public abstract class Creature extends Entity {
     }
 
     public int getSaturation() {
-        return 2;
+        return SATURATION;
     }
 
     public boolean isDead() {
-        return getHp() <= 0;
+        return getHp() <= MIN_HP;
     }
 
     private Coordinates getCoordinatesFromMap(GameMap gameMap) {
-        Coordinates coordinates = gameMap.getCoordinates(this);
+        Coordinates coordinates = gameMap.getCoordinatesOf(this);
         if (coordinates == null) {
             throw new IllegalStateException("Creature not found on the map");
         }

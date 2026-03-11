@@ -1,6 +1,7 @@
 package main.java.utils;
 
-import static main.java.core.SimulationLauncher.*;
+
+import static main.java.utils.SimulationConstants.*;
 
 public final class ScriptRenderer {
     private ScriptRenderer() {

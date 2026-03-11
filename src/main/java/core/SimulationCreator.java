@@ -14,6 +14,6 @@ public class SimulationCreator {
         for (Action action : actionManager.getInitActions()) {
             action.perform();
         }
-        GameMapRenderer.printMapSimulation(gameMap);
+        GameMapRenderer.printGameMap(gameMap);
     }
 }

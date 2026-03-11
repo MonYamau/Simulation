@@ -8,8 +8,9 @@ import main.java.utils.Coordinates;
 
 import java.util.Optional;
 
+import static main.java.utils.SimulationConstants.MIN_HP;
+
 public class PredatorFeeder implements FeedingService {
-    private final static int MIN_NUM_HP = 0;
 
     @Override
     public void getFood(Creature creature, Coordinates coordinates, GameMap gameMap) {
@@ -18,7 +19,7 @@ public class PredatorFeeder implements FeedingService {
             return;
         }
         Creature target = (Creature) entity.get();
-        if (target.getHp() > MIN_NUM_HP) {
+        if (target.getHp() > MIN_HP) {
             makeAttack(target, creature);
         } else {
             gameMap.removeEntity(coordinates);

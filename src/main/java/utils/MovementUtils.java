@@ -14,9 +14,9 @@ public final class MovementUtils {
     public static Set<Coordinates> getAvailableCellsForMove(Coordinates current, Class<?> target, GameMap gameMap) {
         Set<Coordinates> availableCells = new HashSet<>();
         for (Coordinates shift : MovementUtils.getShifts()) {
-            Coordinates newCheck = MovementUtils.shiftCoordinates(current, shift);
-            if (gameMap.isCellWithinBoundaries(newCheck) && !MovementUtils.isCellOccupied(newCheck, target, gameMap)) {
-                availableCells.add(newCheck);
+            Coordinates candidateCell = MovementUtils.shiftCoordinates(current, shift);
+            if (gameMap.isValidCoordinates(candidateCell) && !MovementUtils.isCellBlockedForMovement(candidateCell, target, gameMap)) {
+                availableCells.add(candidateCell);
             }
         }
         return availableCells;
@@ -43,7 +43,7 @@ public final class MovementUtils {
         return new Coordinates(current.col() + shift.col(), current.row() + shift.row());
     }
 
-    private static boolean isCellOccupied(Coordinates coordinates, Class<?> target, GameMap gameMap) {
+    private static boolean isCellBlockedForMovement(Coordinates coordinates, Class<?> target, GameMap gameMap) {
         if (!gameMap.isCellEmpty(coordinates)) {
             Optional<Entity> entity = gameMap.getEntity(coordinates);
             return entity.filter(value -> !target.isInstance(value)).isPresent();

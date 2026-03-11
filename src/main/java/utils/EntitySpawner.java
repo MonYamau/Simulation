@@ -19,7 +19,7 @@ public final class EntitySpawner {
 
     private static Coordinates getRandomEmptyCell(GameMap gameMap) {
         Random random = new Random();
-        List<Coordinates> emptyCells = gameMap.getAllEmptyCells();
+        List<Coordinates> emptyCells = gameMap.getEmptyCells();
         int randomIndex = random.nextInt(emptyCells.size());
         return emptyCells.get(randomIndex);
     }

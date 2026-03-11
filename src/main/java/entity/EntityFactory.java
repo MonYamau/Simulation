@@ -8,12 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import static main.java.utils.SimulationConstants.*;
+
 public class EntityFactory {
-    private static final int CAT_HP = 10;
-    private static final int MOUSE_HP = 6;
-    private static final int CAT_SPEED = 3;
-    private static final int MOUSE_SPEED = 2;
-    private static final int CAT_ATTACK = 2;
 
     private final Map<Class<?>, Supplier<Entity>> entityCreators = new HashMap<>();
 
