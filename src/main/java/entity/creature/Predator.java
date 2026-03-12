@@ -11,7 +11,6 @@ public abstract class Predator extends Creature {
         this.attack = attack;
     }
 
-
     public int getAttack() {
         return attack;
     }
