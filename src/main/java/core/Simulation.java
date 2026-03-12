@@ -24,9 +24,7 @@ public class Simulation {
     }
 
     public void nextTurn() {
-        ScriptRenderer.clearScreen();
-        ScriptRenderer.printInstructionScript();
-        ScriptRenderer.printCounter(++counter);
+        ScriptRenderer.printTurnMessages(++counter);
         for (Action action : actionManager.getTurnActions()) {
             action.perform();
         }

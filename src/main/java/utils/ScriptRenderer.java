@@ -7,16 +7,32 @@ public final class ScriptRenderer {
     private ScriptRenderer() {
     }
 
-    public static void clearScreen() {
+    public static void printWelcomeMessages(){
+        clearScreen();
+        printWelcomeScript();
+        printInstructionScript();
+    }
+
+    public static void printTurnMessages(int counter){
+        clearScreen();
+        printInstructionScript();
+        printCounter(counter);
+    }
+
+    public static void printIncorrectInputScript() {
+        System.out.println("Некорректный ввод! Введите одну букву кириллицы");
+    }
+
+    private static void clearScreen() {
         System.out.print(ANSI_CLEAR_SCREEN);
         System.out.flush();
     }
 
-    public static void printCounter(int counter) {
+    private static void printCounter(int counter) {
         System.out.println("Количество произведённых ходов: " + counter);
     }
 
-    public static void printWelcomeScript() {
+    private static void printWelcomeScript() {
         System.out.println("""
                 Добро пожаловать в симуляцию!
                 Карта заполнена препятствиями и существами. Существа: кошки и мышки!
@@ -24,15 +40,11 @@ public final class ScriptRenderer {
                 Давайте понаблюдаем за этим процессом!""");
     }
 
-    public static void printInstructionScript() {
+    private static void printInstructionScript() {
         System.out.printf("""
                 Введите [%s], чтобы выполнить один ход
                 Введите [%s], чтобы запустить/продолжить бесконечную симуляцию
                 Введите [%s], чтобы приостановить бесконечную симуляцию
                 Введите [%s], чтобы выйти%n""", MOTION, START, PAUSE, EXIT);
-    }
-
-    public static void printIncorrectInputScript() {
-        System.out.println("Некорректный ввод! Введите одну букву кириллицы");
     }
 }
