@@ -9,9 +9,9 @@ import main.java.entity.creature.Mouse;
 
 import java.util.Optional;
 
-import static main.java.utils.SimulationConstants.*;
-
 public final class GameMapRenderer {
+    public static final int DEFAULT_MAX_COLUMN_VALUE = 14;
+    public static final int DEFAULT_MAX_ROW_VALUE = 16;
     public static final String ANSI_GREY_BACKGROUND_COLOR = "\u001B[;100m";
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String EMPTY_CELL = "  　";

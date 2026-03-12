@@ -4,10 +4,10 @@ import main.java.entity.Entity;
 
 import java.util.*;
 
-import static main.java.utils.SimulationConstants.DEFAULT_MAX_COLUMN_VALUE;
-import static main.java.utils.SimulationConstants.DEFAULT_MAX_ROW_VALUE;
-
 public class GameMap {
+    public static final int DEFAULT_MAX_COLUMN_VALUE = 14;
+    public static final int DEFAULT_MAX_ROW_VALUE = 16;
+
     private final Map<Coordinates, Entity> entities = new HashMap<>();
 
     public Optional<Entity> getEntity(Coordinates coordinates) {

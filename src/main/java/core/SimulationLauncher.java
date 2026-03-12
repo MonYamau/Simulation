@@ -7,9 +7,12 @@ import main.java.utils.ScriptRenderer;
 
 import java.util.Scanner;
 
-import static main.java.utils.SimulationConstants.*;
-
 public class SimulationLauncher {
+    public static final String MOTION = "Х";
+    public static final String START = "Н";
+    public static final String PAUSE = "П";
+    public static final String EXIT = "В";
+
     public void start() {
         GameMap gameMap = new GameMap();
         EntityFactory entityFactory = new EntityFactory();

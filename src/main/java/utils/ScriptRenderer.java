@@ -1,9 +1,11 @@
 package main.java.utils;
 
-import static main.java.utils.SimulationConstants.*;
-
 public final class ScriptRenderer {
     public static final String ANSI_CLEAR_SCREEN = "\033[H\033[2J";
+    public static final String MOTION = "Х";
+    public static final String START = "Н";
+    public static final String PAUSE = "П";
+    public static final String EXIT = "В";
 
     private ScriptRenderer() {
     }
