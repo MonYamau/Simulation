@@ -6,6 +6,8 @@ import main.java.map.GameMap;
 import main.java.map.GameMapRenderer;
 import main.java.utils.ScriptRenderer;
 
+import static main.java.utils.SimulationConstants.THREAD_SLEEP;
+
 public class Simulation {
     private static int counter;
     private final GameMap gameMap;
@@ -43,6 +45,24 @@ public class Simulation {
         simulationThread.start();
     }
 
+    public synchronized void pauseSimulation() {
+        isPaused = true;
+        notifyAll();
+    }
+
+    public synchronized void stopSimulation() {
+        isRunning = false;
+        isPaused = false;
+        notifyAll();
+        if (simulationThread != null) {
+            try {
+                simulationThread.join(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+
     @SuppressWarnings("BusyWait")
     private Thread getThread() {
         return new Thread(() -> {
@@ -67,7 +87,7 @@ public class Simulation {
                     break;
                 }
                 try {
-                    Thread.sleep(1800);
+                    Thread.sleep(THREAD_SLEEP);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                     isRunning = false;
@@ -75,23 +95,5 @@ public class Simulation {
                 }
             }
         });
-    }
-
-    public synchronized void pauseSimulation() {
-        isPaused = true;
-        notifyAll();
-    }
-
-    public synchronized void stopSimulation() {
-        isRunning = false;
-        isPaused = false;
-        notifyAll();
-        if (simulationThread != null) {
-            try {
-                simulationThread.join(1000);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-        }
     }
 }

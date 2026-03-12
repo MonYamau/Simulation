@@ -4,6 +4,8 @@ public final class SimulationConstants {
     private SimulationConstants() {
     }
 
+    public static final int THREAD_SLEEP = 1800;
+
     public static final int MAX_COLUMN_VALUE = 14;
     public static final int MAX_ROW_VALUE = 16;
 
