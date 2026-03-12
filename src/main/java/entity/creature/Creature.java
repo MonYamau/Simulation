@@ -55,14 +55,6 @@ public abstract class Creature extends Entity {
         return getHp() > MIN_HP;
     }
 
-    private Coordinates getCoordinatesFromMap(GameMap gameMap) {
-        Coordinates coordinates = gameMap.getCoordinatesOf(this);
-        if (coordinates == null) {
-            throw new IllegalStateException("Creature not found on the map" + this);
-        }
-        return coordinates;
-    }
-
     public void makeMove(GameMap gameMap) {
         Coordinates currentCoordinates = getCoordinatesFromMap(gameMap);
         for (int i = 0; i < getSpeed(); i++) {
@@ -74,6 +66,14 @@ public abstract class Creature extends Entity {
                 currentCoordinates = move;
             }
         }
+    }
+
+    private Coordinates getCoordinatesFromMap(GameMap gameMap) {
+        Coordinates coordinates = gameMap.getCoordinatesOf(this);
+        if (coordinates == null) {
+            throw new IllegalStateException("Creature not found on the map" + this);
+        }
+        return coordinates;
     }
 
     private Coordinates getNextCellForMove(GameMap gameMap) {
