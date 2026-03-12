@@ -21,21 +21,22 @@ public final class GameMapRenderer {
         for (int col = 0; col < MAX_COLUMN_VALUE; col++) {
             renderMap.append("\n");
             for (int row = 0; row < MAX_ROW_VALUE; row++) {
-                String colorCell;
-                if (!gameMap.isCellEmpty(new Coordinates(col, row))) {
-                    Optional<Entity> entity = gameMap.getEntity(new Coordinates(col, row));
-                    if (entity.isEmpty()) {
-                        throw new IllegalArgumentException("invalid entity received: " + entity);
-                    }
-                    colorCell = formatEntityCellWithColoring(new Coordinates(col, row), entity.get());
-                    renderMap.append(colorCell);
-                } else {
-                    colorCell = formatEmptyCellWithColoring(new Coordinates(col, row));
-                    renderMap.append(colorCell);
-                }
+                String colorCell = renderCell(gameMap, new Coordinates(col, row));
+                renderMap.append(colorCell);
             }
         }
         System.out.println(renderMap);
+    }
+
+    private static String renderCell(GameMap gameMap, Coordinates coordinates){
+        if (!gameMap.isCellEmpty(coordinates)) {
+            Optional<Entity> entity = gameMap.getEntity(coordinates);
+            if (entity.isEmpty()) {
+                throw new IllegalArgumentException("invalid entity received: " + entity);
+            }
+            return formatEntityCellWithColoring(coordinates, entity.get());
+        }
+        return formatEmptyCellWithColoring(coordinates);
     }
 
     private static String formatEmptyCellWithColoring(Coordinates coordinates) {
