@@ -13,14 +13,19 @@ import java.util.Optional;
 import static main.java.utils.SimulationConstants.*;
 
 public final class GameMapRenderer {
+    public static final String ANSI_GREY_BACKGROUND_COLOR = "\u001B[;100m";
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String EMPTY_CELL = "  　";
+    public static final String CELL_WITH_ENTITY = " %s ";
+
     private GameMapRenderer() {
     }
 
     public static void printGameMap(GameMap gameMap) {
         StringBuilder renderMap = new StringBuilder();
-        for (int col = 0; col < MAX_COLUMN_VALUE; col++) {
+        for (int col = 0; col < DEFAULT_MAX_COLUMN_VALUE; col++) {
             renderMap.append("\n");
-            for (int row = 0; row < MAX_ROW_VALUE; row++) {
+            for (int row = 0; row < DEFAULT_MAX_ROW_VALUE; row++) {
                 String colorCell = renderCell(gameMap, new Coordinates(col, row));
                 renderMap.append(colorCell);
             }

@@ -7,8 +7,8 @@ import main.java.entity.creature.Mouse;
 import main.java.map.GameMap;
 import main.java.utils.EntitySpawner;
 
-import static main.java.utils.SimulationConstants.CHEESE_COUNT;
-import static main.java.utils.SimulationConstants.MOUSE_COUNT;
+import static main.java.utils.SimulationConstants.DEFAULT_CHEESE_COUNT;
+import static main.java.utils.SimulationConstants.DEFAULT_MOUSE_COUNT;
 
 public class ResourceProvider extends CreatingAction {
 
@@ -18,8 +18,8 @@ public class ResourceProvider extends CreatingAction {
 
     @Override
     public void perform() {
-        replenishEntity(Mouse.class, MOUSE_COUNT);
-        replenishEntity(Cheese.class, CHEESE_COUNT);
+        replenishEntity(Mouse.class, DEFAULT_MOUSE_COUNT);
+        replenishEntity(Cheese.class, DEFAULT_CHEESE_COUNT);
     }
 
     private <T extends Entity> void replenishEntity(Class<T> entity, int minNumOfEntity) {

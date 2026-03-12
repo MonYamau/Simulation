@@ -20,11 +20,11 @@ public class GameMapCreator extends CreatingAction {
     }
 
     private void initGameMap() {
-        createEntities(Cat.class, CAT_COUNT);
-        createEntities(Mouse.class, MOUSE_COUNT);
-        createEntities(Cheese.class, CHEESE_COUNT);
-        createEntities(Box.class, BOX_COUNT);
-        createEntities(Basket.class, BASKET_COUNT);
+        createEntities(Cat.class, DEFAULT_CAT_COUNT);
+        createEntities(Mouse.class, DEFAULT_MOUSE_COUNT);
+        createEntities(Cheese.class, DEFAULT_CHEESE_COUNT);
+        createEntities(Box.class, DEFAULT_BOX_COUNT);
+        createEntities(Basket.class, DEFAULT_BASKET_COUNT);
     }
 
     private <T extends Entity> void createEntities(Class<T> entityClass, int entityCount) {

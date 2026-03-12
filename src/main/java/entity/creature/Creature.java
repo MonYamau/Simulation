@@ -12,10 +12,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-import static main.java.utils.SimulationConstants.MIN_HP;
-import static main.java.utils.SimulationConstants.SATURATION;
 
 public abstract class Creature extends Entity {
+    public static final int SATURATION = 2;
+    public static final int MIN_HP = 0;
+
     private final int speed;
     private final Class<?> typeOfFood;
     private final PathFindingService pathFindingService;
@@ -50,8 +51,8 @@ public abstract class Creature extends Entity {
         return SATURATION;
     }
 
-    public boolean isDead() {
-        return getHp() <= MIN_HP;
+    public boolean isAlive() {
+        return getHp() > MIN_HP;
     }
 
     private Coordinates getCoordinatesFromMap(GameMap gameMap) {

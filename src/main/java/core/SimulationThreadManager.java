@@ -1,8 +1,8 @@
 package main.java.core;
 
-import static main.java.utils.SimulationConstants.THREAD_SLEEP;
-
 public class SimulationThreadManager {
+    public static final int THREAD_SLEEP = 1800;
+
     private final TurnExecutor turnExecutor;
     private volatile boolean isRunning;
     private volatile boolean isPaused;

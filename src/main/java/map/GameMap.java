@@ -5,8 +5,8 @@ import main.java.utils.Coordinates;
 
 import java.util.*;
 
-import static main.java.utils.SimulationConstants.MAX_COLUMN_VALUE;
-import static main.java.utils.SimulationConstants.MAX_ROW_VALUE;
+import static main.java.utils.SimulationConstants.DEFAULT_MAX_COLUMN_VALUE;
+import static main.java.utils.SimulationConstants.DEFAULT_MAX_ROW_VALUE;
 
 public class GameMap {
     private final Map<Coordinates, Entity> entities = new HashMap<>();
@@ -61,14 +61,14 @@ public class GameMap {
     }
 
     public boolean isValidCoordinates(Coordinates coordinates) {
-        if (!(coordinates.col() < MAX_COLUMN_VALUE && coordinates.col() >= 0)) return false;
-        return coordinates.row() < MAX_ROW_VALUE && coordinates.row() >= 0;
+        if (!(coordinates.col() < DEFAULT_MAX_COLUMN_VALUE && coordinates.col() >= 0)) return false;
+        return coordinates.row() < DEFAULT_MAX_ROW_VALUE && coordinates.row() >= 0;
     }
 
     public List<Coordinates> getEmptyCells() {
         List<Coordinates> emptyCells = new ArrayList<>();
-        for (int col = 0; col < MAX_COLUMN_VALUE; col++) {
-            for (int row = 0; row < MAX_ROW_VALUE; row++) {
+        for (int col = 0; col < DEFAULT_MAX_COLUMN_VALUE; col++) {
+            for (int row = 0; row < DEFAULT_MAX_ROW_VALUE; row++) {
                 if (isCellEmpty(new Coordinates(col, row))) {
                     emptyCells.add(new Coordinates(col, row));
                 }
