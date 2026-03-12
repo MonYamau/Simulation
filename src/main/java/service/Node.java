@@ -1,6 +1,6 @@
 package main.java.service;
 
-import main.java.utils.Coordinates;
+import main.java.map.Coordinates;
 
 import java.util.Objects;
 

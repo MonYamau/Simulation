@@ -1,6 +1,7 @@
 package main.java.utils;
 
 import main.java.entity.Entity;
+import main.java.map.Coordinates;
 import main.java.map.GameMap;
 
 import java.util.HashSet;

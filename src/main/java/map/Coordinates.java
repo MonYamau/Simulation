@@ -1,4 +1,4 @@
-package main.java.utils;
+package main.java.map;
 
 public record Coordinates(int col, int row) {
 }

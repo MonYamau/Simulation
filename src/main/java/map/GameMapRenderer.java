@@ -6,7 +6,6 @@ import main.java.entity.Cheese;
 import main.java.entity.Entity;
 import main.java.entity.creature.Cat;
 import main.java.entity.creature.Mouse;
-import main.java.utils.Coordinates;
 
 import java.util.Optional;
 
