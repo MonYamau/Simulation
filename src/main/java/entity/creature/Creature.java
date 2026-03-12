@@ -57,7 +57,7 @@ public abstract class Creature extends Entity {
     private Coordinates getCoordinatesFromMap(GameMap gameMap) {
         Coordinates coordinates = gameMap.getCoordinatesOf(this);
         if (coordinates == null) {
-            throw new IllegalStateException("Creature not found on the map");
+            throw new IllegalStateException("Creature not found on the map" + this);
         }
         return coordinates;
     }
