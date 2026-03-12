@@ -11,11 +11,18 @@ public final class MovementUtils {
     private MovementUtils() {
     }
 
+    private final static Set<Coordinates> shifts = Set.of(
+            new Coordinates(-1, 0), //вверх
+            new Coordinates(1, 0), //вниз
+            new Coordinates(0, -1), //налево
+            new Coordinates(0, 1) //направо
+    );
+
     public static Set<Coordinates> getAvailableCellsForMove(Coordinates current, Class<?> target, GameMap gameMap) {
         Set<Coordinates> availableCells = new HashSet<>();
-        for (Coordinates shift : MovementUtils.getShifts()) {
-            Coordinates candidateCell = MovementUtils.shiftCoordinates(current, shift);
-            if (gameMap.isValidCoordinates(candidateCell) && !MovementUtils.isCellBlockedForMovement(candidateCell, target, gameMap)) {
+        for (Coordinates shift : shifts) {
+            Coordinates candidateCell = shiftCoordinates(current, shift);
+            if (!isCellBlockedForMovement(candidateCell, target, gameMap)) {
                 availableCells.add(candidateCell);
             }
         }
@@ -30,24 +37,18 @@ public final class MovementUtils {
         return false;
     }
 
-    private static Set<Coordinates> getShifts() {
-        return Set.of(
-                new Coordinates(-1, 0), //вверх
-                new Coordinates(1, 0), //вниз
-                new Coordinates(0, -1), //налево
-                new Coordinates(0, 1) //направо
-        );
-    }
-
-    private static Coordinates shiftCoordinates(Coordinates current, Coordinates shift) {
-        return new Coordinates(current.col() + shift.col(), current.row() + shift.row());
-    }
-
     private static boolean isCellBlockedForMovement(Coordinates coordinates, Class<?> target, GameMap gameMap) {
+        if (!gameMap.isValidCoordinates(coordinates)) {
+            return true;
+        }
         if (!gameMap.isCellEmpty(coordinates)) {
             Optional<Entity> entity = gameMap.getEntity(coordinates);
             return entity.filter(value -> !target.isInstance(value)).isPresent();
         }
         return false;
+    }
+
+    private static Coordinates shiftCoordinates(Coordinates current, Coordinates shift) {
+        return new Coordinates(current.col() + shift.col(), current.row() + shift.row());
     }
 }
