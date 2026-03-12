@@ -6,11 +6,11 @@ import main.java.map.GameMapRenderer;
 import main.java.utils.ScriptRenderer;
 
 public class TurnExecutor {
-    private int counter;
     private final GameMap gameMap;
     private final ActionManager actionManager;
+    private int counter;
 
-    public TurnExecutor(GameMap gameMap, ActionManager actionManager){
+    public TurnExecutor(GameMap gameMap, ActionManager actionManager) {
         counter = 0;
         this.gameMap = gameMap;
         this.actionManager = actionManager;

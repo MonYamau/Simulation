@@ -7,13 +7,13 @@ public final class ScriptRenderer {
     private ScriptRenderer() {
     }
 
-    public static void printWelcomeMessages(){
+    public static void printWelcomeMessages() {
         clearScreen();
         printWelcomeScript();
         printInstructionScript();
     }
 
-    public static void printTurnMessages(int counter){
+    public static void printTurnMessages(int counter) {
         clearScreen();
         printInstructionScript();
         printCounter(counter);

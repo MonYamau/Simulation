@@ -21,12 +21,13 @@ public class ActionManager {
         fillTurnActions();
     }
 
-    public void executeInitActions(){
+    public void executeInitActions() {
         for (Action action : initActions) {
             action.perform();
         }
     }
-    public void executeTurnActions(){
+
+    public void executeTurnActions() {
         for (Action action : turnActions) {
             action.perform();
         }

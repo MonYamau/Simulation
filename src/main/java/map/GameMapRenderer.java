@@ -28,7 +28,7 @@ public final class GameMapRenderer {
         System.out.println(renderMap);
     }
 
-    private static String renderCell(GameMap gameMap, Coordinates coordinates){
+    private static String renderCell(GameMap gameMap, Coordinates coordinates) {
         if (!gameMap.isCellEmpty(coordinates)) {
             Optional<Entity> entity = gameMap.getEntity(coordinates);
             if (entity.isEmpty()) {

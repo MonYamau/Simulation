@@ -6,10 +6,10 @@ import main.java.map.GameMap;
 import static main.java.utils.SimulationConstants.THREAD_SLEEP;
 
 public class Simulation {
+    private final TurnExecutor turnExecutor;
     private volatile boolean isRunning;
     private volatile boolean isPaused;
     private Thread simulationThread;
-    private final TurnExecutor turnExecutor;
 
     public Simulation(GameMap gameMap, ActionManager actionManager) {
         isRunning = false;
@@ -18,7 +18,7 @@ public class Simulation {
         SimulationCreator.init(gameMap, actionManager);
     }
 
-    public void executeTurn(){
+    public void executeTurn() {
         turnExecutor.nextTurn();
     }
 
