@@ -21,12 +21,15 @@ public class ActionManager {
         fillTurnActions();
     }
 
-    public List<Action> getInitActions() {
-        return initActions;
+    public void executeInitActions(){
+        for (Action action : initActions) {
+            action.perform();
+        }
     }
-
-    public List<Action> getTurnActions() {
-        return turnActions;
+    public void executeTurnActions(){
+        for (Action action : turnActions) {
+            action.perform();
+        }
     }
 
     private void fillInitActions() {

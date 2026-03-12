@@ -23,7 +23,7 @@ public class SimulationLauncher {
         while (true) {
             switch (scanner.nextLine().toUpperCase()) {
                 case MOTION:
-                    simulation.nextTurn();
+                    simulation.executeTurn();
                     break;
                 case START:
                     simulation.startSimulation();

@@ -9,9 +9,7 @@ import main.java.utils.ScriptRenderer;
 public class SimulationCreator {
     public static void init(GameMap gameMap, ActionManager actionManager) {
         ScriptRenderer.printWelcomeMessages();
-        for (Action action : actionManager.getInitActions()) {
-            action.perform();
-        }
+        actionManager.executeInitActions();
         GameMapRenderer.printGameMap(gameMap);
     }
 }

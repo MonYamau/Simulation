@@ -1,36 +1,25 @@
 package main.java.core;
 
-import main.java.action.Action;
 import main.java.action.ActionManager;
 import main.java.map.GameMap;
-import main.java.map.GameMapRenderer;
-import main.java.utils.ScriptRenderer;
 
 import static main.java.utils.SimulationConstants.THREAD_SLEEP;
 
 public class Simulation {
-    private static int counter;
-    private final GameMap gameMap;
-    private final ActionManager actionManager;
     private volatile boolean isRunning;
     private volatile boolean isPaused;
     private Thread simulationThread;
+    private final TurnExecutor turnExecutor;
 
     public Simulation(GameMap gameMap, ActionManager actionManager) {
-        counter = 0;
         isRunning = false;
         isPaused = true;
-        this.gameMap = gameMap;
-        this.actionManager = actionManager;
+        this.turnExecutor = new TurnExecutor(gameMap, actionManager);
         SimulationCreator.init(gameMap, actionManager);
     }
 
-    public void nextTurn() {
-        ScriptRenderer.printTurnMessages(++counter);
-        for (Action action : actionManager.getTurnActions()) {
-            action.perform();
-        }
-        GameMapRenderer.printGameMap(gameMap);
+    public void executeTurn(){
+        turnExecutor.nextTurn();
     }
 
     public synchronized void startSimulation() {
@@ -80,7 +69,7 @@ public class Simulation {
                 }
                 if (!isRunning) break;
                 try {
-                    nextTurn();
+                    turnExecutor.nextTurn();
                 } catch (Exception e) {
                     System.err.println("Error was received when executing the flow: " + e.getMessage());
                     isRunning = false;
