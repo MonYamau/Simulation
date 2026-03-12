@@ -9,15 +9,15 @@ import java.util.Optional;
 import java.util.Set;
 
 public final class MovementUtils {
-    private MovementUtils() {
-    }
-
     private final static Set<Coordinates> shifts = Set.of(
             new Coordinates(-1, 0), //вверх
             new Coordinates(1, 0), //вниз
             new Coordinates(0, -1), //налево
             new Coordinates(0, 1) //направо
     );
+
+    private MovementUtils() {
+    }
 
     public static Set<Coordinates> getAvailableCellsForMove(Coordinates current, Class<?> target, GameMap gameMap) {
         Set<Coordinates> availableCells = new HashSet<>();

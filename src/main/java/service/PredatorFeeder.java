@@ -3,8 +3,8 @@ package main.java.service;
 import main.java.entity.Entity;
 import main.java.entity.creature.Creature;
 import main.java.entity.creature.Predator;
-import main.java.map.GameMap;
 import main.java.map.Coordinates;
+import main.java.map.GameMap;
 
 import java.util.Optional;
 

@@ -1,10 +1,10 @@
 package main.java.entity.creature;
 
 import main.java.entity.Entity;
+import main.java.map.Coordinates;
 import main.java.map.GameMap;
 import main.java.service.FeedingService;
 import main.java.service.PathFindingService;
-import main.java.map.Coordinates;
 import main.java.utils.MovementUtils;
 
 import java.util.ArrayList;
