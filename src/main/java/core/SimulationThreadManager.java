@@ -1,7 +1,7 @@
 package main.java.core;
 
 public class SimulationThreadManager {
-    public static final int THREAD_SLEEP = 1800;
+    public static final int THREAD_SLEEP = 1500;
 
     private final TurnExecutor turnExecutor;
     private volatile boolean isRunning;
