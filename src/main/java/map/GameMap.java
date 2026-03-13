@@ -17,10 +17,10 @@ public class GameMap {
         throw new IllegalArgumentException("invalid coordinates received: " + coordinates);
     }
 
-    public Coordinates getCoordinatesOf(Entity entity) {
+    public Optional<Coordinates> getCoordinatesOf(Entity entity) {
         for (Map.Entry<Coordinates, Entity> entry : entities.entrySet()) {
             if (entry.getValue() == entity) {
-                return entry.getKey();
+                return Optional.ofNullable(entry.getKey());
             }
         }
         throw new IllegalArgumentException("invalid entity received: " + entity);
