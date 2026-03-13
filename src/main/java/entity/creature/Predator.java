@@ -4,7 +4,6 @@ import main.java.entity.Entity;
 import main.java.map.Coordinates;
 import main.java.map.GameMap;
 import main.java.service.MovementService;
-import main.java.service.PathFinder;
 
 import java.util.Optional;
 

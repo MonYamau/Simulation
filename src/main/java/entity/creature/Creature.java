@@ -9,11 +9,11 @@ import java.util.Optional;
 
 
 public abstract class Creature extends Entity {
-    private int hp;
     private final int speed;
     private final Class<?> typeOfFood;
     private final int saturation;
     private final MovementService movementService;
+    private int hp;
 
     public Creature(int hp, int speed, Class<?> typeOfFood, MovementService movementService) {
         this.hp = hp;
@@ -23,12 +23,12 @@ public abstract class Creature extends Entity {
         this.saturation = 2;
     }
 
-    protected void setHp(int hp) {
-        this.hp = hp;
-    }
-
     protected int getHp() {
         return hp;
+    }
+
+    protected void setHp(int hp) {
+        this.hp = hp;
     }
 
     protected int getSaturation() {
@@ -41,7 +41,7 @@ public abstract class Creature extends Entity {
 
     public void makeMove(GameMap gameMap) {
         Optional<Coordinates> currentCoordinates = gameMap.getCoordinatesOf(this);
-        if (currentCoordinates.isEmpty()){
+        if (currentCoordinates.isEmpty()) {
             return;
         }
         Coordinates currentCell = currentCoordinates.get();
@@ -58,7 +58,7 @@ public abstract class Creature extends Entity {
 
     protected abstract void getFood(Coordinates targetCoordinates, GameMap gameMap);
 
-    private boolean isTypeOfFood(Coordinates coordinates, GameMap gameMap){
+    private boolean isTypeOfFood(Coordinates coordinates, GameMap gameMap) {
         if (!gameMap.isCellEmpty(coordinates)) {
             Optional<Entity> entity = gameMap.getEntity(coordinates);
             return entity.filter(typeOfFood::isInstance).isPresent();

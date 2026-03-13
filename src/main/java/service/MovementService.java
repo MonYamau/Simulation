@@ -22,11 +22,11 @@ public class MovementService {
         return getRandomCell(current, target, gameMap);
     }
 
-    private Coordinates getRandomCell(Coordinates current, Class<?> target, GameMap gameMap){
+    private Coordinates getRandomCell(Coordinates current, Class<?> target, GameMap gameMap) {
         Random random = new Random();
         List<Coordinates> availableCells;
         availableCells = new ArrayList<>(movementOptionsProvider.getAvailableCellsForMove(current, target, gameMap));
-        if (!availableCells.isEmpty()){
+        if (!availableCells.isEmpty()) {
             return availableCells.get(random.nextInt(availableCells.size()));
         }
         return current;

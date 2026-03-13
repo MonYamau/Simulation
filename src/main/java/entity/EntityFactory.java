@@ -3,7 +3,10 @@ package main.java.entity;
 import main.java.entity.creature.Cat;
 import main.java.entity.creature.Mouse;
 import main.java.map.Coordinates;
-import main.java.service.*;
+import main.java.service.BfsPathFinder;
+import main.java.service.MovementOptionsProvider;
+import main.java.service.MovementService;
+import main.java.service.PathFinder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,14 +20,14 @@ public class EntityFactory {
     public static final int MOUSE_SPEED = 2;
     public static final int CAT_ATTACK = 2;
 
+    private final Map<Class<?>, Supplier<Entity>> entityCreators = new HashMap<>();
+
     Set<Coordinates> shifts = Set.of(
             new Coordinates(-1, 0),
-                new Coordinates(1, 0),
-                new Coordinates(0, -1),
-                new Coordinates(0, 1)
-        );
-
-    private final Map<Class<?>, Supplier<Entity>> entityCreators = new HashMap<>();
+            new Coordinates(1, 0),
+            new Coordinates(0, -1),
+            new Coordinates(0, 1)
+    );
 
     public EntityFactory() {
         MovementOptionsProvider movementOptionsProvider = new MovementOptionsProvider(shifts);

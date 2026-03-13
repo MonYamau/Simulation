@@ -10,7 +10,7 @@ public class BfsPathFinder implements PathFinder {
     Set<Coordinates> checked;
     MovementOptionsProvider movementOptionsProvider;
 
-    public BfsPathFinder(MovementOptionsProvider movementOptionsProvider){
+    public BfsPathFinder(MovementOptionsProvider movementOptionsProvider) {
         this.movementOptionsProvider = movementOptionsProvider;
     }
 

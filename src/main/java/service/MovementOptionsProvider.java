@@ -4,12 +4,14 @@ import main.java.entity.Entity;
 import main.java.map.Coordinates;
 import main.java.map.GameMap;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 public class MovementOptionsProvider {
     Set<Coordinates> shifts;
 
-    public MovementOptionsProvider(Set<Coordinates> shifts){
+    public MovementOptionsProvider(Set<Coordinates> shifts) {
         this.shifts = shifts;
     }
 
