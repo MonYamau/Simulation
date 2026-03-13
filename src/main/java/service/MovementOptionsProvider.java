@@ -1,25 +1,19 @@
-package main.java.utils;
+package main.java.service;
 
 import main.java.entity.Entity;
 import main.java.map.Coordinates;
 import main.java.map.GameMap;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
-public final class MovementUtils {
-    private final static Set<Coordinates> shifts = Set.of(
-            new Coordinates(-1, 0), //вверх
-            new Coordinates(1, 0), //вниз
-            new Coordinates(0, -1), //налево
-            new Coordinates(0, 1) //направо
-    );
+public class MovementOptionsProvider {
+    Set<Coordinates> shifts;
 
-    private MovementUtils() {
+    public MovementOptionsProvider(Set<Coordinates> shifts){
+        this.shifts = shifts;
     }
 
-    public static Set<Coordinates> getAvailableCellsForMove(Coordinates current, Class<?> target, GameMap gameMap) {
+    public Set<Coordinates> getAvailableCellsForMove(Coordinates current, Class<?> target, GameMap gameMap) {
         Set<Coordinates> availableCells = new HashSet<>();
         for (Coordinates shift : shifts) {
             Coordinates candidateCell = shiftCoordinates(current, shift);
@@ -30,7 +24,7 @@ public final class MovementUtils {
         return availableCells;
     }
 
-    public static boolean isTarget(Coordinates coordinates, Class<?> target, GameMap gameMap) {
+    public boolean isTarget(Coordinates coordinates, Class<?> target, GameMap gameMap) {
         if (!gameMap.isCellEmpty(coordinates)) {
             Optional<Entity> entity = gameMap.getEntity(coordinates);
             return entity.filter(target::isInstance).isPresent();
@@ -38,7 +32,7 @@ public final class MovementUtils {
         return false;
     }
 
-    private static boolean isCellBlockedForMovement(Coordinates coordinates, Class<?> target, GameMap gameMap) {
+    private boolean isCellBlockedForMovement(Coordinates coordinates, Class<?> target, GameMap gameMap) {
         if (!gameMap.isValidCoordinates(coordinates)) {
             return true;
         }
@@ -49,7 +43,7 @@ public final class MovementUtils {
         return false;
     }
 
-    private static Coordinates shiftCoordinates(Coordinates current, Coordinates shift) {
+    private Coordinates shiftCoordinates(Coordinates current, Coordinates shift) {
         return new Coordinates(current.col() + shift.col(), current.row() + shift.row());
     }
 }
