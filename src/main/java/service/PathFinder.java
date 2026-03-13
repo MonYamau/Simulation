@@ -5,6 +5,6 @@ import main.java.map.GameMap;
 
 import java.util.List;
 
-public interface PathFindingService {
+public interface PathFinder {
     List<Coordinates> find(Coordinates start, Class<?> target, GameMap gameMap);
 }
