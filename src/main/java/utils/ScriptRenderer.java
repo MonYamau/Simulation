@@ -45,6 +45,7 @@ public final class ScriptRenderer {
 
     private static void printInstructionScript() {
         System.out.printf("""
+                
                 Введите [%s], чтобы выполнить один ход
                 Введите [%s], чтобы запустить/продолжить бесконечную симуляцию
                 Введите [%s], чтобы приостановить бесконечную симуляцию
