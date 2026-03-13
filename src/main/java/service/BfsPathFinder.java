@@ -2,13 +2,17 @@ package main.java.service;
 
 import main.java.map.Coordinates;
 import main.java.map.GameMap;
-import main.java.utils.MovementUtils;
 
 import java.util.*;
 
-public class BfsPathFinder implements PathFindingService {
+public class BfsPathFinder implements PathFinder {
     Queue<Node> check;
     Set<Coordinates> checked;
+    MovementOptionsProvider movementOptionsProvider;
+
+    public BfsPathFinder(MovementOptionsProvider movementOptionsProvider){
+        this.movementOptionsProvider = movementOptionsProvider;
+    }
 
     @Override
     public List<Coordinates> find(Coordinates start, Class<?> target, GameMap gameMap) {
@@ -26,12 +30,12 @@ public class BfsPathFinder implements PathFindingService {
         while (!check.isEmpty()) {
             Node current = check.poll();
             Coordinates currentCoordinates = current.getCoordinates();
-            if (MovementUtils.isTarget(currentCoordinates, target, gameMap)) {
+            if (movementOptionsProvider.isTarget(currentCoordinates, target, gameMap)) {
                 pathToTarget = restorePath(start, current);
                 return pathToTarget;
             }
 
-            for (Coordinates coordinates : MovementUtils.getAvailableCellsForMove(currentCoordinates, target, gameMap)) {
+            for (Coordinates coordinates : movementOptionsProvider.getAvailableCellsForMove(currentCoordinates, target, gameMap)) {
                 if (!checked.contains(coordinates)) {
                     Node neighbor = new Node(coordinates);
                     neighbor.setParent(current);
