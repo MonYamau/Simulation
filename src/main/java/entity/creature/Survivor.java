@@ -1,6 +1,6 @@
 package main.java.entity.creature;
 
-import main.java.map.Coordinates;
+import main.java.service.Coordinates;
 import main.java.map.GameMap;
 import main.java.service.MovementService;
 
