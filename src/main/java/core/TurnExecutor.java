@@ -8,17 +8,19 @@ import main.java.utils.ScriptRenderer;
 public class TurnExecutor {
     private final GameMap gameMap;
     private final ActionManager actionManager;
+    private final GameMapRenderer gameMapRenderer;
     private int counter;
 
-    public TurnExecutor(GameMap gameMap, ActionManager actionManager) {
-        counter = 0;
+    public TurnExecutor(GameMap gameMap, ActionManager actionManager, GameMapRenderer gameMapRenderer) {
+        this.counter = 0;
         this.gameMap = gameMap;
         this.actionManager = actionManager;
+        this.gameMapRenderer = gameMapRenderer;
     }
 
     public void nextTurn() {
         ScriptRenderer.printTurnMessages(++counter);
         actionManager.executeTurnActions();
-        GameMapRenderer.printGameMap(gameMap);
+        gameMapRenderer.printGameMap(gameMap);
     }
 }
