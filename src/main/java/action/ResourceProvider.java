@@ -7,10 +7,7 @@ import main.java.entity.creature.Mouse;
 import main.java.map.GameMap;
 import main.java.utils.EntitySpawner;
 
-public class ResourceProvider extends CreatingAction {
-    public static final int DEFAULT_MOUSE_COUNT = 5;
-    public static final int DEFAULT_CHEESE_COUNT = 7;
-
+public class ResourceProvider extends SpawnAction {
     public ResourceProvider(GameMap gameMap, EntityFactory entityFactory) {
         super(gameMap, entityFactory);
     }

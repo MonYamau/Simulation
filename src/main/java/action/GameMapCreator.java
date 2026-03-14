@@ -6,12 +6,7 @@ import main.java.entity.creature.Mouse;
 import main.java.map.GameMap;
 import main.java.utils.EntitySpawner;
 
-public class GameMapCreator extends CreatingAction {
-    public static final int DEFAULT_CAT_COUNT = 3;
-    public static final int DEFAULT_MOUSE_COUNT = 5;
-    public static final int DEFAULT_CHEESE_COUNT = 7;
-    public static final int DEFAULT_BOX_COUNT = 25;
-    public static final int DEFAULT_BASKET_COUNT = 20;
+public class GameMapCreator extends SpawnAction {
 
     public GameMapCreator(GameMap gameMap, EntityFactory entityFactory) {
         super(gameMap, entityFactory);
