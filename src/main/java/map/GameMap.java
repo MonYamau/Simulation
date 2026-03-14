@@ -1,14 +1,21 @@
 package main.java.map;
 
 import main.java.entity.Entity;
+import main.java.service.Coordinates;
 
 import java.util.*;
 
 public class GameMap {
-    public static final int DEFAULT_MAX_COLUMN_VALUE = 14;
-    public static final int DEFAULT_MAX_ROW_VALUE = 16;
+    private final Map<Coordinates, Entity> entities;
 
-    private final Map<Coordinates, Entity> entities = new HashMap<>();
+    private final int maxColumnValue;
+    private final int maxRowValue;
+
+    public GameMap(int maxColumnValue, int maxRowValue) {
+        entities = new HashMap<>();
+        this.maxColumnValue = maxColumnValue;
+        this.maxRowValue = maxRowValue;
+    }
 
     public Optional<Entity> getEntity(Coordinates coordinates) {
         if (isValidCoordinates(coordinates)) {
@@ -60,14 +67,14 @@ public class GameMap {
     }
 
     public boolean isValidCoordinates(Coordinates coordinates) {
-        if (!(coordinates.col() < DEFAULT_MAX_COLUMN_VALUE && coordinates.col() >= 0)) return false;
-        return coordinates.row() < DEFAULT_MAX_ROW_VALUE && coordinates.row() >= 0;
+        if (!(coordinates.col() < maxColumnValue && coordinates.col() >= 0)) return false;
+        return coordinates.row() < maxRowValue && coordinates.row() >= 0;
     }
 
     public List<Coordinates> getEmptyCells() {
         List<Coordinates> emptyCells = new ArrayList<>();
-        for (int col = 0; col < DEFAULT_MAX_COLUMN_VALUE; col++) {
-            for (int row = 0; row < DEFAULT_MAX_ROW_VALUE; row++) {
+        for (int col = 0; col < maxColumnValue; col++) {
+            for (int row = 0; row < maxRowValue; row++) {
                 if (isCellEmpty(new Coordinates(col, row))) {
                     emptyCells.add(new Coordinates(col, row));
                 }
