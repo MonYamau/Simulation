@@ -6,25 +6,29 @@ import main.java.entity.Cheese;
 import main.java.entity.Entity;
 import main.java.entity.creature.Cat;
 import main.java.entity.creature.Mouse;
+import main.java.service.Coordinates;
 
 import java.util.Optional;
 
-public final class GameMapRenderer {
-    public static final int DEFAULT_MAX_COLUMN_VALUE = 14;
-    public static final int DEFAULT_MAX_ROW_VALUE = 16;
-    public static final String ANSI_GREY_BACKGROUND_COLOR = "\u001B[;100m";
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String EMPTY_CELL = "  　";
-    public static final String CELL_WITH_ENTITY = " %s ";
+public class GameMapRenderer {
+    private static final String ANSI_GREY_BACKGROUND_COLOR = "\u001B[;100m";
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static final String EMPTY_CELL = "  　";
+    private static final String CELL_WITH_ENTITY = " %s ";
 
-    private GameMapRenderer() {
+    private final int maxColumnValue;
+    private final int maxRowValue;
+
+    public GameMapRenderer(int maxColumnValue, int maxRowValue) {
+        this.maxColumnValue = maxColumnValue;
+        this.maxRowValue = maxRowValue;
     }
 
-    public static void printGameMap(GameMap gameMap) {
+    public void printGameMap(GameMap gameMap) {
         StringBuilder renderMap = new StringBuilder();
-        for (int col = 0; col < DEFAULT_MAX_COLUMN_VALUE; col++) {
+        for (int col = 0; col < maxColumnValue; col++) {
             renderMap.append("\n");
-            for (int row = 0; row < DEFAULT_MAX_ROW_VALUE; row++) {
+            for (int row = 0; row < maxRowValue; row++) {
                 String colorCell = renderCell(gameMap, new Coordinates(col, row));
                 renderMap.append(colorCell);
             }
@@ -32,7 +36,7 @@ public final class GameMapRenderer {
         System.out.println(renderMap);
     }
 
-    private static String renderCell(GameMap gameMap, Coordinates coordinates) {
+    private String renderCell(GameMap gameMap, Coordinates coordinates) {
         if (!gameMap.isCellEmpty(coordinates)) {
             Optional<Entity> entity = gameMap.getEntity(coordinates);
             if (entity.isEmpty()) {
@@ -43,7 +47,7 @@ public final class GameMapRenderer {
         return formatEmptyCellWithColoring(coordinates);
     }
 
-    private static String formatEmptyCellWithColoring(Coordinates coordinates) {
+    private String formatEmptyCellWithColoring(Coordinates coordinates) {
         if (isEvenCell(coordinates)) {
             return "%s%s%s".formatted(ANSI_GREY_BACKGROUND_COLOR, EMPTY_CELL, ANSI_RESET);
         } else {
@@ -51,7 +55,7 @@ public final class GameMapRenderer {
         }
     }
 
-    private static String formatEntityCellWithColoring(Coordinates coordinates, Entity entity) {
+    private String formatEntityCellWithColoring(Coordinates coordinates, Entity entity) {
         if (isEvenCell(coordinates)) {
             return "%s%s%s".formatted(ANSI_GREY_BACKGROUND_COLOR, getEntitySprite(entity), ANSI_RESET);
         } else {
@@ -59,7 +63,7 @@ public final class GameMapRenderer {
         }
     }
 
-    private static String getEntitySprite(Entity entity) {
+    private String getEntitySprite(Entity entity) {
         if (entity instanceof Basket) {
             return CELL_WITH_ENTITY.formatted("🧺");
         }
@@ -78,7 +82,7 @@ public final class GameMapRenderer {
         throw new IllegalArgumentException("Incorrect type of object");
     }
 
-    private static boolean isEvenCell(Coordinates coordinates) {
+    private boolean isEvenCell(Coordinates coordinates) {
         return (coordinates.col() + coordinates.row()) % 2 == 0;
     }
 }
