@@ -1,5 +1,9 @@
-package main.java.action;
+package main.java.core;
 
+import main.java.action.Action;
+import main.java.action.GameMapInitializer;
+import main.java.action.ResourceProvider;
+import main.java.action.TurnMovement;
 import main.java.entity.EntityFactory;
 import main.java.map.GameMap;
 

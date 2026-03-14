@@ -1,6 +1,5 @@
 package main.java.core;
 
-import main.java.action.ActionManager;
 import main.java.map.GameMap;
 import main.java.map.GameMapRenderer;
 
