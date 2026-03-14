@@ -1,21 +1,25 @@
-package main.java.service;
+package main.java.utils;
 
 import main.java.entity.Entity;
-import main.java.map.Coordinates;
+import main.java.service.Coordinates;
 import main.java.map.GameMap;
 
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-public class MovementOptionsProvider {
-    Set<Coordinates> shifts;
+public final class MovementUtils {
+    private static final Set<Coordinates> shifts = Set.of(
+            new Coordinates(-1, 0),
+            new Coordinates(1, 0),
+            new Coordinates(0, -1),
+            new Coordinates(0, 1)
+    );
 
-    public MovementOptionsProvider(Set<Coordinates> shifts) {
-        this.shifts = shifts;
+    private MovementUtils() {
     }
 
-    public Set<Coordinates> getAvailableCellsForMove(Coordinates current, Class<?> target, GameMap gameMap) {
+    public static Set<Coordinates> getAvailableCellsForMove(Coordinates current, Class<?> target, GameMap gameMap) {
         Set<Coordinates> availableCells = new HashSet<>();
         for (Coordinates shift : shifts) {
             Coordinates candidateCell = shiftCoordinates(current, shift);
@@ -26,7 +30,7 @@ public class MovementOptionsProvider {
         return availableCells;
     }
 
-    public boolean isTarget(Coordinates coordinates, Class<?> target, GameMap gameMap) {
+    public static boolean isTarget(Coordinates coordinates, Class<?> target, GameMap gameMap) {
         if (!gameMap.isCellEmpty(coordinates)) {
             Optional<Entity> entity = gameMap.getEntity(coordinates);
             return entity.filter(target::isInstance).isPresent();
@@ -34,7 +38,7 @@ public class MovementOptionsProvider {
         return false;
     }
 
-    private boolean isCellBlockedForMovement(Coordinates coordinates, Class<?> target, GameMap gameMap) {
+    private static boolean isCellBlockedForMovement(Coordinates coordinates, Class<?> target, GameMap gameMap) {
         if (!gameMap.isValidCoordinates(coordinates)) {
             return true;
         }
@@ -45,7 +49,7 @@ public class MovementOptionsProvider {
         return false;
     }
 
-    private Coordinates shiftCoordinates(Coordinates current, Coordinates shift) {
+    private static Coordinates shiftCoordinates(Coordinates current, Coordinates shift) {
         return new Coordinates(current.col() + shift.col(), current.row() + shift.row());
     }
 }
