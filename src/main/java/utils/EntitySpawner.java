@@ -2,8 +2,8 @@ package main.java.utils;
 
 import main.java.entity.Entity;
 import main.java.entity.EntityFactory;
-import main.java.service.Coordinates;
 import main.java.map.GameMap;
+import main.java.service.Coordinates;
 
 import java.util.List;
 import java.util.Random;

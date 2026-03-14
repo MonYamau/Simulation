@@ -12,7 +12,7 @@ public class SimulationFactory {
     private static final int DEFAULT_MAX_COLUMN_VALUE = 14;
     private static final int DEFAULT_MAX_ROW_VALUE = 16;
 
-    public Simulation create(){
+    public Simulation create() {
         PathFinder bfsPathFinder = new BfsPathFinder();
         EntityFactory entityFactory = new EntityFactory(bfsPathFinder);
         GameMap gameMap = new GameMap(DEFAULT_MAX_COLUMN_VALUE, DEFAULT_MAX_ROW_VALUE);

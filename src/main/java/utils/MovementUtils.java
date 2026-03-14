@@ -1,8 +1,8 @@
 package main.java.utils;
 
 import main.java.entity.Entity;
-import main.java.service.Coordinates;
 import main.java.map.GameMap;
+import main.java.service.Coordinates;
 
 import java.util.HashSet;
 import java.util.Optional;
