@@ -34,7 +34,7 @@ public class ActionManager {
     }
 
     private void fillInitActions() {
-        initActions.add(new GameMapCreator(gameMap, entityFactory));
+        initActions.add(new GameMapInitializer(gameMap, entityFactory));
     }
 
     private void fillTurnActions() {
