@@ -1,18 +1,16 @@
 package main.java.service;
 
-import main.java.map.Coordinates;
 import main.java.map.GameMap;
+import main.java.utils.MovementUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class MovementService {
-    MovementOptionsProvider movementOptionsProvider;
     PathFinder pathFinder;
 
-    public MovementService(MovementOptionsProvider movementOptionsProvider, PathFinder pathFinder) {
-        this.movementOptionsProvider = movementOptionsProvider;
+    public MovementService(PathFinder pathFinder) {
         this.pathFinder = pathFinder;
     }
 
@@ -25,7 +23,7 @@ public class MovementService {
     private Coordinates getRandomCell(Coordinates current, Class<?> target, GameMap gameMap) {
         Random random = new Random();
         List<Coordinates> availableCells;
-        availableCells = new ArrayList<>(movementOptionsProvider.getAvailableCellsForMove(current, target, gameMap));
+        availableCells = new ArrayList<>(MovementUtils.getAvailableCellsForMove(current, target, gameMap));
         if (!availableCells.isEmpty()) {
             return availableCells.get(random.nextInt(availableCells.size()));
         }
