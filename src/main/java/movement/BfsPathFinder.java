@@ -8,8 +8,8 @@ import main.java.utils.MovementUtils;
 import java.util.*;
 
 public class BfsPathFinder implements PathFinder {
-    Queue<Node> check;
-    Set<Coordinates> checked;
+    private Queue<Node> check;
+    private Set<Coordinates> checked;
 
     @Override
     public List<Coordinates> find(Coordinates start, Class<? extends Entity> target, GameMap gameMap) {
