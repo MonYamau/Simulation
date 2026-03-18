@@ -9,8 +9,8 @@ public class Main {
         SimulationFactory simulationFactory = new SimulationFactory();
         try {
             Simulation simulation = simulationFactory.create();
-            SimulationLauncher simulationLauncher = new SimulationLauncher(simulation);
-
+            SimulationLauncher simulationLauncher = new SimulationLauncher();
+            simulationLauncher.startGameLoop(simulation);
         } catch (IllegalArgumentException e) {
             System.err.println("incorrect value received");
             System.err.println(e.getMessage());
