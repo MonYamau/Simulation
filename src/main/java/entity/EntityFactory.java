@@ -27,7 +27,7 @@ public class EntityFactory {
         initializeEntityCreators(movementService);
     }
 
-    public <T extends Entity> T createEntity(Class<T> entityClass) {
+    public <T extends Entity> T create(Class<T> entityClass) {
         @SuppressWarnings("unchecked")
         Supplier<T> entityCreator = (Supplier<T>) entityCreators.get(entityClass);
         return entityCreator.get();

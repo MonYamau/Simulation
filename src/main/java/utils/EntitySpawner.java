@@ -14,7 +14,7 @@ public final class EntitySpawner {
 
     public static <T extends Entity> void spawnEntity(Class<T> entityClass, EntityFactory entityFactory, GameMap gameMap) {
         Coordinates emptyCell = getRandomEmptyCell(gameMap);
-        T entity = entityFactory.createEntity(entityClass);
+        T entity = entityFactory.create(entityClass);
         gameMap.putEntity(emptyCell, entity);
     }
 
