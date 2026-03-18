@@ -10,7 +10,7 @@ import java.util.Optional;
 public abstract class Predator extends Creature {
     private final int attack;
 
-    public Predator(int hp, int speed, Class<?> typeOfFood, MovementService movementService, int attack) {
+    public Predator(int hp, int speed, Class<? extends Entity> typeOfFood, MovementService movementService, int attack) {
         super(hp, speed, typeOfFood, movementService);
         this.attack = attack;
     }

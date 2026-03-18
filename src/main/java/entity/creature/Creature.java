@@ -10,12 +10,12 @@ import java.util.Optional;
 
 public abstract class Creature extends Entity {
     private final int speed;
-    private final Class<?> typeOfFood;
+    private final Class<? extends Entity> typeOfFood;
     private final int saturation;
     private final MovementService movementService;
     private int hp;
 
-    public Creature(int hp, int speed, Class<?> typeOfFood, MovementService movementService) {
+    public Creature(int hp, int speed, Class<? extends Entity> typeOfFood, MovementService movementService) {
         this.hp = hp;
         this.speed = speed;
         this.typeOfFood = typeOfFood;

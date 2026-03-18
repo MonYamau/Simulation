@@ -1,5 +1,6 @@
 package main.java.movement;
 
+import main.java.entity.Entity;
 import main.java.gamemap.Coordinates;
 import main.java.gamemap.GameMap;
 import main.java.utils.MovementUtils;
@@ -11,7 +12,7 @@ public class BfsPathFinder implements PathFinder {
     Set<Coordinates> checked;
 
     @Override
-    public List<Coordinates> find(Coordinates start, Class<?> target, GameMap gameMap) {
+    public List<Coordinates> find(Coordinates start, Class<? extends Entity> target, GameMap gameMap) {
         check = new LinkedList<>();
         checked = new HashSet<>();
         Node startCell = new Node(start);

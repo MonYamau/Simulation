@@ -16,8 +16,8 @@ import java.util.function.Supplier;
 public class EntityFactory {
     private static final int CAT_HP = 10;
     private static final int MOUSE_HP = 6;
-    private static final Class<?> CAT_TYPE_OF_FOOD = Survivor.class;
-    private static final Class<?> MOUSE_TYPE_OF_FOOD = Cheese.class;
+    private static final Class<? extends Entity> CAT_TYPE_OF_FOOD = Survivor.class;
+    private static final Class<? extends Entity> MOUSE_TYPE_OF_FOOD = Cheese.class;
     private static final int CAT_SPEED = 3;
     private static final int MOUSE_SPEED = 2;
     private static final int CAT_ATTACK = 2;

@@ -1,5 +1,6 @@
 package main.java.movement;
 
+import main.java.entity.Entity;
 import main.java.gamemap.Coordinates;
 import main.java.gamemap.GameMap;
 import main.java.utils.MovementUtils;
@@ -15,7 +16,7 @@ public class MovementService {
         this.pathFinder = pathFinder;
     }
 
-    public Coordinates getNextCellForMove(GameMap gameMap, Class<?> target, Coordinates current) {
+    public Coordinates getNextCellForMove(GameMap gameMap, Class<? extends Entity> target, Coordinates current) {
         List<Coordinates> path = pathFinder.find(current, target, gameMap);
         if (!path.isEmpty()) return path.getFirst();
         return getRandomCell(current, target, gameMap);
