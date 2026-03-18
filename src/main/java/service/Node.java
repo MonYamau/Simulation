@@ -1,5 +1,7 @@
 package main.java.service;
 
+import main.java.gamemap.Coordinates;
+
 import java.util.Objects;
 
 public class Node {

@@ -1,5 +1,6 @@
 package main.java.service;
 
+import main.java.gamemap.Coordinates;
 import main.java.gamemap.GameMap;
 import main.java.utils.MovementUtils;
 
