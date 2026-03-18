@@ -45,6 +45,9 @@ public class GameMap {
 
     public void removeEntity(Coordinates coordinates) {
         validate(coordinates);
+        if (isCellEmpty(coordinates)) {
+            throw new IllegalStateException("The entity cannot be deleted");
+        }
         entities.remove(coordinates);
     }
 
