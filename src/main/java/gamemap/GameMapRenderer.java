@@ -50,17 +50,15 @@ public class GameMapRenderer {
     private String formatEmptyCellWithColoring(Coordinates coordinates) {
         if (isEvenCell(coordinates)) {
             return "%s%s%s".formatted(ANSI_GREY_BACKGROUND_COLOR, EMPTY_CELL, ANSI_RESET);
-        } else {
-            return "%s".formatted(EMPTY_CELL);
         }
+        return "%s".formatted(EMPTY_CELL);
     }
 
     private String formatEntityCellWithColoring(Coordinates coordinates, Entity entity) {
         if (isEvenCell(coordinates)) {
             return "%s%s%s".formatted(ANSI_GREY_BACKGROUND_COLOR, getEntitySprite(entity), ANSI_RESET);
-        } else {
-            return "%s".formatted(getEntitySprite(entity));
         }
+        return "%s".formatted(getEntitySprite(entity));
     }
 
     private String getEntitySprite(Entity entity) {
