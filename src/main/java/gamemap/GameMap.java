@@ -16,6 +16,14 @@ public class GameMap {
         this.width = width;
     }
 
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
     public Optional<Entity> getEntity(Coordinates coordinates) {
         if (isValidCoordinates(coordinates)) {
             return Optional.ofNullable(entities.get(coordinates));
@@ -70,17 +78,5 @@ public class GameMap {
             return false;
         }
         return coordinates.row() < width && coordinates.row() >= 0;
-    }
-
-    public List<Coordinates> getEmptyCells() {
-        List<Coordinates> emptyCells = new ArrayList<>();
-        for (int col = 0; col < height; col++) {
-            for (int row = 0; row < width; row++) {
-                if (isCellEmpty(new Coordinates(col, row))) {
-                    emptyCells.add(new Coordinates(col, row));
-                }
-            }
-        }
-        return emptyCells;
     }
 }
