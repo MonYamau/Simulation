@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public final class MovementUtils {
-    private static final Set<Coordinates> shifts = Set.of(
+    private static final Set<Coordinates> SHIFTS = Set.of(
             new Coordinates(-1, 0),
             new Coordinates(1, 0),
             new Coordinates(0, -1),
@@ -21,7 +21,7 @@ public final class MovementUtils {
 
     public static Set<Coordinates> getAvailableCellsForMove(Coordinates current, Class<?> target, GameMap gameMap) {
         Set<Coordinates> availableCells = new HashSet<>();
-        for (Coordinates shift : shifts) {
+        for (Coordinates shift : SHIFTS) {
             Coordinates candidateCell = shiftCoordinates(current, shift);
             if (!isCellBlockedForMovement(candidateCell, target, gameMap)) {
                 availableCells.add(candidateCell);
