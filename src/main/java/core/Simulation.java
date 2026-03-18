@@ -1,31 +1,140 @@
 package main.java.core;
 
+import main.java.action.Action;
+import main.java.action.GameMapInitializer;
+import main.java.action.ResourceProvider;
+import main.java.action.TurnMovement;
 import main.java.gamemap.GameMap;
 import main.java.gamemap.GameMapRenderer;
+import main.java.utils.EntitySpawner;
+import main.java.utils.MessagePrinter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Simulation {
-    TurnExecutor turnExecutor;
-    SimulationThreadManager simulationThreadManager;
+    public static final int THREAD_SLEEP = 1500;
 
-    public Simulation(GameMap gameMap, GameMapRenderer gameMapRenderer, ActionManager actionManager) {
-        this.turnExecutor = new TurnExecutor(gameMap, actionManager, gameMapRenderer);
-        this.simulationThreadManager = new SimulationThreadManager(turnExecutor);
-        SimulationInitializer.init(gameMap, actionManager, gameMapRenderer);
+    private final List<Action> initActions;
+    private final List<Action> turnActions;
+    private int counter;
+    private volatile boolean isRunning;
+    private volatile boolean isPaused;
+    private Thread simulationThread;
+    private final GameMap gameMap;
+    private final EntityFactory entityFactory;
+    private final GameMapRenderer gameMapRenderer;
+
+    public Simulation(GameMap gameMap, GameMapRenderer gameMapRenderer, EntityFactory entityFactory) {
+        isRunning = false;
+        isPaused = true;
+        this.gameMap = gameMap;
+        this.entityFactory = entityFactory;
+        this.gameMapRenderer = gameMapRenderer;
+        this.counter = 0;
+        this.initActions = new ArrayList<>();
+        this.turnActions = new ArrayList<>();
+        fillInitActions();
+        fillTurnActions();
+        init();
     }
 
-    public void executeTurn() {
-        turnExecutor.nextTurn();
+    public void nextTurn() {
+        MessagePrinter.printTurnMessages(++counter);
+        executeTurnActions();
+        gameMapRenderer.render(gameMap);
     }
 
-    public void startSimulation() {
-        simulationThreadManager.start();
+    public synchronized void startSimulation() {
+        if (simulationThread != null && simulationThread.isAlive()) {
+            isPaused = false;
+            notifyAll();
+            return;
+        }
+        isRunning = true;
+        isPaused = false;
+        simulationThread = getThread();
+        simulationThread.start();
     }
 
-    public void pauseSimulation() {
-        simulationThreadManager.pause();
+    public synchronized void pauseSimulation() {
+        isPaused = true;
+        notifyAll();
     }
 
-    public void stopSimulation() {
-        simulationThreadManager.stop();
+    public synchronized void stopSimulation() {
+        isRunning = false;
+        isPaused = false;
+        notifyAll();
+        if (simulationThread != null) {
+            try {
+                simulationThread.join(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+
+    @SuppressWarnings("BusyWait")
+    private Thread getThread() {
+        return new Thread(() -> {
+            while (isRunning) {
+                synchronized (this) {
+                    while (isPaused) {
+                        try {
+                            wait();
+                        } catch (InterruptedException e) {
+                            Thread.currentThread().interrupt();
+                            isRunning = false;
+                            break;
+                        }
+                    }
+                }
+                if (!isRunning) break;
+                try {
+                    nextTurn();
+                } catch (Exception e) {
+                    System.err.println("Error was received when executing the flow: " + e.getMessage());
+                    isRunning = false;
+                    break;
+                }
+                try {
+                    Thread.sleep(THREAD_SLEEP);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    isRunning = false;
+                    break;
+                }
+            }
+        });
+    }
+
+    private void executeInitActions() {
+        executeActions(initActions);
+    }
+
+    private void executeTurnActions() {
+        executeActions(turnActions);
+    }
+
+    private void executeActions(List<Action> actions) {
+        for (Action action: actions) {
+            action.perform();
+        }
+    }
+
+    private void fillInitActions() {
+        initActions.add(new GameMapInitializer(gameMap, entityFactory));
+    }
+
+    private void fillTurnActions() {
+        turnActions.add(new ResourceProvider(gameMap, entityFactory));
+        turnActions.add(new TurnMovement(gameMap));
+    }
+
+    private void init() {
+        MessagePrinter.printWelcomeMessages();
+        executeInitActions();
+        gameMapRenderer.render(gameMap);
     }
 }
