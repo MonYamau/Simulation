@@ -8,13 +8,13 @@ import java.util.*;
 public class GameMap {
     private final Map<Coordinates, Entity> entities;
 
-    private final int maxColumnValue;
-    private final int maxRowValue;
+    private final int height;
+    private final int width;
 
-    public GameMap(int maxColumnValue, int maxRowValue) {
+    public GameMap(int height, int width) {
         entities = new HashMap<>();
-        this.maxColumnValue = maxColumnValue;
-        this.maxRowValue = maxRowValue;
+        this.height = height;
+        this.width = width;
     }
 
     public Optional<Entity> getEntity(Coordinates coordinates) {
@@ -67,14 +67,14 @@ public class GameMap {
     }
 
     public boolean isValidCoordinates(Coordinates coordinates) {
-        if (!(coordinates.column() < maxColumnValue && coordinates.column() >= 0)) return false;
-        return coordinates.row() < maxRowValue && coordinates.row() >= 0;
+        if (!(coordinates.column() < height && coordinates.column() >= 0)) return false;
+        return coordinates.row() < width && coordinates.row() >= 0;
     }
 
     public List<Coordinates> getEmptyCells() {
         List<Coordinates> emptyCells = new ArrayList<>();
-        for (int col = 0; col < maxColumnValue; col++) {
-            for (int row = 0; row < maxRowValue; row++) {
+        for (int col = 0; col < height; col++) {
+            for (int row = 0; row < width; row++) {
                 if (isCellEmpty(new Coordinates(col, row))) {
                     emptyCells.add(new Coordinates(col, row));
                 }
