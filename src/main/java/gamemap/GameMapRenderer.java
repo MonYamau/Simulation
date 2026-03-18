@@ -15,19 +15,11 @@ public class GameMapRenderer {
     private static final String EMPTY_CELL = "  　";
     private static final String CELL_WITH_ENTITY = " %s ";
 
-    private final int maxColumnValue;
-    private final int maxRowValue;
-
-    public GameMapRenderer(int maxColumnValue, int maxRowValue) {
-        this.maxColumnValue = maxColumnValue;
-        this.maxRowValue = maxRowValue;
-    }
-
     public void render(GameMap gameMap) {
         StringBuilder renderMap = new StringBuilder();
-        for (int col = 0; col < maxColumnValue; col++) {
+        for (int col = 0; col < gameMap.getHeight(); col++) {
             renderMap.append("\n");
-            for (int row = 0; row < maxRowValue; row++) {
+            for (int row = 0; row < gameMap.getWidth(); row++) {
                 String colorCell = renderCell(gameMap, new Coordinates(col, row));
                 renderMap.append(colorCell);
             }

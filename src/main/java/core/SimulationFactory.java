@@ -14,7 +14,7 @@ public class SimulationFactory {
         PathFinder bfsPathFinder = new BfsPathFinder();
         EntityFactory entityFactory = new EntityFactory(bfsPathFinder);
         GameMap gameMap = new GameMap(DEFAULT_MAX_COLUMN_VALUE, DEFAULT_MAX_ROW_VALUE);
-        GameMapRenderer gameMapRenderer = new GameMapRenderer(DEFAULT_MAX_COLUMN_VALUE, DEFAULT_MAX_ROW_VALUE);
+        GameMapRenderer gameMapRenderer = new GameMapRenderer();
         ActionManager actionManager = new ActionManager(gameMap, entityFactory);
         return new Simulation(gameMap, gameMapRenderer, actionManager);
     }
