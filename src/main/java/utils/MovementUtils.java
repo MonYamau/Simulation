@@ -50,6 +50,6 @@ public final class MovementUtils {
     }
 
     private static Coordinates shiftCoordinates(Coordinates current, Coordinates shift) {
-        return new Coordinates(current.col() + shift.col(), current.row() + shift.row());
+        return new Coordinates(current.column() + shift.column(), current.row() + shift.row());
     }
 }

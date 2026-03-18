@@ -83,6 +83,6 @@ public class GameMapRenderer {
     }
 
     private boolean isEvenCell(Coordinates coordinates) {
-        return (coordinates.col() + coordinates.row()) % 2 == 0;
+        return (coordinates.column() + coordinates.row()) % 2 == 0;
     }
 }
