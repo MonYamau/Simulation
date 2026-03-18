@@ -1,9 +1,9 @@
 package main.java.action;
 
-import main.java.entity.staticobject.Cheese;
-import main.java.entity.Entity;
 import main.java.core.EntityFactory;
+import main.java.entity.Entity;
 import main.java.entity.creature.Mouse;
+import main.java.entity.staticobject.Cheese;
 import main.java.gamemap.GameMap;
 import main.java.utils.EntitySpawner;
 

@@ -1,15 +1,10 @@
 package main.java.core;
 
 import main.java.action.Action;
-import main.java.action.GameMapInitializer;
-import main.java.action.ResourceProvider;
-import main.java.action.TurnMovement;
 import main.java.gamemap.GameMap;
 import main.java.gamemap.GameMapRenderer;
-import main.java.utils.EntitySpawner;
 import main.java.utils.MessagePrinter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Simulation {
@@ -17,12 +12,12 @@ public class Simulation {
 
     private final List<Action> initActions;
     private final List<Action> turnActions;
+    private final GameMap gameMap;
+    private final GameMapRenderer gameMapRenderer;
     private int counter;
     private volatile boolean isRunning;
     private volatile boolean isPaused;
     private Thread simulationThread;
-    private final GameMap gameMap;
-    private final GameMapRenderer gameMapRenderer;
 
     public Simulation(GameMap gameMap, GameMapRenderer gameMapRenderer, List<Action> initActions, List<Action> turnActions) {
         isRunning = false;
@@ -114,7 +109,7 @@ public class Simulation {
     }
 
     private void executeActions(List<Action> actions) {
-        for (Action action: actions) {
+        for (Action action : actions) {
             action.perform();
         }
     }

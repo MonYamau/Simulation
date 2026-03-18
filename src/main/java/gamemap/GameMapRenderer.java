@@ -1,11 +1,11 @@
 package main.java.gamemap;
 
-import main.java.entity.staticobject.Basket;
-import main.java.entity.staticobject.Box;
-import main.java.entity.staticobject.Cheese;
 import main.java.entity.Entity;
 import main.java.entity.creature.Cat;
 import main.java.entity.creature.Mouse;
+import main.java.entity.staticobject.Basket;
+import main.java.entity.staticobject.Box;
+import main.java.entity.staticobject.Cheese;
 
 import java.util.Optional;
 

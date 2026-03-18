@@ -4,8 +4,6 @@ import main.java.entity.Entity;
 import main.java.gamemap.GameMap;
 import main.java.movement.MovementService;
 
-import java.util.Optional;
-
 public abstract class Predator extends Creature {
     private final int attack;
 

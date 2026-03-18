@@ -82,8 +82,8 @@ public class GameMap {
         return coordinates.row() >= 0 && coordinates.row() < width;
     }
 
-    private void validate(Coordinates coordinates){
-        if (!isValidCoordinates(coordinates)){
+    private void validate(Coordinates coordinates) {
+        if (!isValidCoordinates(coordinates)) {
             throw new IllegalArgumentException("invalid coordinates received: " + coordinates);
         }
     }
