@@ -38,7 +38,7 @@ public class GameMap {
         throw new IllegalArgumentException("invalid entity received: " + entity);
     }
 
-    public <T extends Entity> void putEntity(Coordinates coordinates, T entity) {
+    public void putEntity(Coordinates coordinates, Entity entity) {
         validate(coordinates);
         entities.put(coordinates, entity);
     }
