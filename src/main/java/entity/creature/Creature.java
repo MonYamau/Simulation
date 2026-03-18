@@ -45,7 +45,8 @@ public abstract class Creature extends Entity {
         for (int i = 0; i < speed; i++) {
             Coordinates cell = movementService.getNextCellForMove(gameMap, typeOfFood, currentCell);
             if (isTypeOfFood(cell, gameMap)) {
-                eat(cell, gameMap);
+                Optional<Entity> entity = gameMap.getEntity(cell);
+                eat(entity.get(), gameMap);
             } else {
                 move(currentCell, cell, gameMap);
                 currentCell = cell;
@@ -53,7 +54,7 @@ public abstract class Creature extends Entity {
         }
     }
 
-    protected abstract void eat(Coordinates targetCoordinates, GameMap gameMap);
+    protected abstract void eat(Entity food, GameMap gameMap);
 
     private boolean isTypeOfFood(Coordinates coordinates, GameMap gameMap) {
         if (!gameMap.isCellEmpty(coordinates)) {

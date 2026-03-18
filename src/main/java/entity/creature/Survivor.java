@@ -2,7 +2,6 @@ package main.java.entity.creature;
 
 import main.java.entity.Entity;
 import main.java.gamemap.GameMap;
-import main.java.gamemap.Coordinates;
 import main.java.movement.MovementService;
 
 public abstract class Survivor extends Creature {
@@ -11,8 +10,8 @@ public abstract class Survivor extends Creature {
     }
 
     @Override
-    protected void eat(Coordinates targetCoordinates, GameMap gameMap) {
-        gameMap.removeEntity(targetCoordinates);
+    protected void eat(Entity food, GameMap gameMap) {
+        gameMap.removeEntity(food);
         this.setHp(this.getHp() + this.getSaturation());
     }
 }
