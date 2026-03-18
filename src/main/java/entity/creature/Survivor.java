@@ -2,7 +2,7 @@ package main.java.entity.creature;
 
 import main.java.gamemap.GameMap;
 import main.java.gamemap.Coordinates;
-import main.java.service.MovementService;
+import main.java.movement.MovementService;
 
 public abstract class Survivor extends Creature {
     public Survivor(int hp, int speed, Class<?> typeOfFood, MovementService movementService) {

@@ -3,8 +3,8 @@ package main.java.core;
 import main.java.entity.EntityFactory;
 import main.java.gamemap.GameMap;
 import main.java.gamemap.GameMapRenderer;
-import main.java.service.BfsPathFinder;
-import main.java.service.PathFinder;
+import main.java.movement.BfsPathFinder;
+import main.java.movement.PathFinder;
 
 
 public class SimulationFactory {

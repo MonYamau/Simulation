@@ -3,7 +3,7 @@ package main.java.entity.creature;
 import main.java.entity.Entity;
 import main.java.gamemap.GameMap;
 import main.java.gamemap.Coordinates;
-import main.java.service.MovementService;
+import main.java.movement.MovementService;
 
 import java.util.Optional;
 

@@ -3,8 +3,8 @@ package main.java.entity;
 import main.java.entity.creature.Cat;
 import main.java.entity.creature.Mouse;
 import main.java.entity.creature.Survivor;
-import main.java.service.MovementService;
-import main.java.service.PathFinder;
+import main.java.movement.MovementService;
+import main.java.movement.PathFinder;
 
 import java.util.HashMap;
 import java.util.Map;

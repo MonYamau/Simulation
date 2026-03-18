@@ -1,4 +1,4 @@
-package main.java.service;
+package main.java.movement;
 
 import main.java.gamemap.Coordinates;
 import main.java.gamemap.GameMap;
