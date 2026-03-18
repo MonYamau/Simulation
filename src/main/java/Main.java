@@ -14,6 +14,9 @@ public class Main {
         } catch (IllegalArgumentException e) {
             System.err.println("incorrect value received");
             System.err.println(e.getMessage());
+        } catch (IllegalStateException e) {
+            System.err.println("uncorrected state of the field");
+            System.err.println(e.getMessage());
         } catch (Exception e) {
             System.err.println("Unknown error received");
             System.err.println(e.getMessage());
