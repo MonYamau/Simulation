@@ -1,6 +1,6 @@
 package main.java.action;
 
-import main.java.entity.EntityFactory;
+import main.java.core.EntityFactory;
 import main.java.gamemap.GameMap;
 
 public abstract class SpawnAction extends Action {

@@ -1,5 +1,6 @@
 package main.java.action;
 
+import main.java.core.EntityFactory;
 import main.java.entity.*;
 import main.java.entity.creature.Cat;
 import main.java.entity.creature.Mouse;

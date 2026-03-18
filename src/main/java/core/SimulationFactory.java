@@ -1,6 +1,5 @@
 package main.java.core;
 
-import main.java.entity.EntityFactory;
 import main.java.gamemap.GameMap;
 import main.java.gamemap.GameMapRenderer;
 import main.java.movement.BfsPathFinder;

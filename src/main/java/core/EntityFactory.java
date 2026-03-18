@@ -1,5 +1,6 @@
-package main.java.entity;
+package main.java.core;
 
+import main.java.entity.Entity;
 import main.java.entity.creature.Cat;
 import main.java.entity.creature.Mouse;
 import main.java.entity.creature.Survivor;
