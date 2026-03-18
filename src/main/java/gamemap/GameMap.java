@@ -67,10 +67,10 @@ public class GameMap {
     }
 
     public boolean isValidCoordinates(Coordinates coordinates) {
-        if (!(coordinates.column() < height && coordinates.column() >= 0)) {
-            return false;
+        if (coordinates.column() >= 0 && coordinates.column() < height) {
+            return true;
         }
-        return coordinates.row() < width && coordinates.row() >= 0;
+        return coordinates.row() >= 0 && coordinates.row() < width;
     }
 
     private void validate(Coordinates coordinates){
