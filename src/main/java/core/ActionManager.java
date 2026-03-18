@@ -25,13 +25,15 @@ public class ActionManager {
     }
 
     public void executeInitActions() {
-        for (Action action : initActions) {
-            action.perform();
-        }
+        executeActions(initActions);
     }
 
     public void executeTurnActions() {
-        for (Action action : turnActions) {
+        executeActions(turnActions);
+    }
+
+    private void executeActions(List<Action> actions) {
+        for (Action action: actions) {
             action.perform();
         }
     }
