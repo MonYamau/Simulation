@@ -10,7 +10,7 @@ public abstract class Survivor extends Creature {
     }
 
     @Override
-    protected void getFood(Coordinates targetCoordinates, GameMap gameMap) {
+    protected void eat(Coordinates targetCoordinates, GameMap gameMap) {
         gameMap.removeEntity(targetCoordinates);
         this.setHp(this.getHp() + this.getSaturation());
     }

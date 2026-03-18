@@ -20,7 +20,7 @@ public abstract class Predator extends Creature {
     }
 
     @Override
-    protected void getFood(Coordinates targetCoordinates, GameMap gameMap) {
+    protected void eat(Coordinates targetCoordinates, GameMap gameMap) {
         Optional<Entity> entity = gameMap.getEntity(targetCoordinates);
         if (entity.isEmpty()) {
             return;
