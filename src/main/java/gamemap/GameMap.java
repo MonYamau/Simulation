@@ -25,10 +25,8 @@ public class GameMap {
     }
 
     public Optional<Entity> getEntity(Coordinates coordinates) {
-        if (isValidCoordinates(coordinates)) {
-            return Optional.ofNullable(entities.get(coordinates));
-        }
-        throw new IllegalArgumentException("invalid coordinates received: " + coordinates);
+        validate(coordinates);
+        return Optional.ofNullable(entities.get(coordinates));
     }
 
     public Optional<Coordinates> getCoordinates(Entity entity) {
@@ -41,19 +39,13 @@ public class GameMap {
     }
 
     public <T extends Entity> void putEntity(Coordinates coordinates, T entity) {
-        if (isValidCoordinates(coordinates)) {
-            entities.put(coordinates, entity);
-            return;
-        }
-        throw new IllegalArgumentException("invalid coordinates received: " + coordinates);
+        validate(coordinates);
+        entities.put(coordinates, entity);
     }
 
     public void removeEntity(Coordinates coordinates) {
-        if (isValidCoordinates(coordinates)) {
-            entities.remove(coordinates);
-            return;
-        }
-        throw new IllegalArgumentException("invalid coordinates received: " + coordinates);
+        validate(coordinates);
+        entities.remove(coordinates);
     }
 
     public <T extends Entity> List<T> getEntitiesByType(Class<T> entityClass) {
@@ -67,10 +59,8 @@ public class GameMap {
     }
 
     public boolean isCellEmpty(Coordinates coordinates) {
-        if (isValidCoordinates(coordinates)) {
-            return !entities.containsKey(coordinates);
-        }
-        throw new IllegalArgumentException("invalid coordinates received: " + coordinates);
+        validate(coordinates);
+        return !entities.containsKey(coordinates);
     }
 
     public boolean isValidCoordinates(Coordinates coordinates) {
@@ -78,5 +68,11 @@ public class GameMap {
             return false;
         }
         return coordinates.row() < width && coordinates.row() >= 0;
+    }
+
+    private void validate(Coordinates coordinates){
+        if (!isValidCoordinates(coordinates)){
+            throw new IllegalArgumentException("invalid coordinates received: " + coordinates);
+        }
     }
 }
