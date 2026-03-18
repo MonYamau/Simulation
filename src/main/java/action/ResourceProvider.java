@@ -4,7 +4,7 @@ import main.java.entity.Cheese;
 import main.java.entity.Entity;
 import main.java.entity.EntityFactory;
 import main.java.entity.creature.Mouse;
-import main.java.map.GameMap;
+import main.java.gamemap.GameMap;
 import main.java.utils.EntitySpawner;
 
 public class ResourceProvider extends SpawnAction {

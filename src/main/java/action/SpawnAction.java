@@ -1,7 +1,7 @@
 package main.java.action;
 
 import main.java.entity.EntityFactory;
-import main.java.map.GameMap;
+import main.java.gamemap.GameMap;
 
 public abstract class SpawnAction extends Action {
     protected static final int DEFAULT_CAT_COUNT = 3;

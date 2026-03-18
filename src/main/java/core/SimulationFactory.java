@@ -1,8 +1,8 @@
 package main.java.core;
 
 import main.java.entity.EntityFactory;
-import main.java.map.GameMap;
-import main.java.map.GameMapRenderer;
+import main.java.gamemap.GameMap;
+import main.java.gamemap.GameMapRenderer;
 import main.java.service.BfsPathFinder;
 import main.java.service.PathFinder;
 

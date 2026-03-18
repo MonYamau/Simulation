@@ -1,4 +1,4 @@
-package main.java.map;
+package main.java.gamemap;
 
 import main.java.entity.Basket;
 import main.java.entity.Box;

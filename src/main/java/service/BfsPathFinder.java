@@ -1,6 +1,6 @@
 package main.java.service;
 
-import main.java.map.GameMap;
+import main.java.gamemap.GameMap;
 import main.java.utils.MovementUtils;
 
 import java.util.*;

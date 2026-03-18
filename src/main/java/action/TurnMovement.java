@@ -1,7 +1,7 @@
 package main.java.action;
 
 import main.java.entity.creature.Creature;
-import main.java.map.GameMap;
+import main.java.gamemap.GameMap;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package main.java.action;
 
-import main.java.map.GameMap;
+import main.java.gamemap.GameMap;
 
 public abstract class Action {
     protected GameMap gameMap;
