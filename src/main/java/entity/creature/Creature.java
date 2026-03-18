@@ -50,7 +50,7 @@ public abstract class Creature extends Entity {
             if (isTypeOfFood(cell, gameMap)) {
                 eat(cell, gameMap);
             } else {
-                moveCreature(currentCell, cell, gameMap);
+                move(currentCell, cell, gameMap);
                 currentCell = cell;
             }
         }
@@ -66,7 +66,7 @@ public abstract class Creature extends Entity {
         return false;
     }
 
-    private void moveCreature(Coordinates from, Coordinates to, GameMap gameMap) {
+    private void move(Coordinates from, Coordinates to, GameMap gameMap) {
         Optional<Entity> entity = gameMap.getEntity(from);
         if (entity.isEmpty()) {
             return;
