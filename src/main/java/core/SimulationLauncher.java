@@ -10,16 +10,12 @@ public class SimulationLauncher {
     public static final String PAUSE = "П";
     public static final String EXIT = "В";
 
-    public SimulationLauncher(Simulation simulation) {
-        startGameLoop(simulation);
-    }
-
     public void startGameLoop(Simulation simulation) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             switch (scanner.nextLine().toUpperCase()) {
                 case MOTION:
-                    simulation.executeTurn();
+                    simulation.nextTurn();
                     break;
                 case START:
                     simulation.startSimulation();
