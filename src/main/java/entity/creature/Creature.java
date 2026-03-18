@@ -41,9 +41,6 @@ public abstract class Creature extends Entity {
 
     public void makeMove(GameMap gameMap) {
         Optional<Coordinates> currentCoordinates = gameMap.getCoordinates(this);
-        if (currentCoordinates.isEmpty()) {
-            return;
-        }
         Coordinates currentCell = currentCoordinates.get();
         for (int i = 0; i < speed; i++) {
             Coordinates cell = movementService.getNextCellForMove(gameMap, typeOfFood, currentCell);
@@ -68,9 +65,6 @@ public abstract class Creature extends Entity {
 
     private void move(Coordinates from, Coordinates to, GameMap gameMap) {
         Optional<Entity> entity = gameMap.getEntity(from);
-        if (entity.isEmpty()) {
-            return;
-        }
         gameMap.removeEntity(from);
         gameMap.putEntity(to, entity.get());
     }
