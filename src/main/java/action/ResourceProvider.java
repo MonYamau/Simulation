@@ -1,6 +1,6 @@
 package main.java.action;
 
-import main.java.entity.Cheese;
+import main.java.entity.staticobject.Cheese;
 import main.java.entity.Entity;
 import main.java.entity.EntityFactory;
 import main.java.entity.creature.Mouse;

@@ -3,6 +3,9 @@ package main.java.action;
 import main.java.entity.*;
 import main.java.entity.creature.Cat;
 import main.java.entity.creature.Mouse;
+import main.java.entity.staticobject.Basket;
+import main.java.entity.staticobject.Box;
+import main.java.entity.staticobject.Cheese;
 import main.java.gamemap.GameMap;
 import main.java.utils.EntitySpawner;
 
