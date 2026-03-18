@@ -40,7 +40,7 @@ public abstract class Creature extends Entity {
     }
 
     public void makeMove(GameMap gameMap) {
-        Optional<Coordinates> currentCoordinates = gameMap.getCoordinatesOf(this);
+        Optional<Coordinates> currentCoordinates = gameMap.getCoordinates(this);
         if (currentCoordinates.isEmpty()) {
             return;
         }

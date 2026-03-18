@@ -24,7 +24,7 @@ public class GameMap {
         throw new IllegalArgumentException("invalid coordinates received: " + coordinates);
     }
 
-    public Optional<Coordinates> getCoordinatesOf(Entity entity) {
+    public Optional<Coordinates> getCoordinates(Entity entity) {
         for (Map.Entry<Coordinates, Entity> entry : entities.entrySet()) {
             if (entry.getValue() == entity) {
                 return Optional.ofNullable(entry.getKey());
