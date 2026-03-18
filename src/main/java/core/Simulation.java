@@ -16,12 +16,9 @@ public class Simulation {
     private final GameMapRenderer gameMapRenderer;
     private int counter;
     private volatile boolean isRunning;
-    private volatile boolean isPaused;
-    private Thread simulationThread;
 
     public Simulation(GameMap gameMap, GameMapRenderer gameMapRenderer, List<Action> initActions, List<Action> turnActions) {
         isRunning = false;
-        isPaused = true;
         this.initActions = initActions;
         this.turnActions = turnActions;
         this.gameMap = gameMap;
@@ -36,68 +33,29 @@ public class Simulation {
         gameMapRenderer.render(gameMap);
     }
 
-    public synchronized void startSimulation() {
-        if (simulationThread != null && simulationThread.isAlive()) {
-            isPaused = false;
-            notifyAll();
-            return;
-        }
+    @SuppressWarnings("BusyWait")
+    public void startSimulation() {
         isRunning = true;
-        isPaused = false;
-        simulationThread = getThread();
-        simulationThread.start();
-    }
-
-    public synchronized void pauseSimulation() {
-        isPaused = true;
-        notifyAll();
-    }
-
-    public synchronized void stopSimulation() {
-        isRunning = false;
-        isPaused = false;
-        notifyAll();
-        if (simulationThread != null) {
+        while (isRunning) {
             try {
-                simulationThread.join(1000);
+                nextTurn();
+            } catch (Exception e) {
+                System.err.println("Error received: " + e.getMessage());
+                isRunning = false;
+                break;
+            }
+            try {
+                Thread.sleep(THREAD_SLEEP);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
+                isRunning = false;
+                break;
             }
         }
     }
 
-    @SuppressWarnings("BusyWait")
-    private Thread getThread() {
-        return new Thread(() -> {
-            while (isRunning) {
-                synchronized (this) {
-                    while (isPaused) {
-                        try {
-                            wait();
-                        } catch (InterruptedException e) {
-                            Thread.currentThread().interrupt();
-                            isRunning = false;
-                            break;
-                        }
-                    }
-                }
-                if (!isRunning) break;
-                try {
-                    nextTurn();
-                } catch (Exception e) {
-                    System.err.println("Error was received when executing the flow: " + e.getMessage());
-                    isRunning = false;
-                    break;
-                }
-                try {
-                    Thread.sleep(THREAD_SLEEP);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    isRunning = false;
-                    break;
-                }
-            }
-        });
+    public void pauseSimulation() {
+        isRunning = false;
     }
 
     private void executeInitActions() {
