@@ -1,6 +1,6 @@
 package main.java.core;
 
-import main.java.utils.ScriptRenderer;
+import main.java.utils.MessagePrinter;
 
 import java.util.Scanner;
 
@@ -32,7 +32,7 @@ public class SimulationLauncher {
                     scanner.close();
                     return;
                 default:
-                    ScriptRenderer.printIncorrectInputScript();
+                    MessagePrinter.printIncorrectInputScript();
             }
         }
     }

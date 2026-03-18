@@ -2,7 +2,7 @@ package main.java.core;
 
 import main.java.gamemap.GameMap;
 import main.java.gamemap.GameMapRenderer;
-import main.java.utils.ScriptRenderer;
+import main.java.utils.MessagePrinter;
 
 public class TurnExecutor {
     private final GameMap gameMap;
@@ -18,7 +18,7 @@ public class TurnExecutor {
     }
 
     public void nextTurn() {
-        ScriptRenderer.printTurnMessages(++counter);
+        MessagePrinter.printTurnMessages(++counter);
         actionManager.executeTurnActions();
         gameMapRenderer.printGameMap(gameMap);
     }
