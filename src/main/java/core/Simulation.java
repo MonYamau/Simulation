@@ -22,20 +22,16 @@ public class Simulation {
     private volatile boolean isPaused;
     private Thread simulationThread;
     private final GameMap gameMap;
-    private final EntityFactory entityFactory;
     private final GameMapRenderer gameMapRenderer;
 
-    public Simulation(GameMap gameMap, GameMapRenderer gameMapRenderer, EntityFactory entityFactory) {
+    public Simulation(GameMap gameMap, GameMapRenderer gameMapRenderer, List<Action> initActions, List<Action> turnActions) {
         isRunning = false;
         isPaused = true;
+        this.initActions = initActions;
+        this.turnActions = turnActions;
         this.gameMap = gameMap;
-        this.entityFactory = entityFactory;
         this.gameMapRenderer = gameMapRenderer;
         this.counter = 0;
-        this.initActions = new ArrayList<>();
-        this.turnActions = new ArrayList<>();
-        fillInitActions();
-        fillTurnActions();
         init();
     }
 
@@ -121,15 +117,6 @@ public class Simulation {
         for (Action action: actions) {
             action.perform();
         }
-    }
-
-    private void fillInitActions() {
-        initActions.add(new GameMapInitializer(gameMap, entityFactory));
-    }
-
-    private void fillTurnActions() {
-        turnActions.add(new ResourceProvider(gameMap, entityFactory));
-        turnActions.add(new TurnMovement(gameMap));
     }
 
     private void init() {
