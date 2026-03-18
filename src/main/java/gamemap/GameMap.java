@@ -67,7 +67,9 @@ public class GameMap {
     }
 
     public boolean isValidCoordinates(Coordinates coordinates) {
-        if (!(coordinates.column() < height && coordinates.column() >= 0)) return false;
+        if (!(coordinates.column() < height && coordinates.column() >= 0)) {
+            return false;
+        }
         return coordinates.row() < width && coordinates.row() >= 0;
     }
 
