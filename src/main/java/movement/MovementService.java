@@ -18,7 +18,9 @@ public class MovementService {
 
     public Coordinates getNextCellForMove(GameMap gameMap, Class<? extends Entity> target, Coordinates current) {
         List<Coordinates> path = pathFinder.find(current, target, gameMap);
-        if (!path.isEmpty()) return path.getFirst();
+        if (!path.isEmpty()) {
+            return path.getFirst();
+        }
         return getRandomCell(current, target, gameMap);
     }
 
