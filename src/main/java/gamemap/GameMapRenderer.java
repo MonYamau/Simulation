@@ -24,7 +24,7 @@ public class GameMapRenderer {
         this.maxRowValue = maxRowValue;
     }
 
-    public void printGameMap(GameMap gameMap) {
+    public void render(GameMap gameMap) {
         StringBuilder renderMap = new StringBuilder();
         for (int col = 0; col < maxColumnValue; col++) {
             renderMap.append("\n");

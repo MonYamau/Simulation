@@ -8,6 +8,6 @@ public class SimulationInitializer {
     public static void init(GameMap gameMap, ActionManager actionManager, GameMapRenderer gameMapRenderer) {
         MessagePrinter.printWelcomeMessages();
         actionManager.executeInitActions();
-        gameMapRenderer.printGameMap(gameMap);
+        gameMapRenderer.render(gameMap);
     }
 }

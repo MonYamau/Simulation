@@ -20,6 +20,6 @@ public class TurnExecutor {
     public void nextTurn() {
         MessagePrinter.printTurnMessages(++counter);
         actionManager.executeTurnActions();
-        gameMapRenderer.printGameMap(gameMap);
+        gameMapRenderer.render(gameMap);
     }
 }
