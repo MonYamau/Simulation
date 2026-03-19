@@ -6,13 +6,8 @@ import main.java.gamemap.GameMap;
 import java.util.List;
 
 public class TurnMovement extends Action {
-
-    public TurnMovement(GameMap gameMap) {
-        super(gameMap);
-    }
-
     @Override
-    public void perform() {
+    public void perform(GameMap gameMap) {
         List<Creature> creatures = gameMap.getEntitiesByType(Creature.class);
         for (Creature creature : creatures) {
             if (creature.isAlive()) {

@@ -8,24 +8,24 @@ import main.java.gamemap.GameMap;
 import main.java.utils.EntitySpawner;
 
 public class ResourceProvider extends SpawnAction {
-    public ResourceProvider(GameMap gameMap, EntityFactory entityFactory) {
-        super(gameMap, entityFactory);
+    public ResourceProvider(EntityFactory entityFactory) {
+        super(entityFactory);
     }
 
     @Override
-    public void perform() {
-        replenishEntity(Mouse.class, DEFAULT_MOUSE_COUNT);
-        replenishEntity(Cheese.class, DEFAULT_CHEESE_COUNT);
+    public void perform(GameMap gameMap) {
+        replenishEntity(Mouse.class, DEFAULT_MOUSE_COUNT, gameMap);
+        replenishEntity(Cheese.class, DEFAULT_CHEESE_COUNT, gameMap);
     }
 
-    private <T extends Entity> void replenishEntity(Class<T> entity, int minNumOfEntity) {
-        int amount = countAmountOfEntity(entity);
+    private <T extends Entity> void replenishEntity(Class<T> entity, int minNumOfEntity, GameMap gameMap) {
+        int amount = countAmountOfEntity(entity, gameMap);
         for (int i = amount; i < minNumOfEntity; i++) {
             EntitySpawner.spawnEntity(entity, entityFactory, gameMap);
         }
     }
 
-    private <T extends Entity> int countAmountOfEntity(Class<T> entityClass) {
+    private <T extends Entity> int countAmountOfEntity(Class<T> entityClass, GameMap gameMap) {
         int entityCounter = 0;
         for (Entity entity : gameMap.getEntitiesByType(Entity.class)) {
             if (entityClass.isInstance(entity)) {

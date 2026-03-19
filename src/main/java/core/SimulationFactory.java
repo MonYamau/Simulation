@@ -22,21 +22,21 @@ public class SimulationFactory {
         EntityFactory entityFactory = new EntityFactory(bfsPathFinder);
         GameMap gameMap = new GameMap(DEFAULT_MAX_COLUMN_VALUE, DEFAULT_MAX_ROW_VALUE);
         GameMapRenderer gameMapRenderer = new GameMapRenderer();
-        List<Action> initActions = getInitActions(gameMap, entityFactory);
-        List<Action> turnActions = getTurnActions(gameMap, entityFactory);
+        List<Action> initActions = getInitActions(entityFactory);
+        List<Action> turnActions = getTurnActions(entityFactory);
         return new Simulation(gameMap, gameMapRenderer, initActions, turnActions);
     }
 
-    private List<Action> getInitActions(GameMap gameMap, EntityFactory entityFactory) {
+    private List<Action> getInitActions(EntityFactory entityFactory) {
         List<Action> initActions = new ArrayList<>();
-        initActions.add(new GameMapInitializer(gameMap, entityFactory));
+        initActions.add(new GameMapInitializer(entityFactory));
         return initActions;
     }
 
-    private List<Action> getTurnActions(GameMap gameMap, EntityFactory entityFactory) {
+    private List<Action> getTurnActions(EntityFactory entityFactory) {
         List<Action> turnActions = new ArrayList<>();
-        turnActions.add(new ResourceProvider(gameMap, entityFactory));
-        turnActions.add(new TurnMovement(gameMap));
+        turnActions.add(new ResourceProvider(entityFactory));
+        turnActions.add(new TurnMovement());
         return turnActions;
     }
 }

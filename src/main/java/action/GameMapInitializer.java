@@ -12,24 +12,24 @@ import main.java.utils.EntitySpawner;
 
 public class GameMapInitializer extends SpawnAction {
 
-    public GameMapInitializer(GameMap gameMap, EntityFactory entityFactory) {
-        super(gameMap, entityFactory);
+    public GameMapInitializer(EntityFactory entityFactory) {
+        super(entityFactory);
     }
 
     @Override
-    public void perform() {
-        initGameMap();
+    public void perform(GameMap gameMap) {
+        initGameMap(gameMap);
     }
 
-    private void initGameMap() {
-        spawnEntities(Cat.class, DEFAULT_CAT_COUNT);
-        spawnEntities(Mouse.class, DEFAULT_MOUSE_COUNT);
-        spawnEntities(Cheese.class, DEFAULT_CHEESE_COUNT);
-        spawnEntities(Box.class, DEFAULT_BOX_COUNT);
-        spawnEntities(Basket.class, DEFAULT_BASKET_COUNT);
+    private void initGameMap(GameMap gameMap) {
+        spawnEntities(Cat.class, DEFAULT_CAT_COUNT, gameMap);
+        spawnEntities(Mouse.class, DEFAULT_MOUSE_COUNT, gameMap);
+        spawnEntities(Cheese.class, DEFAULT_CHEESE_COUNT, gameMap);
+        spawnEntities(Box.class, DEFAULT_BOX_COUNT, gameMap);
+        spawnEntities(Basket.class, DEFAULT_BASKET_COUNT, gameMap);
     }
 
-    private <T extends Entity> void spawnEntities(Class<T> entityClass, int entityCount) {
+    private <T extends Entity> void spawnEntities(Class<T> entityClass, int entityCount, GameMap gameMap) {
         for (int i = 0; i < entityCount; i++) {
             EntitySpawner.spawnEntity(entityClass, entityFactory, gameMap);
         }

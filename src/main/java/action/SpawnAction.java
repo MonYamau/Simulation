@@ -1,7 +1,6 @@
 package main.java.action;
 
 import main.java.core.EntityFactory;
-import main.java.gamemap.GameMap;
 
 public abstract class SpawnAction extends Action {
     protected static final int DEFAULT_CAT_COUNT = 3;
@@ -12,8 +11,7 @@ public abstract class SpawnAction extends Action {
 
     protected EntityFactory entityFactory;
 
-    public SpawnAction(GameMap gameMap, EntityFactory entityFactory) {
-        super(gameMap);
+    public SpawnAction(EntityFactory entityFactory) {
         this.entityFactory = entityFactory;
     }
 }

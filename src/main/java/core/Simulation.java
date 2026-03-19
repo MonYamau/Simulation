@@ -68,7 +68,7 @@ public class Simulation {
 
     private void executeActions(List<Action> actions) {
         for (Action action : actions) {
-            action.perform();
+            action.perform(gameMap);
         }
     }
 
